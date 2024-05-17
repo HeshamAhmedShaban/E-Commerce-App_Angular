@@ -1,0 +1,120 @@
+{
+  "getAllCategories": [
+    {
+      "categoryId": "55",
+      "categoryName": "Fruits & Vegetables",
+      "parentCategoryId": "0",
+      "id": "dc7a"
+    },
+    {
+      "categoryId": "56",
+      "categoryName": "Foodgrains, Oil & Masala",
+      "parentCategoryId": "0",
+      "id": "437d"
+    },
+    {
+      "categoryId": "57",
+      "categoryName": "Bakery, Cakes & Dairy ",
+      "parentCategoryId": "0",
+      "id": "e1a4"
+    },
+    {
+      "categoryId": "58",
+      "categoryName": "Beverages",
+      "parentCategoryId": "0",
+      "id": "3396"
+    },
+    {
+      "categoryId": "59",
+      "categoryName": "Snacks & Branded Foods",
+      "parentCategoryId": "0",
+      "id": "507c"
+    },
+    {
+      "categoryId": "60",
+      "categoryName": "Beauty & Hygiene",
+      "parentCategoryId": "0",
+      "id": "a4b2"
+    },
+    {
+      "categoryId": "61",
+      "categoryName": "Cuts & Sprouts",
+      "parentCategoryId": "55",
+      "id": "f21e"
+    },
+    {
+      "categoryId": "62",
+      "categoryName": "Dals & Pulses",
+      "parentCategoryId": "55",
+      "id": "8bb8"
+    },
+    {
+      "categoryId": "63",
+      "categoryName": "Exotic Fruits & Veggies",
+      "parentCategoryId": "55",
+      "id": "f05a"
+    },
+    {
+      "categoryId": "64",
+      "categoryName": "Flower Bouquets, Bunches",
+      "parentCategoryId": "55",
+      "id": "4bad"
+    },
+    {
+      "categoryId": "65",
+      "categoryName": "Atta, Flours & Sooji",
+      "parentCategoryId": "56",
+      "id": "1829"
+    },
+    {
+      "categoryId": "66",
+      "categoryName": "Dry Fruits",
+      "parentCategoryId": "56",
+      "id": "d317"
+    },
+    {
+      "categoryId": "67",
+      "categoryName": "Edible Oil & Ghee",
+      "parentCategoryId": "56",
+      "id": "6b6b"
+    },
+    {
+      "categoryId": "68",
+      "categoryName": "Bakery Snacks",
+      "parentCategoryId": "56",
+      "id": "49a6"
+    },
+    {
+      "categoryId": "69",
+      "categoryName": "Cakes & Pastries",
+      "parentCategoryId": "56",
+      "id": "3c94"
+    }
+  ],
+  "getAllProducts": [
+    {
+      "id": "3251",
+      "productSku": "Camera",
+      "productName": "Camera",
+      "productPrice": 10000,
+      "productShortName": "camera",
+      "productDescription": "Camera",
+      "createdDate": "2024-05-17T04:59:38.878Z",
+      "deliveryTimeSpan": "1 - 2 Days",
+      "categoryId": "60",
+      "productImageUrl": "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+    },
+    {
+      "id": "412b",
+      "productSku": "headphone",
+      "productName": "headphone",
+      "productPrice": 2000,
+      "productShortName": "headphone",
+      "productDescription": "black and silver headphones on white surface",
+      "createdDate": "2024-05-17T05:03:26.916Z",
+      "deliveryTimeSpan": "1 day",
+      "categoryId": "60",
+      "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  ]
+}

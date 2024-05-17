@@ -1,0 +1,99 @@
+
+
+<div class="row pt-4">
+  <div [ngClass]="isSidePanelVisable ? 'col-8' : 'col-12'">
+    <div class="card">
+      <div class="card-header bg-light-subtle">
+        <div class="row">
+          <div class="col-6">
+            product List
+          </div>
+          <div class="col-6 text-end">
+            @if(!isSidePanelVisable){
+            <button class="btn btn-sm btn-outline-primary" (click)="isSidePanelVisable = !isSidePanelVisable">Add new product</button>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          @for(product of productList;track  $index){
+            <div class="col-3">
+              <div class="card">
+                <img class="card-img-top" [src]="product.productImageUrl" alt="productImage">
+                <div class="card-body">
+                  <h4 class="card-title">{{product.productName}}</h4>
+                  <p class="card-text">{{product.productName}}</p>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  @if(isSidePanelVisable){
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header bg-light-subtle">
+          <div class="row">
+            <div class="col-6">
+              New product
+            </div>
+            <div class="col-6 text-end">
+              <button class="btn btn-sm btn-outline-danger" (click)="isSidePanelVisable = !isSidePanelVisable">Close</button>
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-6">
+              <label for="SKU">SKU</label>
+              <input type="text" name="SKU" id="SKU" placeholder="SKU" class="form-control" [(ngModel)]="productObj.productSku">
+            </div>
+            <div class="col-6">
+              <label for="name">Name</label>
+              <input type="text" name="name" id="SKU" placeholder="name" class="form-control" [(ngModel)]="productObj.productName">
+            </div>
+            <div class="col-6">
+              <label for="shortname">Short Name</label>
+              <input type="text" name="shortname" id="shortname" placeholder="shortname" class="form-control" [(ngModel)]="productObj.productShortName">
+            </div>
+            <div class="col-6">
+              <label for="price">Price</label>
+              <input type="number" name="price" id="SKU" placeholder="price" class="form-control" [(ngModel)]="productObj.productPrice">
+            </div>
+            <div class="col-6">
+              <label for="category">Category</label>
+              <select name="category" id="category" class="form-select" [(ngModel)]="productObj.categoryId">
+                <option value="0" disabled>Select Category</option>
+                <option *ngFor="let category of categoryList" [value]="category.categoryId">{{category.categoryName}}</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="delivary">Delivary Time</label>
+              <input type="text" name="delivary" id="delivary" placeholder="delivary time" class="form-control" [(ngModel)]="productObj.deliveryTimeSpan">
+            </div>
+            <div class="col-6">
+              <label for="image">Image URL</label>
+              <input type="text" name="image" id="image" placeholder="image" class="form-control" [(ngModel)]="productObj.productImageUrl">
+            </div>
+            <div class="col-6">
+              <label for="description">Product Description</label>
+              <!-- <input type="text" name="description" id="description" placeholder="description" class="form-control" [(ngModel)]="productObj.productDescription"> -->
+              <textarea name="description" id="description" placeholder="description" class="form-control" [(ngModel)]="productObj.productDescription"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6">
+              <button class="btn btn-sm btn-outline-danger">Reset</button>
+            </div>
+            <div class="col-6">
+              <button class="btn btn-sm btn-outline-primary" (click)="createProduct()">Create Product</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>
