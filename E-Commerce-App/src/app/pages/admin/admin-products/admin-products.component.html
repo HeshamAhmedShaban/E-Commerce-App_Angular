@@ -17,18 +17,24 @@
       </div>
       <div class="card-body">
         <div class="row">
-          @for(product of productList;track  $index){
-            <div class="col-3">
-              <div class="card">
-                <img class="card-img-top" [src]="product.productImageUrl" alt="productImage">
-                <div class="card-body">
-                  <h4 class="card-title">{{product.productName}}</h4>
-                  <p class="card-text">{{product.productName}}</p>
+            <div class="col-3" *ngFor="let product of productList; let i=index">
+            <div class="card">
+              <img class="card-img-top" style="height: 200px" [src]="product.productImageUrl" alt="productImage">
+              <div class="card-body">
+                <h4 class="card-title text-center">{{product.productName}}</h4>
+                <p class="card-text">{{product.productDescription}}</p>
+                <p class="card-text"><strong>Price:</strong> {{product.productPrice | currency}}</p>
+                <p class="card-text"><strong>Delivery Time:</strong> {{product.deliveryTimeSpan}}</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-primary" (click)="updateButton(product.id!)">Update</button>
+                  <button class="btn btn-danger" (click)="deleteProduct(product.id!)">Delete</button>
                 </div>
               </div>
             </div>
-          }
+          </div>
+          
         </div>
+        
       </div>
     </div>
   </div>
@@ -80,16 +86,15 @@
             </div>
             <div class="col-6">
               <label for="description">Product Description</label>
-              <!-- <input type="text" name="description" id="description" placeholder="description" class="form-control" [(ngModel)]="productObj.productDescription"> -->
               <textarea name="description" id="description" placeholder="description" class="form-control" [(ngModel)]="productObj.productDescription"></textarea>
             </div>
           </div>
           <div class="row">
             <div class="col-6">
-              <button class="btn btn-sm btn-outline-danger">Reset</button>
+              <button class="btn btn-sm btn-outline-secondary" (click)="clearForm()">Clear</button>
             </div>
             <div class="col-6">
-              <button class="btn btn-sm btn-outline-primary" (click)="createProduct()">Create Product</button>
+              <button type="submit" class="btn btn-sm btn-outline-primary" (click)="updateMode ? updateProduct() : createProduct() ">{{updateMode ? 'Update' : 'Create Product'}}</button>
             </div>
           </div>
         </div>

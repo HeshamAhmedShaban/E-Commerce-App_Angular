@@ -93,28 +93,16 @@
   ],
   "getAllProducts": [
     {
-      "id": "3251",
-      "productSku": "Camera",
-      "productName": "Camera",
-      "productPrice": 10000,
-      "productShortName": "camera",
-      "productDescription": "Camera",
-      "createdDate": "2024-05-17T04:59:38.878Z",
-      "deliveryTimeSpan": "1 - 2 Days",
-      "categoryId": "60",
-      "productImageUrl": "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-    },
-    {
-      "id": "412b",
       "productSku": "headphone",
       "productName": "headphone",
-      "productPrice": 2000,
+      "productPrice": 1000,
       "productShortName": "headphone",
-      "productDescription": "black and silver headphones on white surface",
-      "createdDate": "2024-05-17T05:03:26.916Z",
+      "productDescription": "headPhone ",
+      "createdDate": "2024-05-17T08:41:22.624Z",
       "deliveryTimeSpan": "1 day",
-      "categoryId": "60",
-      "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "categoryId": "59",
+      "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "id": "64b6"
     }
   ]
 }

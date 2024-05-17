@@ -26,4 +26,12 @@ export class ProductService {
     return this.http.post(`${this._url}getAllProducts`,JSON.stringify(objProduct))
   }
 
+  public updateProductt(objProduct:Iproduct){
+    return this.http.put(`${this._url}getAllProducts/${objProduct.id}`,JSON.stringify(objProduct))
+  }
+
+  public deleteProductt(id:string){
+    return this.http.delete(`${this._url}getAllProducts/${id}`)
+  }
+
 }
