@@ -91,18 +91,5 @@
       "id": "3c94"
     }
   ],
-  "getAllProducts": [
-    {
-      "productSku": "headphone",
-      "productName": "headphone",
-      "productPrice": 1000,
-      "productShortName": "headphone",
-      "productDescription": "headPhone ",
-      "createdDate": "2024-05-17T08:41:22.624Z",
-      "deliveryTimeSpan": "1 day",
-      "categoryId": "59",
-      "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-      "id": "64b6"
-    }
-  ]
+  "getAllProducts": []
 }

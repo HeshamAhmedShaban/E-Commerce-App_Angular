@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
 import { Icategory } from '../../../core/models/icategory';
 import { Iproduct } from '../../../core/models/iproduct';
+import { CategoryService } from '../../../core/services/category.service';
 
 @Component({
   selector: 'app-admin-products',
@@ -32,6 +33,7 @@ updateMode:boolean=false
   categoryList!:Icategory[]
   productList!:Iproduct[]
   _productService=inject(ProductService)
+  _categoryService=inject(CategoryService)
 
   ngOnInit(): void {
       this.getAllProducts()
@@ -40,7 +42,7 @@ updateMode:boolean=false
 
 
   public getAllCategories(){
-    this._productService.getCategory().subscribe({
+    this._categoryService.getCategory().subscribe({
       next:(data:any)=>{
         this.categoryList=data
       }

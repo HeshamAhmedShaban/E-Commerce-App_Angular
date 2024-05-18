@@ -14,9 +14,6 @@ export class ProductService {
 
   http=inject(HttpClient);
 
-  public getCategory():Observable<Icategory>{
-    return this.http.get<any>(`${this._url}getAllCategories`)
-  }
 
   public getAllProducts(){  
     return this.http.get(`${this._url}getAllProducts`)
