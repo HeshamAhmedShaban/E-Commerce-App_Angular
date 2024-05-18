@@ -83,12 +83,6 @@
       "categoryName": "Bakery Snacks",
       "parentCategoryId": "56",
       "id": "49a6"
-    },
-    {
-      "categoryId": "69",
-      "categoryName": "Cakes & Pastries",
-      "parentCategoryId": "56",
-      "id": "3c94"
     }
   ],
   "getAllProducts": []

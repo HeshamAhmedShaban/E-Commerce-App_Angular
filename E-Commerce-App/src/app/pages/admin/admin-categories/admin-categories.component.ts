@@ -21,12 +21,19 @@ export class AdminCategoriesComponent implements OnInit {
 
   categorys$!:Observable<any>
 
-  productService=inject(ProductService)
-  categorySerice=inject(CategoryService)
+  _productService=inject(ProductService)
+  _categorySerice=inject(CategoryService)
 
-ngOnInit(): void {
-  this.categorys$=this.categorySerice.getCategory()
-}
+  ngOnInit(): void {
+    this.categorys$=this._categorySerice.getCategory()
+  }
+
+
+  public deleteCategory(id:string){
+    this._categorySerice.deleteCategoryy(id).subscribe(()=>{
+      this.categorys$=this._categorySerice.getCategory();
+    })
+  }
 
 
 }

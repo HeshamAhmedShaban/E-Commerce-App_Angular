@@ -16,4 +16,7 @@ export class CategoryService {
     return this.http.get<any>(`${this._url}getAllCategories`)
   }
 
+  public deleteCategoryy(id:string):Observable<Icategory>{
+    return this.http.delete<Icategory>(`${this._url}getAllCategories/${id}`)
+  }
 }
