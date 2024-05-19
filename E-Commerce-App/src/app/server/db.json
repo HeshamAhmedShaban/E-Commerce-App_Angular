@@ -85,5 +85,18 @@
       "id": "49a6"
     }
   ],
-  "getAllProducts": []
+  "getAllProducts": [
+    {
+      "id": "167c",
+      "productSku": "ABC",
+      "productName": "ABC",
+      "productPrice": 1000,
+      "productShortName": "ABC",
+      "productDescription": "ABC",
+      "createdDate": "2024-05-19T05:26:34.634Z",
+      "deliveryTimeSpan": "1 day",
+      "categoryId": "55",
+      "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    }
+  ]
 }

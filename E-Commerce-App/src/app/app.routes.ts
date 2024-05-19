@@ -5,11 +5,13 @@ import { AdminProductsComponent } from './pages/admin/admin-products/admin-produ
 import { AdminCategoriesComponent } from './pages/admin/admin-categories/admin-categories.component';
 import { Routing } from './core/enums/routing';
 import { LandingComponent } from './pages/website/landing/landing.component';
+import { CategoryProductsComponent } from './pages/website/category-products/category-products.component';
 
 export const routes: Routes = [
   {path:Routing.Default,redirectTo:'shop',pathMatch:'full'},
   {path:Routing.Login,component:LoginComponent,title:'Login'},
   {path:'shop',component:LandingComponent,title:'Shop'},
+  {path:'products/:id',component:CategoryProductsComponent,title:'Product Details'},
   {path:Routing.Default,component:LayoutComponent,children:[
     {path:Routing.Products,component:AdminProductsComponent,title:'Products'},
     {path:Routing.Categories,component:AdminCategoriesComponent,title:'Categories'},

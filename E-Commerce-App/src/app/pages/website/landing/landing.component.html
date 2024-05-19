@@ -17,15 +17,13 @@
                   <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle fw-semibold text-uppercase  me-1 text-danger" href="#"
                           id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          home
+                          Categories
                       </a>
                       <ul class="dropdown-menu  " aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item " href="#">Fashion 1</a></li>
-                          <li><a class="dropdown-item" href="#">Fashion 2</a></li>
-                          <li><a class="dropdown-item" href="#">furniture 1</a></li>
-                          <li><a class="dropdown-item" href="#">furniture 2</a></li>
-                          <li><a class="dropdown-item" href="#">Electronics 1</a></li>
-                          <li><a class="dropdown-item" href="#">Electronics 1</a></li>
+                          @for(item of categoryList; track $index ){
+                              <li><button class="dropdown-item" (click)="getProductsByCategory(item.categoryId)" routerLinkActive="router-link-active">{{item.categoryName}}</button></li>
+                          }
+                          <!-- [routerLink]="['/products?id={{item.categoryId}}']" -->
                       </ul>
                   </li>
                   <li class="nav-item dropdown">
@@ -148,12 +146,18 @@
           <p>Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which
               looks reasonable.</p>
       </div>
+
+      <h1 class="display-2 text-center ">All Categories</h1>
+      <div class="text-center d-flex align-items-center justify-content-evenly flex-wrap pt-3 pb-3">
+        
+        <button class="btn btn-outline-secondary rounded-2 p-2 m-2" (click)="getProductsByCategory(category.categoryId)" style='width: 200px; height: 55px' type="button" *ngFor="let category of categoryList">{{category.categoryName}}</button>
+      </div>
       <div class="row g-4">
           <div class="col-lg-6 col-xl-4">
               <div class="p-4 rounded bg-light">
                   <div class="row align-items-center">
                       <div class="col-6">
-                          <img src="product_img/best-product-1.jpg" class="img-fluid rounded-circle w-100" alt="">
+                          <img src="" class="img-fluid rounded-circle w-100" alt="">
                       </div>
                       <div class="col-6">
                           <a href="#" class="h5">Organic Tomato</a>
@@ -175,7 +179,7 @@
               <div class="p-4 rounded bg-light">
                   <div class="row align-items-center">
                       <div class="col-6">
-                          <img src="product_img/best-product-2.jpg" class="img-fluid rounded-circle w-100" alt="">
+                          <img src="" class="img-fluid rounded-circle w-100" alt="">
                       </div>
                       <div class="col-6">
                           <a href="#" class="h5">Organic Tomato</a>
@@ -197,7 +201,7 @@
               <div class="p-4 rounded bg-light">
                   <div class="row align-items-center">
                       <div class="col-6">
-                          <img src="product_img/best-product-3.jpg" class="img-fluid rounded-circle w-100" alt="">
+                          <img src="" class="img-fluid rounded-circle w-100" alt="">
                       </div>
                       <div class="col-6">
                           <a href="#" class="h5">Organic Tomato</a>
@@ -219,7 +223,7 @@
               <div class="p-4 rounded bg-light">
                   <div class="row align-items-center">
                       <div class="col-6">
-                          <img src="product_img/best-product-4.jpg" class="img-fluid rounded-circle w-100" alt="">
+                          <img src="" class="img-fluid rounded-circle w-100" alt="">
                       </div>
                       <div class="col-6">
                           <a href="#" class="h5">Organic Tomato</a>
@@ -241,7 +245,7 @@
               <div class="p-4 rounded bg-light">
                   <div class="row align-items-center">
                       <div class="col-6">
-                          <img src="product_img/best-product-5.jpg" class="img-fluid rounded-circle w-100" alt="">
+                          <img src="" class="img-fluid rounded-circle w-100" alt="">
                       </div>
                       <div class="col-6">
                           <a href="#" class="h5">Organic Tomato</a>
@@ -263,7 +267,7 @@
               <div class="p-4 rounded bg-light">
                   <div class="row align-items-center">
                       <div class="col-6">
-                          <img src="product_img/best-product-6.jpg" class="img-fluid rounded-circle w-100" alt="">
+                          <img src="" class="img-fluid rounded-circle w-100" alt="">
                       </div>
                       <div class="col-6">
                           <a href="#" class="h5">Organic Tomato</a>
@@ -283,7 +287,7 @@
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="text-center">
-                  <img src="product_img/fruite-item-1.jpg" class="img-fluid rounded" alt="">
+                  <img src="" class="img-fluid rounded" alt="">
                   <div class="py-4">
                       <a href="#" class="h5">Organic Tomato</a>
                       <div class="d-flex my-3 justify-content-center">
@@ -301,7 +305,7 @@
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="text-center">
-                  <img src="product_img/fruite-item-2.jpg" class="img-fluid rounded" alt="">
+                  <img src="" class="img-fluid rounded" alt="">
                   <div class="py-4">
                       <a href="#" class="h5">Organic Tomato</a>
                       <div class="d-flex my-3 justify-content-center">
@@ -319,7 +323,7 @@
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="text-center">
-                  <img src="product_img/fruite-item-3.jpg" class="img-fluid rounded" alt="">
+                  <img src="" class="img-fluid rounded" alt="">
                   <div class="py-4">
                       <a href="#" class="h5">Organic Tomato</a>
                       <div class="d-flex my-3 justify-content-center">
@@ -337,7 +341,7 @@
           </div>
           <div class="col-md-6 col-lg-6 col-xl-3">
               <div class="text-center">
-                  <img src="product_img/fruite-item-4.jpg" class="img-fluid rounded" alt="">
+                  <img src="" class="img-fluid rounded" alt="">
                   <div class="py-2">
                       <a href="#" class="h5">Organic Tomato</a>
                       <div class="d-flex my-3 justify-content-center">
