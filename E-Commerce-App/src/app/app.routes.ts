@@ -6,12 +6,15 @@ import { AdminCategoriesComponent } from './pages/admin/admin-categories/admin-c
 import { Routing } from './core/enums/routing';
 import { LandingComponent } from './pages/website/landing/landing.component';
 import { CategoryProductsComponent } from './pages/website/category-products/category-products.component';
+import { ProductsComponent } from './pages/website/products/products.component';
 
 export const routes: Routes = [
-  {path:Routing.Default,redirectTo:'shop',pathMatch:'full'},
+  {path:Routing.Default,redirectTo:'allProducts',pathMatch:'full'},
   {path:Routing.Login,component:LoginComponent,title:'Login'},
-  {path:'shop',component:LandingComponent,title:'Shop'},
-  {path:'products/:id',component:CategoryProductsComponent,title:'Product Details'},
+  {path:'',component:LandingComponent,title:'Shop',children:[
+    {path:'allProducts',component:ProductsComponent,title:'All Products'}  ,
+    {path:'products/:id',component:CategoryProductsComponent,title:'Products Same Category'},
+  ]},
   {path:Routing.Default,component:LayoutComponent,children:[
     {path:Routing.Products,component:AdminProductsComponent,title:'Products'},
     {path:Routing.Categories,component:AdminCategoriesComponent,title:'Categories'},
