@@ -1,5 +1,4 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { ProductService } from '../../../core/services/product.service';
 import { CategoryService } from '../../../core/services/category.service';
 import { Icategory } from '../../../core/models/icategory';
 import { CommonModule } from '@angular/common';
@@ -40,6 +39,13 @@ export class LandingComponent implements OnInit {
 
   public getProductsByCategory(id:number){
     this.router.navigate(['/products',id])
+  }
+
+  public regisetPage(){
+    this.router.navigateByUrl('/register_user')
+  }
+  public loginPage(){
+    this.router.navigateByUrl('/login_user')
   }
   }
 

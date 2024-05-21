@@ -122,5 +122,32 @@
       "categoryId": "58",
       "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     }
+  ],
+  "users": [
+    {
+      "id": "3758",
+      "custID": 0,
+      "firstName": "Hesham",
+      "lastName": "Shaban",
+      "email": "hesham@gmail.com",
+      "mobileNumber": "01147431061",
+      "password": "12345"
+    },
+    {
+      "id": "687a",
+      "custID": 0,
+      "firstName": "Yousef",
+      "lastName": "Sayed",
+      "email": "yousefsayed@gmail.com",
+      "mobileNumber": "01147431061",
+      "password": "12345"
+    }
+  ],
+  "login": [
+    {
+      "id": "9727",
+      "email": "hesham@gmail.com",
+      "password": "12345"
+    }
   ]
 }

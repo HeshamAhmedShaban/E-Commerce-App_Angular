@@ -7,6 +7,8 @@ import { Routing } from './core/enums/routing';
 import { LandingComponent } from './pages/website/landing/landing.component';
 import { CategoryProductsComponent } from './pages/website/category-products/category-products.component';
 import { ProductsComponent } from './pages/website/products/products.component';
+import { LoginUserComponent } from './pages/website/login-user/login-user.component';
+import { RegisterUserComponent } from './pages/website/register-user/register-user.component';
 
 export const routes: Routes = [
   {path:Routing.Default,redirectTo:'allProducts',pathMatch:'full'},
@@ -14,6 +16,8 @@ export const routes: Routes = [
   {path:'',component:LandingComponent,title:'Shop',children:[
     {path:'allProducts',component:ProductsComponent,title:'All Products'}  ,
     {path:'products/:id',component:CategoryProductsComponent,title:'Products Same Category'},
+    {path:'login_user',component:LoginUserComponent,title:'Login'},
+    {path:'register_user',component:RegisterUserComponent,title:'Register'},
   ]},
   {path:Routing.Default,component:LayoutComponent,children:[
     {path:Routing.Products,component:AdminProductsComponent,title:'Products'},

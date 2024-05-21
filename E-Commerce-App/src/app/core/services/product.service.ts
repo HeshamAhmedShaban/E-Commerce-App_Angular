@@ -10,7 +10,7 @@ import { Iproduct } from '../models/iproduct';
 export class ProductService {
 
 
-  _url:string='http://localhost:3000/'
+  private _url:string='http://localhost:3000/'
 
   http=inject(HttpClient);
 

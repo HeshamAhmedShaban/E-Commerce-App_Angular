@@ -1,0 +1,41 @@
+
+<div class="parent">
+  <div class="form-body">
+    <div class="row">
+        <div class="form-holder">
+            <div class="form-content">
+                <div class="form-items">
+                    <h3 class="text-center">Register Form</h3>
+                    <p class="text-center pt-2">Fill in the data below.</p>
+                    <form class="requires-validation">
+                        <div class="col-md-12 d-flex justify-content-evenly">
+                          <div class="col-md-6">
+                            <input class="form-control" type="text" name="firstName" [(ngModel)]="registerUser.firstName" placeholder="First Name" required>
+                          </div>
+                          <div class="col-md-6">
+                            <input class="form-control" type="text" name="firstName" [(ngModel)]="registerUser.lastName" placeholder="Last Name" required>
+                          </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control" type="email" name="email" [(ngModel)]="registerUser.email" placeholder="E-mail Address" required>
+                        </div>
+
+                        <div class="col-md-12">
+                            <input class="form-control" type="tel" name="mobileNumber" [(ngModel)]="registerUser.mobileNumber" placeholder="Mobile Number" required>
+                        </div>
+
+                        <div class="col-md-12">
+                          <input class="form-control" type="password" name="password" [(ngModel)]="registerUser.password" placeholder="Password" required>
+                        </div>
+
+                        <div class="form-button mt-3 d-flex justify-content-center">
+                            <button class="" id="submit" type="button" class="btn btn-primary" (click)="register()">Register</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</div>
