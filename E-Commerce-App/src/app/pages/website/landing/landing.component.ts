@@ -4,6 +4,7 @@ import { Icategory } from '../../../core/models/icategory';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { AuthUserService } from '../../../core/services/auth-user.service';
 
 @Component({
   selector: 'app-landing',
@@ -17,16 +18,34 @@ export class LandingComponent implements OnInit {
 
   public categoriesNameList: string[] = [];
 
-  public categoryList!:Icategory[]
+  isLoggedIn!: boolean;
 
-  private _categoryService=inject(CategoryService)
-  private router=inject(Router)
+  public categoryList!:Icategory[];
+
+  private _categoryService=inject(CategoryService);
+  private _userSerivce=inject(AuthUserService);
+  private router=inject(Router);
 
   ngOnInit(): void {
-    this.getAllCategories()
-    
+    this.getAllCategories();
+    this.userState()
   }
 
+  private userState(){
+    this._userSerivce.getUserState().subscribe({
+      next: (state) => {
+        this.isLoggedIn = state;
+      },
+    });
+  }
+
+  public logOut(){
+    if(this.isLoggedIn){
+      this._userSerivce.logout()
+    }else {
+      this.router.navigateByUrl('/login_user')
+    }
+  }
   public getAllCategories(){
     this._categoryService.getCategory()
     .subscribe((data: Icategory[]) => {

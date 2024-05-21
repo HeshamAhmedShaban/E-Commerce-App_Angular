@@ -116,13 +116,20 @@
                             <i class="fa fa-user fs-5 me-1" style="color: #202122;"></i>
                         </a>
                         <ul class="dropdown-menu" style="left:-50px" aria-labelledby="navbarDropdown">
-                            <li>
+                          @if(isLoggedIn){
+                              <li>
                                 <div class="d-flex justify-content-evenly mt-2">
-                                    <a > <button class="btn btn-danger rounded-0 px-3" (click)="loginPage()">Login</button></a>
-                                    <a > <button class="btn btn-danger rounded-0 px-3" (click)="regisetPage()">Register</button></a>
+                                    <a > <button class="btn btn-danger rounded-0 px-3" (click)="logOut()">LogOut</button></a>
                                 </div>
-
-                            </li>
+                              </li>
+                          }@else{
+                              <li>
+                                <div class="d-flex justify-content-evenly mt-2">
+                                    <a > <button class="btn btn-primary rounded-0 px-3" (click)="loginPage()">Login</button></a>
+                                    <a > <button class="btn btn-primary rounded-0 px-3" (click)="regisetPage()">Register</button></a>
+                                </div>
+                              </li>
+                          }
 
                         </ul>
                     </li>

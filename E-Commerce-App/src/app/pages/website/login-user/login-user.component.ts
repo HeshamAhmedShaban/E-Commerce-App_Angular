@@ -39,6 +39,7 @@ export class LoginUserComponent {
               };
               this._authService.loginUser(loginUser).subscribe({
                 next:()=>{
+                  localStorage.setItem('email',JSON.stringify(loginUser.email));
                   this.router.navigate(['/allProducts']);
                 },
                 error:()=>{
@@ -53,4 +54,10 @@ export class LoginUserComponent {
       });
     }
   }
+
+  public goToRegister(){
+    this.router.navigateByUrl('/register_user');
+  }
+
+
 }

@@ -62,13 +62,20 @@
 }
 
 .form-content p {
-    color: #fff;
-    text-align: left;
-    font-size: 17px;
-    font-weight: 300;
-    line-height: 20px;
-    margin-bottom: 30px;
+  color: #fff;
+  text-align: left;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 20px;
+  margin-top: 20px;
 }
+
+.form-content button {
+  color: #fff;
+  margin-top: 15px;
+  margin-left:50px;
+}
+
 
 
 .form-content input[type=text], .form-content input[type=password], .form-content input[type=email], .form-content input[type=tel]  ,.form-content select {

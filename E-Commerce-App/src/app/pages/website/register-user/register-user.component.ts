@@ -40,4 +40,7 @@ export class RegisterUserComponent {
   });
   }
 
+  public goToLogin(){
+    this.router.navigateByUrl('/login_user');
+  }
 }

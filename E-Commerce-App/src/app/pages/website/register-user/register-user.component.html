@@ -29,6 +29,10 @@
                           <input class="form-control" type="password" name="password" [(ngModel)]="registerUser.password" placeholder="Password" required>
                         </div>
 
+                        <div class="col-md-12 d-flex">
+                          <p>Do you have an account ?</p>
+                          <button class="btn btn-outline-secondary btn-sm" (click)="goToLogin()">Login</button>
+                        </div>
                         <div class="form-button mt-3 d-flex justify-content-center">
                             <button class="" id="submit" type="button" class="btn btn-primary" (click)="register()">Register</button>
                         </div>
