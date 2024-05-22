@@ -5,6 +5,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthUserService } from '../../../core/services/auth-user.service';
+import { Icart } from '../../../core/models/icart';
+import { CartService } from '../../../core/services/cart.service';
+import { Login_Auth } from '../../../core/models/auth';
+import { forkJoin, map, switchMap } from 'rxjs';
+import { ProductService } from '../../../core/services/product.service';
 
 @Component({
   selector: 'app-landing',
@@ -15,20 +20,33 @@ import { AuthUserService } from '../../../core/services/auth-user.service';
 })
 export class LandingComponent implements OnInit {
 
-
   public categoriesNameList: string[] = [];
 
-  isLoggedIn!: boolean;
+  public isLoggedIn!: boolean;
 
   public categoryList!:Icategory[];
 
+  public cartUserItems!:Icart[];
+
+  public productsUser!:any[]
+
+  private userData!:Login_Auth;
+
   private _categoryService=inject(CategoryService);
+  private _productService=inject(ProductService)
   private _userSerivce=inject(AuthUserService);
+  private _cartService=inject(CartService);
   private router=inject(Router);
 
   ngOnInit(): void {
     this.getAllCategories();
-    this.userState()
+    this.userState();
+    this.getCartItems();
+    const data=localStorage.getItem('email');
+    if(data !== null){
+      this.userData=JSON.parse(data)
+      // console.log(this.userData);
+    }
   }
 
   private userState(){
@@ -66,6 +84,36 @@ export class LandingComponent implements OnInit {
   public loginPage(){
     this.router.navigateByUrl('/login_user')
   }
+
+
+  // public getCartItems(){
+  //   this._cartService.getAllCarts().pipe(
+  //     map((data:any) => {
+  //       return data.filter((item:Icart) => item.customerEmail === this.userData.email);
+  //     })
+  //   ).subscribe(cartItems => {
+  //     this.cartUserItems = cartItems;
+  //     console.log(this.cartUserItems);
+  //   });
+  // }
+
+  public getCartItems() {
+    this._cartService.getAllCarts().pipe(
+      map((data: any) => data.filter((item: Icart) => item.customerEmail === this.userData.email)),
+      switchMap((cartItems: Icart[]) => {
+        this.cartUserItems = cartItems;
+        const productIds = [...new Set(cartItems.map(item => item.productId))];
+        return forkJoin(productIds.map(id => this._productService.getProductById(id)));
+      })
+    ).subscribe(products => {
+      this.productsUser = products;
+      console.log(this.cartUserItems);
+      console.log(this.productsUser);
+    });
   }
+}
+
+
+
 
 

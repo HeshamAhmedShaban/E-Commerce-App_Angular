@@ -56,7 +56,7 @@
                             <i class="fa fa-cart-shopping fs-5 me-1" style="color: #202122;"></i>
                         </a>
                         <ul class="dropdown-menu menuOnLeft   rounded-0 mt-2" aria-labelledby="navbarDropdown3">
-                            <li class="p-2">
+                            <!-- <li class="p-2">
                                 <div class="d-flex w-100 border-bottom justify-content-evenly">
                                     <div>
                                         <img style="height: 70px !important;width: 100px !important;"
@@ -74,23 +74,22 @@
                                             class="fa-solid fa-xmark"></i></button>
                                 </div>
 
-                            </li>
-                            <li class="p-2">
-                                <div class="d-flex w-100 border-bottom justify-content-evenly">
-
-                                    <img style="height: 70px !important;width: 100px !important;"
-                                        class="img-fluid  p-2" src="product_img/cartImg2.jfif" alt="">
-                                    <div>
-                                        <a href="#" class="text-decoration-none text-black fw-semibold">
-                                            <p class="m-0 p-0">Ornare consequat</p>
-                                        </a>
-                                        <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ 81.00</p>
-                                    </div>
-
-                                    <button type="button" class="btn fs-5 closeBtn"><i
-                                            class="fa-solid fa-xmark"></i></button>
-
-                                </div>
+                            </li> -->
+                            <li class="list-group-item" *ngFor="let item of cartUserItems; let i = index">
+                              <div class="d-flex w-100 border-bottom justify-content-evenly" *ngFor="let product of productsUser; let j = index">
+                                <ng-container *ngIf="product.id === item.productId">
+                                  <div>
+                                    <img style="height: 70px !important;width: 100px !important;" class="img-fluid p-2" [src]="product.productImageUrl" >
+                                  </div>
+                                  <div>
+                                    <a href="#" class="text-decoration-none text-black fw-semibold">
+                                      <p class="m-0 p-0">{{ product.productName }}</p>
+                                    </a>
+                                    <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ {{ product.productPrice }}</p>
+                                  </div>
+                                  <button type="button" class="btn fs-5 closeBtn"><i class="fa-solid fa-xmark"></i></button>
+                                </ng-container>
+                              </div>
                             </li>
                             <li class="p-2">
                                 <div class=" w-100 ">

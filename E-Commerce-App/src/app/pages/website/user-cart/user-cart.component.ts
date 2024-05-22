@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Icart } from '../../../core/models/icart';
 
 @Component({
   selector: 'app-user-cart',
@@ -8,5 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './user-cart.component.css'
 })
 export class UserCartComponent {
+
+  cartObj:Icart = {
+    customerEmail:'',
+    productId:'',
+    quantity:null,
+    addedDate:new Date ()
+  }
 
 }

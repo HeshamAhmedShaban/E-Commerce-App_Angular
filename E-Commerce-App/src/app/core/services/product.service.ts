@@ -1,7 +1,5 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Icategory } from '../models/icategory';
 import { Iproduct } from '../models/iproduct';
 
 @Injectable({
@@ -17,6 +15,10 @@ export class ProductService {
 
   public getAllProducts(){  
     return this.http.get(`${this._url}getAllProducts`)
+  }
+
+  public getProductById(id:string){
+    return this.http.get(`${this._url}getAllProducts/${id}`)
   }
 
   public addProduct(objProduct:Iproduct){

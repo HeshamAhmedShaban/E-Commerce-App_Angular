@@ -39,7 +39,7 @@ export class LoginUserComponent {
               };
               this._authService.loginUser(loginUser).subscribe({
                 next:()=>{
-                  localStorage.setItem('email',JSON.stringify(loginUser.email));
+                  localStorage.setItem('email',JSON.stringify(loginUser));
                   this.router.navigate(['/allProducts']);
                 },
                 error:()=>{
