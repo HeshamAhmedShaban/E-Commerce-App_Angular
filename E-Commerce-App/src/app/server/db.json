@@ -170,34 +170,6 @@
       "password": "12345"
     }
   ],
-  "cart": [
-    {
-      "id": "45b0",
-      "customerEmail": "hesham@gmail.com",
-      "productId": "07d3",
-      "quantity": 1,
-      "addedDate": "2024-05-22T03:58:56.740Z"
-    },
-    {
-      "id": "5008",
-      "customerEmail": "hesham@gmail.com",
-      "productId": "167c",
-      "quantity": 1,
-      "addedDate": "2024-05-22T03:58:56.740Z"
-    },
-    {
-      "id": "2f15",
-      "customerEmail": "hesham@gmail.com",
-      "productId": "35c4",
-      "quantity": 1,
-      "addedDate": "2024-05-22T03:58:56.740Z"
-    },
-    {
-      "id": "e2dd",
-      "customerEmail": "yousefsayed@gmail.com",
-      "productId": "07d3",
-      "quantity": 1,
-      "addedDate": "2024-05-22T04:41:20.899Z"
-    }
-  ]
+  "cart": [],
+  "order": []
 }

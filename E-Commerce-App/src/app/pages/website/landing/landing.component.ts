@@ -20,7 +20,7 @@ import { ProductService } from '../../../core/services/product.service';
 })
 export class LandingComponent implements OnInit {
 
-  public categoriesNameList: string[] = [];
+  public categoriesNameList!: string[] 
 
   public isLoggedIn!: boolean;
 
@@ -29,6 +29,8 @@ export class LandingComponent implements OnInit {
   public cartUserItems!:Icart[];
 
   public productsUser!:any[]
+
+  public totalPrice:number=0
 
   private userData!:Login_Auth;
 
@@ -47,6 +49,9 @@ export class LandingComponent implements OnInit {
       this.userData=JSON.parse(data)
       // console.log(this.userData);
     }
+    this._cartService.cartUpdated$?.subscribe(res=>{
+      if(res) return this.getCartItems();
+    })
   }
 
   private userState(){
@@ -85,18 +90,6 @@ export class LandingComponent implements OnInit {
     this.router.navigateByUrl('/login_user')
   }
 
-
-  // public getCartItems(){
-  //   this._cartService.getAllCarts().pipe(
-  //     map((data:any) => {
-  //       return data.filter((item:Icart) => item.customerEmail === this.userData.email);
-  //     })
-  //   ).subscribe(cartItems => {
-  //     this.cartUserItems = cartItems;
-  //     console.log(this.cartUserItems);
-  //   });
-  // }
-
   public getCartItems() {
     this._cartService.getAllCarts().pipe(
       map((data: any) => data.filter((item: Icart) => item.customerEmail === this.userData.email)),
@@ -107,10 +100,27 @@ export class LandingComponent implements OnInit {
       })
     ).subscribe(products => {
       this.productsUser = products;
+      this.calculateTotalPrice();
       console.log(this.cartUserItems);
       console.log(this.productsUser);
     });
   }
+
+  public deleteProductFromcart(cartId:string){
+    this._cartService.deleteProductFromCart(cartId).subscribe(()=>{
+      this.cartUserItems=this.cartUserItems.filter(item=>item.id !== cartId );
+      // alert('product deleted')
+    })
+  }
+
+
+  public calculateTotalPrice() {
+    this.totalPrice = this.cartUserItems.reduce((total, item) => {
+      const product = this.productsUser.find(p => p.id === item.productId);
+      return total + (product ? product.productPrice : 0);
+    }, 0);
+  }
+
 }
 
 

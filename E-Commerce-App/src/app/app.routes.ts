@@ -9,18 +9,20 @@ import { CategoryProductsComponent } from './pages/website/category-products/cat
 import { ProductsComponent } from './pages/website/products/products.component';
 import { LoginUserComponent } from './pages/website/login-user/login-user.component';
 import { RegisterUserComponent } from './pages/website/register-user/register-user.component';
+import { UserCheckoutComponent } from './pages/website/user-checkout/user-checkout.component';
 
 export const routes: Routes = [
   {path:Routing.Default,redirectTo:'allProducts',pathMatch:'full'},
-  {path:Routing.Login,component:LoginComponent,title:'Login'},
+  {path:Routing.adminLogin,component:LoginComponent,title:'Login'},
   {path:'',component:LandingComponent,title:'Shop',children:[
-    {path:'allProducts',component:ProductsComponent,title:'All Products'}  ,
+    {path:Routing.allProducts,component:ProductsComponent,title:'All Products'}  ,
     {path:'products/:id',component:CategoryProductsComponent,title:'Products Same Category'},
-    {path:'login_user',component:LoginUserComponent,title:'Login'},
-    {path:'register_user',component:RegisterUserComponent,title:'Register'},
+    {path:Routing.userLogin,component:LoginUserComponent,title:'Login'},
+    {path:Routing.userRegister,component:RegisterUserComponent,title:'Register'},
+    {path:Routing.checkOut,component:UserCheckoutComponent,title:'Checkout Your Order'}
   ]},
   {path:Routing.Default,component:LayoutComponent,children:[
-    {path:Routing.Products,component:AdminProductsComponent,title:'Products'},
-    {path:Routing.Categories,component:AdminCategoriesComponent,title:'Categories'},
+    {path:Routing.adminProducts,component:AdminProductsComponent,title:'Products'},
+    {path:Routing.adminCategories,component:AdminCategoriesComponent,title:'Categories'},
   ]}
 ];

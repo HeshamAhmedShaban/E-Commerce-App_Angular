@@ -23,7 +23,6 @@
                             @for(item of categoryList; track $index ){
                                 <li><button class="dropdown-item" (click)="getProductsByCategory(item.categoryId)" routerLinkActive="router-link-active">{{item.categoryName}}</button></li>
                             }
-                            <!-- [routerLink]="['/products?id={{item.categoryId}}']" -->
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -56,55 +55,56 @@
                             <i class="fa fa-cart-shopping fs-5 me-1" style="color: #202122;"></i>
                         </a>
                         <ul class="dropdown-menu menuOnLeft   rounded-0 mt-2" aria-labelledby="navbarDropdown3">
-                            <!-- <li class="p-2">
-                                <div class="d-flex w-100 border-bottom justify-content-evenly">
-                                    <div>
-                                        <img style="height: 70px !important;width: 100px !important;"
-                                            class="img-fluid     p-2" src="product_img/cartImg1.jfif" alt="">
-                                    </div>
-
-
-                                    <div style="">
-                                        <a href="#" class="text-decoration-none text-black fw-semibold">
-                                            <p class="m-0 p-0">Varibale Product 001</p>
-                                        </a>
-                                        <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ 78.00</p>
-                                    </div>
-                                    <button type="button" class="btn fs-5 closeBtn"><i
-                                            class="fa-solid fa-xmark"></i></button>
-                                </div>
-
-                            </li> -->
-                            <li class="list-group-item" *ngFor="let item of cartUserItems; let i = index">
-                              <div class="d-flex w-100 border-bottom justify-content-evenly" *ngFor="let product of productsUser; let j = index">
-                                <ng-container *ngIf="product.id === item.productId">
+                            <ul class="list-group">
+                              @if(cartUserItems.length <= 0){
+                                <li class="list-group-item">
                                   <div>
-                                    <img style="height: 70px !important;width: 100px !important;" class="img-fluid p-2" [src]="product.productImageUrl" >
+                                    <div class="d-flex justify-content-between">
+                                      <p class="m-0 p-0">Your cart is empty</p>
+                                    </div>
                                   </div>
-                                  <div>
-                                    <a href="#" class="text-decoration-none text-black fw-semibold">
-                                      <p class="m-0 p-0">{{ product.productName }}</p>
-                                    </a>
-                                    <p>1 <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ {{ product.productPrice }}</p>
-                                  </div>
-                                  <button type="button" class="btn fs-5 closeBtn"><i class="fa-solid fa-xmark"></i></button>
-                                </ng-container>
-                              </div>
-                            </li>
-                            <li class="p-2">
+                                  
+                                </li>
+                              }@else {
+                                <li class="list-group-item" *ngFor="let item of cartUserItems; let i = index">
+                                  <ng-container *ngFor="let product of productsUser; let j = index">
+                                    <ng-container *ngIf="product.id === item.productId">
+                                      <div class="d-flex w-100 border-bottom justify-content-evenly">
+                                        <div>
+                                          <img style="height: 70px !important; width: 100px !important;"
+                                              class="img-fluid p-2"
+                                              [src]="product.productImageUrl"
+                                              alt="productImageUrl">
+                                        </div>
+                                        <div>
+                                          <a  class="text-decoration-none text-black fw-semibold">
+                                            <p class="m-0 p-0">{{ product.productName }}</p>
+                                          </a>
+                                          <p>{{item.quantity}} <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ {{ product.productPrice }}</p>
+                                        </div>
+                                        <button type="button" class="btn fs-5 closeBtn" (click)="deleteProductFromcart(item.id!)"><i class="fa-solid fa-xmark"></i></button>
+                                      </div>
+                                    </ng-container>
+                                  </ng-container>
+                                </li>
+                                <li class="p-2">
                                 <div class=" w-100 ">
                                     <div class="d-flex justify-content-between">
                                         <h6>SubTotal :</h6>
-                                        <h6>$159.00</h6>
+                                        <h6>${{totalPrice}}</h6>
                                     </div>
                                     <div class="d-flex justify-content-evenly mt-2">
                                         <button class="btn btn-dark rounded-0 px-3"> View Cart</button>
-                                        <a href="checkout.html"> <button
+                                        <a routerLink="/ckeckout"> <button
                                                 class="btn btn-danger rounded-0 px-3">Checkout</button></a>
                                     </div>
 
                                 </div>
-                            </li>
+                              </li>
+                              }
+                            </ul>
+                            
+                            
 
                         </ul>
                     </li>

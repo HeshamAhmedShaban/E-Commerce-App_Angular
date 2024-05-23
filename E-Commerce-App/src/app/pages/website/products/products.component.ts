@@ -77,7 +77,8 @@ export class ProductsComponent implements OnInit {
       next:(data:any)=>{
         // console.log(data);
         this.getAllProduct();
-        alert('Product added')
+        alert('Product added');
+        this._cartService.cartUpdated$?.next(true);
       },
       error:(err:any)=>{
         console.log(err);

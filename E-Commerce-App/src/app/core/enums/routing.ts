@@ -1,13 +1,14 @@
 export enum Routing {
   Default = '',
   Home = 'home',
-  Products = 'products',
-  Categories='categories',
-  Login = 'login',
-  Register ='register',
+  adminProducts = 'products',
+  adminCategories='categories',
+  adminLogin = 'login',
+  allProducts='allProducts',
+  userRegister ='register_user',
+  userLogin='login_user',
+  checkOut='ckeckout',
   Cart = 'cart',
   Orders = 'orders',
-  Chat = 'chat',
-  Admin = 'admin',
   NotFound = 'not-found'
 }

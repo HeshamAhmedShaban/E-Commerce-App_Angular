@@ -1,1 +1,138 @@
-<p>user-checkout works!</p>
+ <div class="container-fluid pt-5">
+  <form >
+    <div class="row mt-4">
+      <!-- Billing Address -->
+      <div class="col-lg-8 col-md-12 mb-3">
+        <div class="card shadow">
+          <div class="card-header headerStyle">
+            <h5 class="text-center">Billing Address</h5>
+          </div>
+          <div class="card-body mb-5">
+            <!-- form start -->
+            <div class="row mt-2">
+              <div class="col-lg-6 col-md-6">
+                <input type="text" placeholder="Enter City"  name="city" [(ngModel)]="checkoutObj.city" class="form-control" required >
+                <div class="validation-error" >
+                </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <input type="text" placeholder="Enter Pincode" class="form-control" name="pinCode" [(ngModel)]="checkoutObj.pinCode" required >
+                <div class="validation-error"></div> 
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-lg-6 col-md-6">
+                <textarea class="form-control" name="firstAddress" [(ngModel)]="checkoutObj.firstAddress" required rows="3" placeholder="Address Line 1" ></textarea>
+                <div class="validation-error" > </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <textarea class="form-control" name="secondAddress" [(ngModel)]="checkoutObj.secondAddress" rows="3" placeholder="Address Line 2"></textarea>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-lg-6 col-md-6">
+                <textarea class="form-control" required name="landMark" [(ngModel)]="checkoutObj.landMark" rows="3" placeholder="Landmark"></textarea>
+                <div class="validation-error"> </div>
+              </div>
+              <div class="col-lg-6 col-md-6">
+                <textarea class="form-control"  name="paymentNaration" [(ngModel)]="checkoutObj.paymentNaration" rows="3" placeholder="Payment Naration"></textarea>
+              </div>
+            </div>
+            <!-- form end -->
+          </div>
+        </div>
+      </div>
+      <!-- Your Order -->
+      <div class="col-lg-4 col-md-12">
+        <div class="card shadow">
+          <div class="card-header headerStyle">
+            <h5 calss="text-center">Your Order</h5>
+          </div>
+          <div class="card-body">
+            <ng-container *ngIf="cartUserItems.length !== 0">
+              <div class="row" >
+                <!-- <ng-container *ngFor="let product of productsUser">
+                  <div class="col-md-5">
+                    <img class="pb-2 mt-1" style="height: 80px !important; width: 100px;" [src]="product.productImageUrl" >
+                  </div>
+                  <div class="col-md-7">
+                    <div class="row">
+                      <div class="col-md-8">
+                        <div class="ps-3">
+                          <p class="p-0 m-0 fw-semibold">{{product.productShortName}}</p>
+                          <p class="p-0 m-0">{{product.productPrice | currency: 'INR'}}</p>
+                          <p class="text-start mt-1"><button class="btn border-0 ps-0">QTY : <b>{{product.quantity}}</b>
+                            </button></p>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <button class="btn btn-danger mt-4 btn-sm" (click)="deleteProductFromcart(product.id!)"><i
+                            class="fa fa-close text-white"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="border-bottom mb-2"></span>
+                </ng-container> -->
+                <li class="list-group-item" *ngFor="let item of cartUserItems; let i = index">
+                      <ng-container *ngFor="let product of productsUser; let j = index">
+                          <ng-container *ngIf="product.id === item.productId">
+                                <div class="d-flex w-100 border-bottom justify-content-evenly">
+                                    <div class="col-md-5">
+                                        <img class="pb-2 mt-1" style="height: 80px !important; width: 100px;"                                              class="img-fluid p-2"
+                                            [src]="product.productImageUrl"
+                                            alt="productImageUrl">
+                                    </div>
+                                    <div class="col-md-7">
+                                      <div class="row">
+                                        <div class="col-md-8">
+                                          <div class="ps-3">
+                                            <p class="p-0 m-0 fw-semibold">Name : {{product.productName}}</p>
+                                            <p class="p-0 m-0">Price : {{product.productPrice}} $</p>
+                                            <p class="text-start mt-1"><button class="btn border-0 ps-0">QTY : <b>{{item.quantity}}</b>
+                                              </button></p>
+                                          </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                          <button class="btn btn-danger mt-4 btn-sm" (click)="deleteProductFromcart(item.id!)"><i
+                                              class="fa fa-close text-white"></i></button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    </div>
+                            </ng-container>
+                      </ng-container>
+                  </li>
+              </div>
+              <div>
+                <div>
+                  <div class="d-flex justify-content-between mt-2 mb-0">
+                    <p class="fw-semibold mb-0">Total :</p>
+                    <p class="fw-semibold mb-0">{{totalPrice}}</p>
+                  </div>
+                  <ng-container *ngIf="cartUserItems.length <= 1">
+                    <span class="fw-semibold" style="font-size: 14px;">{{cartUserItems.length + ' Item'}}</span>
+                  </ng-container>
+                  <ng-template >
+                    <span class="fw-semibold" style="font-size: 14px;">{{cartUserItems.length + ' Items'}}</span>
+                  </ng-template>
+                </div>
+                <div class="row">
+                  <div class="col-12 text-center mt-2">
+                    <button class="btn placeBtn rounded-0 w-100" >Place Order
+                      <span *ngIf="isApiCallInProgress" class="spinner-border spinner-border-sm"></span></button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <ng-container *ngIf="cartUserItems.length == 0">
+              <p class="text-center fw-bold mt-3">No Orders Available To Place!</p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div> 
+
+
+
