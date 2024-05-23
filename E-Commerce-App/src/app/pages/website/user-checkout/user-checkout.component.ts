@@ -7,6 +7,7 @@ import { Login_Auth } from '../../../core/models/auth';
 import { ProductService } from '../../../core/services/product.service';
 import { CartService } from '../../../core/services/cart.service';
 import { forkJoin, map, switchMap } from 'rxjs';
+import { OrderService } from '../../../core/services/order.service';
 
 @Component({
   selector: 'app-user-checkout',
@@ -17,7 +18,7 @@ import { forkJoin, map, switchMap } from 'rxjs';
 })
 export class UserCheckoutComponent implements OnInit {
 
-  public cartUserItems!:Icart[];
+  public cartUserItems!:any[];
 
   public productsUser!:any[]
 
@@ -37,10 +38,12 @@ export class UserCheckoutComponent implements OnInit {
     paymentNaration:'',
     cart:[],
     totalPrice:null,
-    totalItems:null
+    totalItems:null,
+    message:'Thank you for purchasing our products ,We Will Communicate With You At Nearest Time ',
   } 
   private _productService=inject(ProductService)
   private _cartService=inject(CartService);
+  private _orderService=inject(OrderService);
 
   ngOnInit(): void {
     this.getCartItems();
@@ -80,5 +83,37 @@ export class UserCheckoutComponent implements OnInit {
       const product = this.productsUser.find(p => p.id === item.productId);
       return total + (product ? product.productPrice : 0);
     }, 0);
+  }
+
+  public addOrder(){
+    this.checkoutObj.cart=this.cartUserItems;
+    this.checkoutObj.email=this.userData.email;
+    this.checkoutObj.totalPrice=this.totalPrice;
+    this.checkoutObj.totalItems=this.cartUserItems.length;
+    this._orderService.createOrder(this.checkoutObj).subscribe({
+      next:()=>{
+          this.clearCart();
+          this.cartUserItems = [];
+          this.productsUser = [];
+          this.totalPrice = 0;
+          alert('Order created successfully and cart cleared');
+      }
+    })
+  }
+
+  public clearCart(){
+    this.checkoutObj={
+      city:'',
+      email:'',
+      pinCode:'',
+      firstAddress:'',
+      secondAddress:'',
+      landMark:'',
+      paymentNaration:'',
+      cart:[],
+      totalPrice:null,
+      totalItems:null,
+      message:'We Will Communicate With You At Nearest Time  ,,,,Thanks',
+    }
   }
 }

@@ -10,6 +10,6 @@ export interface Iorder {
     paymentNaration:string,
     cart:Iproduct[],
     totalPrice:number | null,
-    totalItems:number | null
-
+    totalItems:number | null,
+    message:string
 }

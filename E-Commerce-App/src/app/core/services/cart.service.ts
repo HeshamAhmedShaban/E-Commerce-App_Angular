@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Icart } from '../models/icart';
 import { Subject } from 'rxjs';
-import { Iproduct } from '../models/iproduct';
+
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class CartService {
 
 
   private _url:string='http://localhost:3000/';
-  http=inject(HttpClient);
+  private http=inject(HttpClient);
 
   public getAllCarts(){
     return this.http.get(`${this._url}cart`)
@@ -29,4 +29,5 @@ export class CartService {
   public deleteProductFromCart(cartId:string){
     return this.http.delete(`${this._url}cart/${cartId}`)
   }
+
 }
