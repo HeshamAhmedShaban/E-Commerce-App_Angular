@@ -74,17 +74,15 @@ export class ProductsComponent implements OnInit {
     this.cartObj.productId=id;
     this.cartObj.quantity=1;
     this._cartService.addToCartt(this.cartObj).subscribe({
-      next:(data:any)=>{
-        // console.log(data);
-        this.getAllProduct();
+      next: (data: Icart) => {
         alert('Product added');
-        this._cartService.cartUpdated$?.next(true);
+        this._cartService.cartUpdated$.next(true);
       },
-      error:(err:any)=>{
+      error: (err: any) => {
         console.log(err);
-        alert('Something went wrong')
+        alert('Something went wrong');
       }
-    })
+    });
     // console.log('added');
   }
 }

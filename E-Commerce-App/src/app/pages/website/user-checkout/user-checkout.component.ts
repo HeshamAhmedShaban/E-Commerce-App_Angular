@@ -39,7 +39,7 @@ export class UserCheckoutComponent implements OnInit {
     cart:[],
     totalPrice:null,
     totalItems:null,
-    message:'Thank you for purchasing our products ,We Will Communicate With You At Nearest Time ',
+    message:'Thank you for purchasing our products ,We Will Communicate With You At Nearest Time',
   } 
   private _productService=inject(ProductService)
   private _cartService=inject(CartService);
@@ -52,9 +52,15 @@ export class UserCheckoutComponent implements OnInit {
       this.userData=JSON.parse(data)
       this.checkoutObj.email=this.userData.email;
     }
-    this._cartService.cartUpdated$?.subscribe(res=>{
-      if(res) return this.getCartItems();
-    })
+    this._cartService.cartUpdated$.subscribe(updated => {
+      if (updated) {
+        this.getCartItems();
+      }
+    });
+
+    this._cartService.cartItems$.subscribe(cartItems => {
+      this.cartUserItems = cartItems.filter(item => item.customerEmail === this.userData.email);
+    });
   }
 
   public getCartItems() {
@@ -70,12 +76,10 @@ export class UserCheckoutComponent implements OnInit {
       this.calculateTotalPrice();
     });
   }
-
-  public deleteProductFromcart(cartId:string){
-    this._cartService.deleteProductFromCart(cartId).subscribe(()=>{
-      this.cartUserItems=this.cartUserItems.filter(item=>item.id !== cartId );
-      // alert('product deleted')
-    })
+  public deleteProductFromcart(cartId: string) {
+    this._cartService.deleteProductFromCart(cartId).subscribe(() => {
+      this.calculateTotalPrice();
+    });
   }
 
   public calculateTotalPrice() {
@@ -113,7 +117,7 @@ export class UserCheckoutComponent implements OnInit {
       cart:[],
       totalPrice:null,
       totalItems:null,
-      message:'We Will Communicate With You At Nearest Time  ,,,,Thanks',
+      message:'Thank you for purchasing our products ,We Will Communicate With You At Nearest Time',
     }
   }
 }

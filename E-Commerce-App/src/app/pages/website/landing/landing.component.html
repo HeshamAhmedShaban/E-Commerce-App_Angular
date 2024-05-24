@@ -50,64 +50,59 @@
                     </li>
                     <!-- cart -->
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa fa-cart-shopping fs-5 me-1" style="color: #202122;"></i>
-                        </a>
-                        <ul class="dropdown-menu menuOnLeft   rounded-0 mt-2" aria-labelledby="navbarDropdown3">
-                            <ul class="list-group">
-                              @if(cartUserItems.length <= 0){
-                                <li class="list-group-item">
+                      <a class="nav-link dropdown-toggle position-relative" href="#" id="navbarDropdown3" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          <i class="fa fa-cart-shopping fs-5 me-1" style="color: #202122;"></i>
+                          <span *ngIf="cartUserItems.length > 0" class="badge bg-danger rounded-circle position-absolute top-0  start-45 translate-middle">
+                              {{ cartUserItems.length }}
+                          </span>
+                      </a>
+                      <ul class="dropdown-menu menuOnLeft rounded-0 mt-2" aria-labelledby="navbarDropdown3">
+                          <ul class="list-group">
+                              <li *ngIf="cartUserItems.length <= 0" class="list-group-item">
                                   <div>
-                                    <div class="d-flex justify-content-between">
-                                      <p class="m-0 p-0">Your cart is empty</p>
-                                    </div>
-                                  </div>
-                                  
-                                </li>
-                              }@else {
-                                <li class="list-group-item" *ngFor="let item of cartUserItems; let i = index">
-                                  <ng-container *ngFor="let product of productsUser; let j = index">
-                                    <ng-container *ngIf="product.id === item.productId">
-                                      <div class="d-flex w-100 border-bottom justify-content-evenly">
-                                        <div>
-                                          <img style="height: 70px !important; width: 100px !important;"
-                                              class="img-fluid p-2"
-                                              [src]="product.productImageUrl"
-                                              alt="productImageUrl">
-                                        </div>
-                                        <div>
-                                          <a  class="text-decoration-none text-black fw-semibold">
-                                            <p class="m-0 p-0">{{ product.productName }}</p>
-                                          </a>
-                                          <p>{{item.quantity}} <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ {{ product.productPrice }}</p>
-                                        </div>
-                                        <button type="button" class="btn fs-5 closeBtn" (click)="deleteProductFromcart(item.id!)"><i class="fa-solid fa-xmark"></i></button>
+                                      <div class="d-flex justify-content-between">
+                                          <p class="m-0 p-0">Your cart is empty</p>
                                       </div>
-                                    </ng-container>
-                                  </ng-container>
-                                </li>
-                                <li class="p-2">
-                                <div class=" w-100 ">
-                                    <div class="d-flex justify-content-between">
-                                        <h6>SubTotal :</h6>
-                                        <h6>${{totalPrice}}</h6>
-                                    </div>
-                                    <div class="d-flex justify-content-evenly mt-2">
-                                        <button class="btn btn-dark rounded-0 px-3"> View Cart</button>
-                                        <a routerLink="/ckeckout"> <button
-                                                class="btn btn-danger rounded-0 px-3">Checkout</button></a>
-                                    </div>
-
-                                </div>
+                                  </div>
                               </li>
-                              }
-                            </ul>
-                            
-                            
-
-                        </ul>
-                    </li>
+                              <ng-container *ngIf="cartUserItems.length > 0">
+                                  <li class="list-group-item" *ngFor="let item of cartUserItems; let i = index">
+                                      <ng-container *ngFor="let product of productsUser; let j = index">
+                                          <ng-container *ngIf="product.id === item.productId">
+                                              <div class="d-flex w-100 border-bottom justify-content-evenly">
+                                                  <div>
+                                                      <img style="height: 70px !important; width: 100px !important;" class="img-fluid p-2" [src]="product.productImageUrl" alt="productImageUrl">
+                                                  </div>
+                                                  <div>
+                                                      <a class="text-decoration-none text-black fw-semibold">
+                                                          <p class="m-0 p-0">{{ product.productName }}</p>
+                                                      </a>
+                                                      <p>{{item.quantity}} <i class="fa-solid fa-xmark" style="color: #0d0d0d;"></i> $ {{ product.productPrice }}</p>
+                                                  </div>
+                                                  <button type="button" class="btn fs-5 closeBtn" (click)="deleteProductFromcart(item.id!)"><i class="fa-solid fa-xmark"></i></button>
+                                              </div>
+                                          </ng-container>
+                                      </ng-container>
+                                  </li>
+                                  <li class="p-2">
+                                      <div class="w-100">
+                                          <div class="d-flex justify-content-between">
+                                              <h6>SubTotal :</h6>
+                                              <h6>${{totalPrice}}</h6>
+                                          </div>
+                                          <div class="d-flex justify-content-evenly mt-2">
+                                              <button class="btn btn-dark rounded-0 px-3">View Cart</button>
+                                              <a routerLink="/ckeckout">
+                                                  <button class="btn btn-danger rounded-0 px-3" >Checkout</button>
+                                              </a>
+                                          </div>
+                                      </div>
+                                  </li>
+                              </ng-container>
+                          </ul>
+                      </ul>
+                  </li>
+                  
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle redHover fw-semibold text-uppercase text-black  me-1"
                             href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
@@ -143,3 +138,4 @@
 </header>
 
 <router-outlet></router-outlet>
+<app-footer></app-footer>

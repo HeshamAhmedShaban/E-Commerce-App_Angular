@@ -100,9 +100,15 @@
                 </div>
               </div>
             </ng-container>
-            <ng-container *ngIf="cartUserItems.length == 0">
-              <p class="text-center fw-bold mt-3">No Orders Available To Place!</p>
-              <p class="text-center fw-bold mt-3">{{checkoutObj.message}}</p>
+            <ng-container >
+              @if(cartUserItems.length > 0){
+                <p class="text-center fw-bold mt-3">{{checkoutObj.message}}</p>
+              }
+              @if(cartUserItems.length == 0){
+                <p class="text-center fw-bold mt-3">No Orders Available To Place!</p>
+              }
+              
+              
             </ng-container>
           </div>
         </div>

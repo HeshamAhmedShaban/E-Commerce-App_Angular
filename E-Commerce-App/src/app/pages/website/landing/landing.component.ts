@@ -10,11 +10,12 @@ import { CartService } from '../../../core/services/cart.service';
 import { Login_Auth } from '../../../core/models/auth';
 import { forkJoin, map, switchMap } from 'rxjs';
 import { ProductService } from '../../../core/services/product.service';
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [CommonModule,FormsModule,RouterLink,RouterOutlet],
+  imports: [CommonModule,FormsModule,RouterLink,RouterOutlet,FooterComponent],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css'
 })
@@ -48,10 +49,18 @@ export class LandingComponent implements OnInit {
     if(data !== null){
       this.userData=JSON.parse(data)
       // console.log(this.userData);
+      this.getCartItems();
     }
-    this._cartService.cartUpdated$?.subscribe(res=>{
-      if(res) return this.getCartItems();
-    })
+    this._cartService.cartItems$.subscribe(cartItems => {
+      this.cartUserItems = cartItems.filter(item => item.customerEmail === this.userData.email);
+      this.calculateTotalPrice();
+    });
+
+    this._cartService.cartUpdated$.subscribe(updated => {
+      if (updated) {
+        this.getCartItems();
+      }
+    });
   }
 
   private userState(){
@@ -110,6 +119,7 @@ export class LandingComponent implements OnInit {
     this._cartService.deleteProductFromCart(cartId).subscribe(()=>{
       this.cartUserItems=this.cartUserItems.filter(item=>item.id !== cartId );
       // alert('product deleted')
+      this.calculateTotalPrice();
     })
   }
 
