@@ -10,8 +10,6 @@ export class OrderService {
   private _url:string='http://localhost:3000/';
   private http=inject(HttpClient);
 
-
-
   public getAllOrders(){
     return this.http.get(`${this._url}order`);
   };

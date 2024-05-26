@@ -19,7 +19,7 @@ export const routes: Routes = [
     {path:'products/:id',component:CategoryProductsComponent,title:'Products Same Category'},
     {path:Routing.userLogin,component:LoginUserComponent,title:'Login'},
     {path:Routing.userRegister,component:RegisterUserComponent,title:'Register'},
-    {path:Routing.checkOut,component:UserCheckoutComponent,title:'Checkout Your Order'}
+    {path:Routing.checkOut,component:UserCheckoutComponent,title:'Checkout Your Order'},
   ]},
   {path:Routing.Default,component:LayoutComponent,children:[
     {path:Routing.adminProducts,component:AdminProductsComponent,title:'Products'},

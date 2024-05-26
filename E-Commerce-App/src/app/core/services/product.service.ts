@@ -10,7 +10,7 @@ export class ProductService {
 
   private _url:string='http://localhost:3000/'
 
-  http=inject(HttpClient);
+  private http=inject(HttpClient);
 
 
   public getAllProducts(){  

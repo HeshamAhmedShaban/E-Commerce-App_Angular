@@ -30,12 +30,10 @@ export class AuthUserService {
     this.user.next(false);
   }
 
-
   public getUsers():Observable<Register_Auth []>{
     return this.http.get<Register_Auth []>(`${this._url}users`)
   }
 
-  //
   public createUser(registerObj:Register_Auth):Observable<Register_Auth>{
     return this.http.post<Register_Auth>(`${this._url}users`,JSON.stringify(registerObj))
   }

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
 
-  _url:string='http://localhost:3000/'
+  private _url:string='http://localhost:3000/'
 
   http=inject(HttpClient);
 
