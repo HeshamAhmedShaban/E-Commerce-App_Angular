@@ -9,6 +9,7 @@ import { Iproduct } from '../../../core/models/iproduct';
 import { Icart } from '../../../core/models/icart';
 import { CartService } from '../../../core/services/cart.service';
 import { Login_Auth } from '../../../core/models/auth';
+import { debounceTime, fromEvent, map } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -39,6 +40,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit(): void {
     this.getAllCategories();
     this.getAllProduct();
+    // this.ser();
     const data=localStorage.getItem('email');
     if(data !== null){
       this.userData=JSON.parse(data)
@@ -69,7 +71,7 @@ export class ProductsComponent implements OnInit {
     this.router.navigate(['/products',id])
   }
 
-  public addTocart(id:string){  
+  public addTocart(id:string){
     this.cartObj.customerEmail=this.userData.email;
     this.cartObj.productId=id;
     this.cartObj.quantity=1;
@@ -85,4 +87,26 @@ export class ProductsComponent implements OnInit {
     });
     // console.log('added');
   }
+
+
+//   private ser(){
+//   //   let inputSearch =document.getElementById('search') as HTMLInputElement
+//   //   let serch$=fromEvent<InputEvent>(inputSearch,"input").subscribe({
+//   //     next:(event:any)=>{
+//   //       console.log(event.target.value);
+//   //     }
+//   //   })
+//   // }
+//   const searchInput = document.getElementById('search') as HTMLInputElement;
+//   const search$ = fromEvent<InputEvent>(searchInput, 'input')
+//     .pipe(
+//       debounceTime(3000), // optional: debounce the input to avoid excessive logging
+//       map(event => (event.target as HTMLInputElement).value)
+//     )
+//     .subscribe({
+//       next: value => {
+//         console.log(value);
+//       }
+//     });
+// }
 }
