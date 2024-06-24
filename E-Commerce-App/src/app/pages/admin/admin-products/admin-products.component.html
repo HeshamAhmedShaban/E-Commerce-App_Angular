@@ -32,9 +32,9 @@
               </div>
             </div>
           </div>
-          
+
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -55,39 +55,143 @@
           <div class="row">
             <div class="col-6">
               <label for="SKU">SKU</label>
-              <input type="text" name="SKU" id="SKU" placeholder="SKU" class="form-control" [(ngModel)]="productObj.productSku">
+              <input type="text"
+                      name="SKU"
+                      id="SKU"
+                      placeholder="SKU"
+                      class="form-control"
+                      [(ngModel)]="productObj.productSku"
+                      #sku="ngModel"
+                      required
+                      minlength="3"
+                      maxlength="10"
+                      (input)="checkInputValidity(sku, [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
+                      [ngClass]="{ 'is-invalid': sku.invalid && (sku.dirty || sku.touched) }">
+              <div class="invalid-feedback" *ngIf="sku.invalid && (sku.dirty || sku.touched)">
+                <p *ngIf="sku.errors?.['required']">SKU is required.</p>
+                <p *ngIf="sku.errors?.['minlength']">SKU must be at least 3 characters long.</p>
+                <p *ngIf="sku.errors?.['maxlength']">SKU cannot be more than 10 characters long.</p>
+              </div>
             </div>
+
+
             <div class="col-6">
               <label for="name">Name</label>
-              <input type="text" name="name" id="SKU" placeholder="name" class="form-control" [(ngModel)]="productObj.productName">
+              <input type="text"
+                      name="name"
+                      id="name"
+                      placeholder="name"
+                      class="form-control"
+                      [(ngModel)]="productObj.productName"
+                      #name="ngModel"
+                      required
+                      minlength="3"
+                      maxlength="10"
+                      (input)="checkInputValidity(name, [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
+                      [ngClass]="{ 'is-invalid': name.invalid && (name.dirty || name.touched) }">
+                      <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+                        <p *ngIf="name.errors?.['required']">Name is required.</p>
+                        <p *ngIf="name.errors?.['minlength']">Name must be at least 3 characters long.</p>
+                        <p *ngIf="name.errors?.['maxlength']">Name cannot be more than 10 characters long.</p>
+                      </div>
             </div>
+
             <div class="col-6">
               <label for="shortname">Short Name</label>
-              <input type="text" name="shortname" id="shortname" placeholder="shortname" class="form-control" [(ngModel)]="productObj.productShortName">
+              <input type="text" name="shortname" id="shortname" placeholder="shortname" class="form-control" [(ngModel)]="productObj.productShortName" #shortname="ngModel"
+                      required
+                      minlength="3"
+                      maxlength="10"
+                      (input)="checkInputValidity(shortname, [{ type:'required', value: null }, { type:'minlength', value: 3 }, { type:'maxlength', value: 10 }])"
+                      [ngClass]="{ 'is-invalid': shortname.invalid && (shortname.dirty || shortname.touched) }">
+                      <div class="invalid-feedback" *ngIf="shortname.invalid && (shortname.dirty || shortname.touched)">
+                        <p *ngIf="shortname.errors?.['required']">Short Name is required.</p>
+                        <p *ngIf="shortname.errors?.['minlength']">Short Name must be at least 3 characters long.</p>
+                        <p *ngIf="shortname.errors?.['maxlength']">Short Name cannot be more than 10 characters long.</p>
+                      </div>
             </div>
             <div class="col-6">
               <label for="price">Price</label>
-              <input type="number" name="price" id="SKU" placeholder="price" class="form-control" [(ngModel)]="productObj.productPrice">
+              <input type="number" name="price" id="price" placeholder="price" class="form-control" [(ngModel)]="productObj.productPrice" #price="ngModel"
+                      required
+                      min="1"
+                      max="1000"
+                      (input)="checkInputValidity(price, [{ type: 'required', value: null }, { type: 'min', value: 1 }, { type: 'max', value: 1000 }])"
+                      [ngClass]="{ 'is-invalid': price.invalid && (price.dirty || price.touched) }">
+              <div class="invalid-feedback" *ngIf="price.invalid && (price.dirty || price.touched)">
+                <p *ngIf="price.errors?.['required']">Price is required.</p>
+                <p *ngIf="price.errors?.['min']">Price must be greater than 0.</p>
+                <p *ngIf="price.errors?.['max']">Price cannot be more than 1000.</p>
+              </div>
             </div>
-            <div class="col-6">
-              <label for="category">Category</label>
-              <select name="category" id="category" class="form-select" [(ngModel)]="productObj.categoryId">
-                <option value="0" disabled>Select Category</option>
+
+          <div class="col-6">
+            <label for="category">Category</label>
+            <select name="category"
+                    id="category"
+                    class="form-select"
+                    [(ngModel)]="productObj.categoryId"
+                    #categoryInput="ngModel"
+                    required
+                    (blur)="checkInputValidity(categoryInput, [{ type: 'required', value: null }])"
+                    (change)="checkInputValidity(categoryInput, [{ type: 'required', value: null }])"
+                    [ngClass]="{ 'is-invalid': categoryInput.invalid && (categoryInput.dirty || categoryInput.touched) }">
+                <!-- <option value="" disabled>Select Category</option> -->
+                <option value="" disabled>Select Category Of Product</option>
                 <option *ngFor="let category of categoryList" [value]="category.categoryId">{{category.categoryName}}</option>
-              </select>
+            </select>
+            <div class="invalid-feedback"  *ngIf="categoryInput.invalid && (categoryInput.dirty || categoryInput.touched)">
+              <p *ngIf="categoryInput.errors?.['required']">Category is required.</p>
             </div>
-            <div class="col-6">
+          </div>
+
+            <!-- <div class="col-6">
               <label for="delivary">Delivary Time</label>
               <input type="text" name="delivary" id="delivary" placeholder="delivary time" class="form-control" [(ngModel)]="productObj.deliveryTimeSpan">
+            </div> -->
+            <div class="col-6">
+              <label for="delivery">Delivery Time</label>
+              <select name="delivery" id="delivery" class="form-select" [(ngModel)]="productObj.deliveryTimeSpan" #deliveryInput="ngModel"
+                    required
+                    (change)="checkInputValidity(deliveryInput, [{ type: 'required', value: null }])"
+                    [ngClass]="{ 'is-invalid': deliveryInput.invalid && (deliveryInput.dirty || deliveryInput.touched) }">
+                <option value="" disabled selected>Select Delivery Time</option>
+                <option value="1 day">1 day</option>
+                <option value="2 days">2 days</option>
+                <option value="3 days">3 days</option>
+              </select>
+              <div class="invalid-feedback" *ngIf="deliveryInput.invalid && (deliveryInput.dirty || deliveryInput.touched)">
+                <p *ngIf="deliveryInput.errors?.['required']">Delivery time is required.</p>
+              </div>
             </div>
+
             <div class="col-6">
               <label for="image">Image URL</label>
               <input type="text" name="image" id="image" placeholder="image" class="form-control" [(ngModel)]="productObj.productImageUrl">
             </div>
             <div class="col-6">
               <label for="description">Product Description</label>
-              <textarea name="description" id="description" placeholder="description" class="form-control" [(ngModel)]="productObj.productDescription"></textarea>
+              <textarea
+                name="description"
+                id="description"
+                placeholder="Description"
+                class="form-control"
+                [(ngModel)]="productObj.productDescription"
+                required
+                minlength="10"
+                maxlength="20"
+                #descriptionInput="ngModel"
+                (input)="checkInputValidity(descriptionInput, [{ type: 'required', value: null }, { type: 'minlength', value: 10 }, { type: 'maxlength', value: 20 }])"
+                [ngClass]="{ 'is-invalid': descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched) }">
+              ></textarea>
+              <div class="invalid-feedback" *ngIf="descriptionInput.invalid && (descriptionInput.dirty || descriptionInput.touched)">
+                <p *ngIf="descriptionInput.errors?.['required']">Description is required.</p>
+                <p *ngIf="descriptionInput.errors?.['minlength']">Description must be at least 10 characters long.</p>
+                <p *ngIf="descriptionInput.errors?.['maxlength']">Description cannot be more than 20 characters long.</p>
+              </div>
             </div>
+
+
           </div>
           <div class="row">
             <div class="col-6">
