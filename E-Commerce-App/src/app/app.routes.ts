@@ -10,6 +10,7 @@ import { ProductsComponent } from './pages/website/products/products.component';
 import { LoginUserComponent } from './pages/website/login-user/login-user.component';
 import { RegisterUserComponent } from './pages/website/register-user/register-user.component';
 import { UserCheckoutComponent } from './pages/website/user-checkout/user-checkout.component';
+import { ReactiveFormComponent } from './pages/admin/reactive-form/reactive-form.component';
 
 export const routes: Routes = [
   {path:Routing.Default,redirectTo:'allProducts',pathMatch:'full'},
@@ -24,5 +25,6 @@ export const routes: Routes = [
   {path:Routing.Default,component:LayoutComponent,children:[
     {path:Routing.adminProducts,component:AdminProductsComponent,title:'Products'},
     {path:Routing.adminCategories,component:AdminCategoriesComponent,title:'Categories'},
+    {path:'reactive',component:ReactiveFormComponent,title:'Reactive Form'}
   ]}
 ];

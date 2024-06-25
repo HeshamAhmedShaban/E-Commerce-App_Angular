@@ -124,84 +124,9 @@ updateMode:boolean=false
     }
   }
 
-  // public checkInputValidity(control: any): void {
-  //   const value = control.value;
-  //   const errors: { [key: string]: boolean } = {}; // Explicitly define the keys as strings
 
-  //   if (!value || value.trim().length === 0) {
-  //     errors['required'] = true;
-  //   }
-  //   if (value.length < 10) {
-  //     errors['minlength'] = true;
-  //   }
-  //   if (value.length >=20) {
-  //     errors['maxlength'] = true;
-  //   }
-  //   control.control.setErrors(Object.keys(errors).length > 0 ? errors : null);
-  // }
 
-  // checkInputValidity(control: any): void {
-  //   const value = control.value;
-  //   const validations = [
-  //     { field: 'required', length: 0 },
-  //     { field: 'minlength', length: 10 },
-  //     { field: 'maxlength', length: 20 }
-  //     // Add more validations as needed
-  //   ];
-  //   const errors: { [key: string]: boolean } = {};
-
-  //   validations.forEach(validation => {
-  //     if (validation.field === 'required' && (!value || value.trim().length === 0)) {
-  //       errors['required'] = true;
-  //     } else if (validation.field === 'minlength' && value.length <= validation.length) {
-  //       errors['minlength'] = true;
-  //     } else if (validation.field === 'maxlength' && value.length >= validation.length) {
-  //       errors['maxlength'] = true;
-  //     }
-  //   });
-
-  //   control.control.setErrors(Object.keys(errors).length > 0 ? errors : null);
-  // }
-
-  // checkInputValidity(control: any, validations: { type: string, value: any }[]): void {
-  //   const value = control.value;
-  //   const errors: { [key: string]: boolean } = {};
-
-  //   validations.forEach(validation => {
-  //     switch (validation.type) {
-  //       case 'required':
-  //         if (!value || value.trim().length === 0) {
-  //           errors['required'] = true;
-  //         }
-  //         break;
-  //       case 'minlength':
-  //         if (value.length < validation.value) {
-  //           errors['minlength'] = true;
-  //         }
-  //         break;
-  //       case 'maxlength':
-  //         if (value.length >= validation.value) {
-  //           errors['maxlength'] = true;
-  //         }
-  //         break;
-  //       case 'min':
-  //         if (value < validation.value) {
-  //           errors['min'] = true;
-  //         }
-  //         break;
-  //       case 'max':
-  //         if(value > validation.value) {
-  //           errors['max'] = true;
-  //         }
-  //         break;
-  //       // Add more cases for other types of validations as needed
-  //     }
-  //   });
-
-  //   control.control.setErrors(Object.keys(errors).length > 0 ? errors : null);
-  // }
-
-  checkInputValidity(control: any, validations: { type: string, value: any }[]): void {
+  public checkInputValidity(control: any, validations: { type: string, value: any }[]): void {
     const value = control.value;
     const errors: { [key: string]: boolean } = {};
 

@@ -1,0 +1,187 @@
+<div class="container card-body pt-5">
+  <Form class="row" [formGroup]="reactiveForm" (ngSubmit)="submitForm()">
+    <div class="col-6">
+      <label for="SKU">SKU</label>
+      <input type="text"
+            name="SKU"
+            id="SKU"
+            placeholder="SKU"
+            class="form-control"
+            formControlName="SKU"
+            (input)="onInput($event, reactiveForm.controls['SKU'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"            [ngClass]="{ 'is-invalid': reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
+
+      <div *ngIf="reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty)" class="invalid-feedback">
+        <div *ngIf="reactiveForm.controls['SKU'].errors?.['required']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Enter SKU.</span>
+        </div>
+        <div *ngIf="reactiveForm.controls['SKU'].errors?.['minlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">SKU must be at least 3 characters long.</span>
+        </div>
+        <div *ngIf="reactiveForm.controls['SKU'].errors?.['maxlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">SKU cannot be more than 10 characters long.</span>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="col-6">
+      <label for="name">Name</label>
+      <input type="text"
+              name="name"
+              id="name"
+              placeholder="name"
+              class="form-control"
+              formControlName="name"
+              (input)="onInput($event, reactiveForm.controls['name'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
+              [ngClass]="{ 'is-invalid': reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
+
+              <!-- (input)="handleInput($event, 'name')" -->
+      <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
+        <div *ngIf="name?.errors?.['required']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Enter Name.</span>
+        </div>
+        <div *ngIf="name?.errors?.['minlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Name must be at least 3 characters long.</span>
+        </div>
+        <div *ngIf="name?.errors?.['maxlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Name cannot be more than 10 characters long.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-6">
+      <label for="shortname">Short Name</label>
+      <input type="text" name="shortname" id="shortname" placeholder="shortname" class="form-control"
+
+              formControlName="shortname"
+              (input)="onInput($event, reactiveForm.controls['shortname'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
+              [ngClass]="{ 'is-invalid': shortname?.invalid && (shortname?.touched || shortname?.dirty) }"
+              >
+
+      <div *ngIf="shortname?.invalid && (shortname?.touched || shortname?.dirty)" class="invalid-feedback">
+        <div *ngIf="shortname?.errors?.['required']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Enter Short Name.</span>
+        </div>
+        <div *ngIf="shortname?.errors?.['minlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Short Name must be at least 3 characters long.</span>
+        </div>
+        <div *ngIf="shortname?.errors?.['maxlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Short Name cannot be more than 10 characters long.</span>
+        </div>
+      </div>
+
+
+    </div>
+    <div class="col-6">
+      <label for="price">Price</label>
+      <input type="number"
+             name="price"
+             id="price"
+             placeholder="price"
+             class="form-control"
+             formControlName="price"
+             (input)="onInput($event, reactiveForm.controls['price'], [{ type: 'required', value: null }, { type: 'min', value: 1 }, { type: 'max', value: 1000 }])"
+             [ngClass]="{ 'is-invalid': reactiveForm.controls['price'].invalid && (reactiveForm.controls['price'].touched || reactiveForm.controls['price'].dirty) }">
+
+      <div *ngIf="reactiveForm.controls['price'].invalid && (reactiveForm.controls['price'].touched || reactiveForm.controls['price'].dirty)" class="invalid-feedback">
+        <div *ngIf="reactiveForm.controls['price'].errors?.['required']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Enter Price.</span>
+        </div>
+        <div *ngIf="reactiveForm.controls['price'].errors?.['min']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Price must be at least 1.</span>
+        </div>
+        <div *ngIf="reactiveForm.controls['price'].errors?.['max']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Price cannot be more than 1000.</span>
+        </div>
+      </div>
+    </div>
+
+  <div class="col-6">
+    <label for="category">Category</label>
+    <select name="category"
+            id="category"
+            class="form-select"
+            formControlName="category"
+            required
+            (change)="onInput($event, reactiveForm.controls['category'], [{ type: 'required', value: null }])"
+            (blur)="onInput($event, reactiveForm.controls['category'], [{ type: 'required', value: null }, ])"
+            [ngClass]="{ 'is-invalid': category?.invalid && (category?.touched || category?.dirty) }"
+            >
+            <option value="" disabled>Select Category Of Product</option>
+    </select>
+    <div *ngIf="category?.invalid && (category?.touched || category?.dirty)" class="invalid-feedback">
+      <div *ngIf="category?.errors?.['required']" class="text-center mb-2">
+        <span class="text-danger fw-bold">Select Category.</span>
+      </div>
+    </div>
+        <!-- <option value="" disabled>Select Category</option> -->
+
+
+  </div>
+    <div class="col-6">
+      <label for="delivery">Delivery Time</label>
+      <select name="delivery"
+              id="delivery"
+              class="form-select"
+              formControlName="deleverytime"
+              required
+              (change)="onInput($event, reactiveForm.controls['deleverytime'], [{ type: 'required', value: null }])"
+              (blur)="onInput($event, reactiveForm.controls['deleverytime'], [{ type: 'required', value: null }, ])"
+              [ngClass]="{ 'is-invalid': deleverytime?.invalid && (deleverytime?.touched || deleverytime?.dirty) }"
+            >
+        <option value="" disabled selected>Select Delivery Time</option>
+        <option value="1 day">1 day</option>
+        <option value="2 days">2 days</option>
+        <option value="3 days">3 days</option>
+      </select>
+      <div *ngIf="deleverytime?.invalid && (deleverytime?.touched || deleverytime?.dirty)" class="invalid-feedback">
+        <div *ngIf="deleverytime?.errors?.['required']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Select Delivery Time.</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="col-6">
+      <label for="image">Image URL</label>
+      <input type="text" name="image" id="image" placeholder="image" class="form-control" >
+    </div>
+    <div class="col-6">
+      <label for="description">Product Description</label>
+      <textarea
+        name="description"
+        id="description"
+        placeholder="Description"
+        class="form-control"
+        formControlName="description"
+        (input)="onInput($event, reactiveForm.controls['description'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 20 }])"
+        [ngClass]="{ 'is-invalid': description?.invalid && (description?.touched || description?.dirty) }"
+        ></textarea>
+
+      <div *ngIf="description?.invalid && (description?.touched || description?.dirty)" class="invalid-feedback">
+        <div *ngIf="description?.errors?.['required']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Enter Description.</span>
+        </div>
+        <div *ngIf="description?.errors?.['minlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Description must be at least 3 characters long.</span>
+        </div>
+        <div *ngIf="description?.errors?.['maxlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">Description cannot be more than 20 characters long.</span>
+        </div>
+      </div>
+
+
+    </div>
+
+  </Form>
+  <div class="row pt-5">
+    <div class="col-6">
+      <button class="btn btn-sm btn-outline-secondary">Clear</button>
+    </div>
+    <div class="col-6">
+      <button type="submit" class="btn btn-sm btn-outline-primary" [disabled]="!reactiveForm.valid" >Create Product</button>
+    </div>
+  </div>
+</div>

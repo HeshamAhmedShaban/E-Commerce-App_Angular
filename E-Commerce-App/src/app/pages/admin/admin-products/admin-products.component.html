@@ -60,11 +60,11 @@
                       id="SKU"
                       placeholder="SKU"
                       class="form-control"
-                      [(ngModel)]="productObj.productSku"
-                      #sku="ngModel"
                       required
                       minlength="3"
                       maxlength="10"
+                      [(ngModel)]="productObj.productSku"
+                      #sku="ngModel"
                       (input)="checkInputValidity(sku, [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
                       [ngClass]="{ 'is-invalid': sku.invalid && (sku.dirty || sku.touched) }">
               <div class="invalid-feedback" *ngIf="sku.invalid && (sku.dirty || sku.touched)">
@@ -193,7 +193,7 @@
 
 
           </div>
-          <div class="row">
+          <div class="row pt-2">
             <div class="col-6">
               <button class="btn btn-sm btn-outline-secondary" (click)="clearForm()">Clear</button>
             </div>
