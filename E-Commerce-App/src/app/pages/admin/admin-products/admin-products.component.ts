@@ -5,11 +5,12 @@ import { ProductService } from '../../../core/services/product.service';
 import { Icategory } from '../../../core/models/icategory';
 import { Iproduct } from '../../../core/models/iproduct';
 import { CategoryService } from '../../../core/services/category.service';
+import { ShareModule } from '../../../shared/modules/share/share.module';
 
 @Component({
   selector: 'app-admin-products',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule,ShareModule],
   templateUrl: './admin-products.component.html',
   styleUrl: './admin-products.component.css'
 })
@@ -36,9 +37,15 @@ updateMode:boolean=false
   _categoryService=inject(CategoryService)
 
   ngOnInit(): void {
-      this.getAllProducts()
-      this.getAllCategories()
+      this.getAllProducts();
+      this.getAllCategories();
   }
+
+
+
+
+
+
 
 
   public getAllCategories(){
