@@ -1,50 +1,81 @@
-<div class="contact">
+<div class="body">
+  <h3>Contact Form</h3>
+
   <div class="container">
-      <div class="wrapper">
-          <form action="" class="left animate">
-              <div class="head">
-                  <h2>Get In Touch</h2>
-              </div>
-              <p>
-                  <label for="name">Your Name</label>
-                  <input type="text" name="name" id="name" placeholder="Hesham AHmed Shaban">
-              </p>
-              <p>
-                  <label for="email">Your Email</label>
-                  <input type="email" name="email" id="email" placeholder="heshamshaban0098@gmail.com">
-              </p>
-              <p>
-                  <label for="subject">Subject</label>
-                  <input type="text" name="subject" id="subject" placeholder="Headline topic to discuss?">
-              </p>
-              <p>
-                  <label for="message">Message</label>
-                  <textarea cols="30" rows="10" name="message" id="message" placeholder="Write Your message"></textarea>
-              </p>
-              <p>
-                  <button class="button">Send</button>
-              </p>
-          </form>
-          <div class="text-right">
-              <ul class="right animate">
-                  <li>
-                      <span>Office</span>
-                      <p>Cairo, BaniSuef </p>
-                  </li>
-                  <li>
-                      <span>Phone</span>
-                      <p><a href="http://wa.me/+201147431061">01147431061</a></p>
-                  </li>
-                  <li>
-                      <span>Office</span>
-                      <p>Cairo, BaniSuef </p>
-                  </li>
-                  <li>
-                      <span>How can we work?</span>
-                      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint accusantium sed magnam officia laudantium harum, possimus soluta architecto fugit numquam. </p>
-                  </li>
-              </ul>
-          </div>
+    <form  #contactForm="ngForm">
+      <div>
+        <label for="name">Name</label>
+        <input type="text" id="name" name="Name" placeholder="Your Name.."
+          [(ngModel)]="contactFormModel.from_name"
+          required
+          minlength="3"
+          maxlength="15"
+          #name="ngModel"
+          (input)="checkInputValidity(name, [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 15 }])"
+          [ngClass]="{ 'border-danger': name.invalid && (name.dirty || name.touched) }"
+          >
+          <div class="text-danger text-center" *ngIf="name.invalid && (name.dirty || name.touched)">
+					  <p *ngIf="name.errors?.['required']">Name is required.</p>
+					  <p *ngIf="name.errors?.['minlength']">Name must be at least 3 characters long.</p>
+					  <p *ngIf="name.errors?.['maxlength']">Name cannot be more than 15 characters long.</p>
+					</div>
+        </div>
+      <div>
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your Email.."
+          [(ngModel)]="contactFormModel.from_email"
+          #email="ngModel"
+          required
+          (input)="checkInputValidity(email, [{ type: 'required', value: null }])"
+          [ngClass]="{ 'border-danger': email.invalid && (name.dirty || name.touched) }"
+          >
+          <div class="text-danger text-center" *ngIf="email.invalid && (email.dirty || email.touched)">
+					  <p *ngIf="email.errors?.['required']">Email is required.</p>
+					</div>
+        </div>
+
+      <label for="hobby">Hobby</label>
+      <select id="hobby" name="hobby"
+        [(ngModel)]="contactFormModel.hobby"
+        #hobby="ngModel"
+      >
+        <option value="football" selected>Football</option>
+        <option value="tennis">Tennis</option>
+        <option value="basketball">Basketball</option>
+      </select>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Write something.." style="height:200px"
+          [(ngModel)]="contactFormModel.message"
+          #message="ngModel"
+          required
+          minlength="10"
+          maxlength="50"
+          (input)="checkInputValidity(message, [{ type: 'required', value: null }, { type: 'minlength', value: 10 }, { type: 'maxlength', value: 50 }])"
+          [ngClass]="{ 'border-danger': message.invalid && (message.dirty || message.touched) }"
+          >
+        </textarea>
+        <div class="text-danger text-center" *ngIf="message.invalid && (message.dirty || message.touched)">
+          <p *ngIf="message.errors?.['required']">Message is required.</p>
+          <p *ngIf="message.errors?.['minlength']">Message must be at least 10 characters long.</p>
+          <p *ngIf="message.errors?.['maxlength']">Message cannot be more than 50 characters long.</p>
+        </div>
       </div>
+
+
+      <!-- <input type="submit" value="SEND" (click)="send()"> -->
+      <div class=" d-flex justify-content-center align-items-center flex-column ">
+        <p-toast />
+        <p-confirmDialog>
+            <ng-template pTemplate="message" let-message>
+                <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+                    <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+                    <p>{{ message.message }}</p>
+                </div>
+            </ng-template>
+        </p-confirmDialog>
+        <p-button (click)="confirm()" label="SEND" [disabled]="contactForm.invalid" />
+    </div>
+    </form>
   </div>
 </div>

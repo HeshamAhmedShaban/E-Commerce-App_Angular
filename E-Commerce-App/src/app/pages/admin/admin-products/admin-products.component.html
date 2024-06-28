@@ -213,18 +213,18 @@
             <div class="col-6">
               <label for="name">Name</label>
               <input type="text"
-                     name="name"
-                     id="name"
-                     placeholder="name"
-                     class="form-control"
-                     [(ngModel)]="productObj.productName"
-                     #name="ngModel"
-                     required
-                     minlength="3"
-                     maxlength="10"
-                     [appValidateInput]="[{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }]"
-                     [ngClass]="{ 'is-invalid': name.invalid && (name.dirty || name.touched) }">
-              <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
+                      name="name"
+                      id="name"
+                      placeholder="name"
+                      class="form-control"
+                      [(ngModel)]="productObj.productName"
+                      #name="ngModel"
+                      required
+                      minlength="3"
+                      maxlength="10"
+                      [appValidateInput]="[{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }]"
+                      [ngClass]="{ 'is-invalid': name.invalid && (name.dirty || name.touched) }">
+                <div class="invalid-feedback" *ngIf="name.invalid && (name.dirty || name.touched)">
                 <p *ngIf="name.errors?.['required']">Name is required.</p>
                 <p *ngIf="name.errors?.['minlength']">Name must be at least 3 characters long.</p>
                 <p *ngIf="name.errors?.['maxlength']">Name cannot be more than 10 characters long.</p>
