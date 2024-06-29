@@ -68,7 +68,7 @@ public confirm() {
 public clearForm(){
   this.contactFormModel = {
     from_name:'',
-    to_name: "Sportyano",
+    to_name: "E-Commerce APP",
     from_email:'',
     hobby:'',
     message:''
