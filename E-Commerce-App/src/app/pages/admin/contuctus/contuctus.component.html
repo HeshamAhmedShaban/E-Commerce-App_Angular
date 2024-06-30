@@ -1,4 +1,4 @@
-<div class="body">
+<!-- <div class="body">
   <h3>Contact Form</h3>
 
   <div class="container">
@@ -63,7 +63,6 @@
       </div>
 
 
-      <!-- <input type="submit" value="SEND" (click)="send()"> -->
       <div class=" d-flex justify-content-center align-items-center flex-column ">
         <p-toast />
         <p-confirmDialog>
@@ -75,6 +74,105 @@
             </ng-template>
         </p-confirmDialog>
         <p-button (click)="confirm()" label="SEND" [disabled]="contactForm.invalid" />
+    </div>
+    </form>
+  </div>
+</div> -->
+
+
+
+<div class="body">
+  <h3>Contact Form</h3>
+
+  <div class="container">
+    <form [formGroup]="contactForm" (ngSubmit)="confirm()">
+
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your Name.."
+          formControlName="from_name"
+          (input)="onInput($event, contactForm.controls['from_name'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 30 }])"
+          [ngClass]="{ 'border-danger': contactForm.controls['from_name'].invalid && (contactForm.controls['from_name'].touched || contactForm.controls['from_name'].dirty) }">
+
+          <div *ngIf="contactForm.controls['from_name'].invalid && (contactForm.controls['from_name'].touched || contactForm.controls['from_name'].dirty)" class="border-danger">
+            <div *ngIf="contactForm.controls['from_name'].errors?.['required']" class="text-center mb-2">
+              <span class="text-danger fw-bold">Enter Name.</span>
+            </div>
+            <div *ngIf="contactForm.controls['from_name'].errors?.['minlength']" class="text-center mb-2">
+              <span class="text-danger fw-bold">Name must be at least 3 characters long.</span>
+            </div>
+            <div *ngIf="contactForm.controls['from_name'].errors?.['maxlength']" class="text-center mb-2">
+              <span class="text-danger fw-bold">Name cannot be more than 30 characters long.</span>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="Your Email.."
+          formControlName="from_email"
+          (input)="onInput($event, contactForm.controls['from_email'], [{ type: 'required', value: null }])"
+          [ngClass]="{ 'border-danger': contactForm.controls['from_email'].invalid && (contactForm.controls['from_email'].touched || contactForm.controls['from_email'].dirty) }">
+
+          <div *ngIf="contactForm.controls['from_email'].invalid && (contactForm.controls['from_email'].touched || contactForm.controls['from_email'].dirty)" class="border-danger">
+            <div *ngIf="contactForm.controls['from_email'].errors?.['required']" class="text-center mb-2">
+              <span class="text-danger fw-bold">Enter Email.</span>
+            </div>
+          </div>
+      </div>
+
+
+      <div class="form-group">
+        <label for="hobby">Hobby</label>
+        <input type="text" id="hobby" name="hobby" placeholder="Your hobby.."
+          formControlName="hobby"
+          (input)="onInput($event, contactForm.controls['hobby'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
+          [ngClass]="{ 'border-danger': contactForm.controls['hobby'].invalid && (contactForm.controls['hobby'].touched || contactForm.controls['hobby'].dirty) }">
+
+          <div *ngIf="contactForm.controls['hobby'].invalid && (contactForm.controls['hobby'].touched || contactForm.controls['hobby'].dirty)" class="border-danger">
+            <div *ngIf="contactForm.controls['hobby'].errors?.['required']" class="text-center mb-2">
+              <span class="text-danger fw-bold">Enter hobby.</span>
+            </div>
+            <div *ngIf="contactForm.controls['hobby'].errors?.['minlength']" class="text-center mb-2">
+              <span class="text-danger fw-bold">hobby must be at least 3 characters long.</span>
+            </div>
+            <div *ngIf="contactForm.controls['hobby'].errors?.['maxlength']" class="text-center mb-2">
+              <span class="text-danger fw-bold">hobby cannot be more than 15 characters long.</span>
+            </div>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" placeholder="Your Message.."
+          formControlName="message"
+          (input)="onInput($event, contactForm.controls['message'], [{ type: 'required', value: null }, { type: 'minlength', value: 10 }, { type: 'maxlength', value: 50 }])"
+          [ngClass]="{ 'border-danger': contactForm.controls['message'].invalid && (contactForm.controls['message'].touched || contactForm.controls['message'].dirty) }">
+        </textarea>
+
+        <div *ngIf="contactForm.controls['message'].invalid && (contactForm.controls['message'].touched || contactForm.controls['message'].dirty)" class="border-danger">
+          <div *ngIf="contactForm.controls['message'].errors?.['required']" class="text-center mb-2">
+            <span class="text-danger fw-bold">Enter Message.</span>
+          </div>
+          <div *ngIf="contactForm.controls['message'].errors?.['minlength']" class="text-center mb-2">
+            <span class="text-danger fw-bold">Message must be at least 10 characters long.</span>
+          </div>
+          <div *ngIf="contactForm.controls['message'].errors?.['maxlength']" class="text-center mb-2">
+            <span class="text-danger fw-bold">Message cannot be more than 50 characters long.</span>
+          </div>
+        </div>
+      </div>
+      <div class=" d-flex justify-content-center align-items-center flex-column ">
+        <p-toast />
+        <p-confirmDialog>
+            <ng-template pTemplate="message" let-message>
+                <div class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border">
+                    <i class="pi pi-exclamation-circle text-6xl text-primary-500"></i>
+                    <p>{{ message.message }}</p>
+                </div>
+            </ng-template>
+        </p-confirmDialog>
+        <p-button  label="SEND" type="submit" [disabled]="contactForm.invalid" />
     </div>
     </form>
   </div>

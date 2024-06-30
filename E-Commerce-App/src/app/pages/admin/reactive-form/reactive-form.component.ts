@@ -14,22 +14,32 @@ export class ReactiveFormComponent {
 
   public reactiveForm!:FormGroup;
 
+  readonly staticValue:string='ABCD/'
+
   @ViewChild(AdminProductsComponent)AdminProductsComponent!:AdminProductsComponent
 
 
 
 constructor(private formbuilder:FormBuilder){
   this.reactiveForm=this.formbuilder.group({
-
-    SKU: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+    SKU: [this.staticValue, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     name:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     shortname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     price:['',[Validators.required,Validators.min(1),Validators.max(1000)]],
-    category:['',[Validators.required]],
+    category:[''],
     description:['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
     image:['',[Validators.required]],
     deleverytime:['',[Validators.required]]
   })
+
+}
+
+public onSKUInput(event: Event): void {
+  const inputElement = event.target as HTMLInputElement;
+  // console.log(inputElement);
+
+  const userInput = inputElement.value.slice(this.staticValue.length);
+  this.reactiveForm.get('SKU')!.setValue(this.staticValue + userInput, { emitEvent: false });
 }
 
 get SKU() {
@@ -70,6 +80,9 @@ public submitForm(){
   console.log(this.reactiveForm.value)
 }
 
+public clearForm(){
+  this.reactiveForm.reset();
+}
 
 // public handleInput(event: any): void {
 //   const input = event.target;

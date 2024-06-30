@@ -8,7 +8,9 @@
             placeholder="SKU"
             class="form-control"
             formControlName="SKU"
-            (input)="onInput($event, reactiveForm.controls['SKU'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"            [ngClass]="{ 'is-invalid': reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
+            (input)="onSKUInput($event)"
+            (input)="onInput($event, reactiveForm.controls['SKU'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 20 }])"
+            [ngClass]="{ 'is-invalid': reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
 
       <div *ngIf="reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty)" class="invalid-feedback">
         <div *ngIf="reactiveForm.controls['SKU'].errors?.['required']" class="text-center mb-2">
@@ -18,7 +20,7 @@
           <span class="text-danger fw-bold">SKU must be at least 3 characters long.</span>
         </div>
         <div *ngIf="reactiveForm.controls['SKU'].errors?.['maxlength']" class="text-center mb-2">
-          <span class="text-danger fw-bold">SKU cannot be more than 10 characters long.</span>
+          <span class="text-danger fw-bold">SKU cannot be more than 20 characters long.</span>
         </div>
       </div>
     </div>
@@ -34,7 +36,7 @@
               class="form-control"
               formControlName="name"
               (input)="onInput($event, reactiveForm.controls['name'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
-              [ngClass]="{ 'is-invalid': reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
+              [ngClass]="{ 'is-invalid': reactiveForm.controls['name'].invalid && (reactiveForm.controls['name'].touched || reactiveForm.controls['name'].dirty) }">
 
               <!-- (input)="handleInput($event, 'name')" -->
       <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
@@ -104,20 +106,19 @@
             id="category"
             class="form-select"
             formControlName="category"
-            required
-            (change)="onInput($event, reactiveForm.controls['category'], [{ type: 'required', value: null }])"
-            (blur)="onInput($event, reactiveForm.controls['category'], [{ type: 'required', value: null }, ])"
-            [ngClass]="{ 'is-invalid': category?.invalid && (category?.touched || category?.dirty) }"
             >
             <option value="" disabled>Select Category Of Product</option>
     </select>
-    <div *ngIf="category?.invalid && (category?.touched || category?.dirty)" class="invalid-feedback">
+    <!-- <div *ngIf="category?.invalid && (category?.touched || category?.dirty)" class="invalid-feedback">
       <div *ngIf="category?.errors?.['required']" class="text-center mb-2">
         <span class="text-danger fw-bold">Select Category.</span>
       </div>
-    </div>
+    </div> -->
         <!-- <option value="" disabled>Select Category</option> -->
-
+        <!-- required
+        (change)="onInput($event, reactiveForm.controls['category'], [{ type: 'required', value: null }])"
+        (blur)="onInput($event, reactiveForm.controls['category'], [{ type: 'required', value: null }, ])"
+        [ngClass]="{ 'is-invalid': category?.invalid && (category?.touched || category?.dirty) }" -->
 
   </div>
     <div class="col-6">
@@ -175,13 +176,15 @@
 
     </div>
 
+    <div class="row pt-5">
+      <div class="col-6">
+        <button  class="btn btn-sm btn-outline-secondary" (click)="clearForm()">Clear</button>
+      </div>
+      <div class="col-6">
+        <button type="submit"  class="btn btn-sm btn-outline-primary" >Create Product</button>
+      </div>
+    </div>
+
   </Form>
-  <div class="row pt-5">
-    <div class="col-6">
-      <button class="btn btn-sm btn-outline-secondary">Clear</button>
-    </div>
-    <div class="col-6">
-      <button type="submit" class="btn btn-sm btn-outline-primary" [disabled]="!reactiveForm.valid" >Create Product</button>
-    </div>
-  </div>
+
 </div>

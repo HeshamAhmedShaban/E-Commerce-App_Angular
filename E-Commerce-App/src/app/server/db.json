@@ -180,8 +180,35 @@
       "id": "d1e7",
       "email": "hesham@gmail.com",
       "password": "12345"
+    },
+    {
+      "id": "fada",
+      "email": "hesham@gmail.com",
+      "password": "12345"
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "id": "9086",
+      "customerEmail": "hesham@gmail.com",
+      "productId": "07d3",
+      "quantity": 1,
+      "addedDate": "2024-06-30T13:10:34.692Z"
+    },
+    {
+      "id": "6e93",
+      "customerEmail": "hesham@gmail.com",
+      "productId": "07d3",
+      "quantity": 1,
+      "addedDate": "2024-06-30T13:10:34.692Z"
+    },
+    {
+      "id": "e70a",
+      "customerEmail": "hesham@gmail.com",
+      "productId": "337e",
+      "quantity": 1,
+      "addedDate": "2024-06-30T13:10:34.692Z"
+    }
+  ],
   "order": []
 }
