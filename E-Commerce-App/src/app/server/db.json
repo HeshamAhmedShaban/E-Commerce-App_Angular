@@ -121,18 +121,6 @@
       "deliveryTimeSpan": "1 day",
       "categoryId": "58",
       "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    },
-    {
-      "id": "337e",
-      "productSku": "headphone",
-      "productName": "Morphine",
-      "productPrice": 333,
-      "productShortName": "headphone",
-      "productDescription": "Morphine",
-      "createdDate": "2024-06-24T07:37:36.100Z",
-      "deliveryTimeSpan": "1 day",
-      "categoryId": "55",
-      "productImageUrl": ""
     }
   ],
   "users": [
@@ -151,6 +139,15 @@
       "firstName": "Yousef",
       "lastName": "Sayed",
       "email": "yousefsayed@gmail.com",
+      "mobileNumber": "01147431061",
+      "password": "12345"
+    },
+    {
+      "id": "6f6a",
+      "custID": 0,
+      "firstName": "Hesham",
+      "lastName": "Shaban",
+      "email": "hesham11@gmail.com",
       "mobileNumber": "01147431061",
       "password": "12345"
     }
@@ -185,30 +182,13 @@
       "id": "fada",
       "email": "hesham@gmail.com",
       "password": "12345"
-    }
-  ],
-  "cart": [
-    {
-      "id": "9086",
-      "customerEmail": "hesham@gmail.com",
-      "productId": "07d3",
-      "quantity": 1,
-      "addedDate": "2024-06-30T13:10:34.692Z"
     },
     {
-      "id": "6e93",
-      "customerEmail": "hesham@gmail.com",
-      "productId": "07d3",
-      "quantity": 1,
-      "addedDate": "2024-06-30T13:10:34.692Z"
-    },
-    {
-      "id": "e70a",
-      "customerEmail": "hesham@gmail.com",
-      "productId": "337e",
-      "quantity": 1,
-      "addedDate": "2024-06-30T13:10:34.692Z"
+      "id": "13db",
+      "email": "hesham11@gmail.com",
+      "password": "12345"
     }
   ],
+  "cart": [],
   "order": []
 }

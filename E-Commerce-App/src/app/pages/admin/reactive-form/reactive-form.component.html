@@ -84,6 +84,7 @@
              placeholder="price"
              class="form-control"
              formControlName="price"
+             (input)="handleInput($event, 'price')"
              (input)="onInput($event, reactiveForm.controls['price'], [{ type: 'required', value: null }, { type: 'min', value: 1 }, { type: 'max', value: 1000 }])"
              [ngClass]="{ 'is-invalid': reactiveForm.controls['price'].invalid && (reactiveForm.controls['price'].touched || reactiveForm.controls['price'].dirty) }">
 

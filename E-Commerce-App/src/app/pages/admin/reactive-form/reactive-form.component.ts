@@ -37,7 +37,6 @@ constructor(private formbuilder:FormBuilder){
 public onSKUInput(event: Event): void {
   const inputElement = event.target as HTMLInputElement;
   // console.log(inputElement);
-
   const userInput = inputElement.value.slice(this.staticValue.length);
   this.reactiveForm.get('SKU')!.setValue(this.staticValue + userInput, { emitEvent: false });
 }
@@ -84,12 +83,6 @@ public clearForm(){
   this.reactiveForm.reset();
 }
 
-// public handleInput(event: any): void {
-//   const input = event.target;
-//   if (input.value.length > 10) {
-//     input.value = input.value.slice(0, 10);
-//   }
-// }
 
 public handleInput(event: any, fieldName: string): void {
     const input = event.target;
