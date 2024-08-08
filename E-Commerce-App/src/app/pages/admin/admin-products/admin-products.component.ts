@@ -16,9 +16,9 @@ import { ShareModule } from '../../../shared/modules/share/share.module';
 })
 export class AdminProductsComponent implements OnInit {
 
-isSidePanelVisable: boolean = false
+public isSidePanelVisable: boolean = false
 
-updateMode:boolean=false
+public updateMode:boolean=false
 
   productObj:Iproduct={
     productSku:'',
@@ -31,10 +31,10 @@ updateMode:boolean=false
     categoryId:0,
     productImageUrl:'',
   }
-  categoryList!:Icategory[]
-  productList!:Iproduct[]
-  _productService=inject(ProductService)
-  _categoryService=inject(CategoryService)
+  public categoryList!:Icategory[]
+  public productList!:Iproduct[]
+  private _productService=inject(ProductService)
+  private _categoryService=inject(CategoryService)
 
   ngOnInit(): void {
       this.getAllProducts();

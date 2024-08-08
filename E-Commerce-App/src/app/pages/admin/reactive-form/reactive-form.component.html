@@ -41,7 +41,7 @@
               <!-- (input)="handleInput($event, 'name')" -->
       <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
         <div *ngIf="name?.errors?.['required']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Enter Name.</span>
+          <span class="text-bg-danger fw-bold">Enter Name.</span>
         </div>
         <div *ngIf="name?.errors?.['minlength']" class="text-center mb-2">
           <span class="text-danger fw-bold">Name must be at least 3 characters long.</span>

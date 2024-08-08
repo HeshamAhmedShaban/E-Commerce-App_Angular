@@ -12,6 +12,7 @@ import { RegisterUserComponent } from './pages/website/register-user/register-us
 import { UserCheckoutComponent } from './pages/website/user-checkout/user-checkout.component';
 import { ReactiveFormComponent } from './pages/admin/reactive-form/reactive-form.component';
 import { ContuctusComponent } from './pages/admin/contuctus/contuctus.component';
+import { ReceiptComponent } from './pages/admin/receipt/receipt.component';
 
 export const routes: Routes = [
   {path:Routing.Default,redirectTo:'allProducts',pathMatch:'full'},
@@ -28,5 +29,6 @@ export const routes: Routes = [
     {path:Routing.adminCategories,component:AdminCategoriesComponent,title:'Categories'},
     {path:'reactive',component:ReactiveFormComponent,title:'Reactive Form'},
     {path:'contactus',component:ContuctusComponent,title:'Contact Us'},
+    {path:'receipt',component:ReceiptComponent,title:'Receipt'},
   ]}
 ];
