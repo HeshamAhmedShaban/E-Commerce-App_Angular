@@ -20,7 +20,7 @@ public isSidePanelVisable: boolean = false
 
 public updateMode:boolean=false
 
-  productObj:Iproduct={
+  public productObj:Iproduct={
     productSku:'',
     productName:'',
     productPrice:0,
