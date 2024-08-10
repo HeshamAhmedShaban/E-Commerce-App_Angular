@@ -36,7 +36,6 @@ constructor(private formbuilder:FormBuilder){
 
 public onSKUInput(event: Event): void {
   const inputElement = event.target as HTMLInputElement;
-  // console.log(inputElement);
   const userInput = inputElement.value.slice(this.staticValue.length);
   this.reactiveForm.get('SKU')!.setValue(this.staticValue + userInput, { emitEvent: false });
 }
@@ -198,7 +197,7 @@ public handleInput(event: any, fieldName: string): void {
   //   control.control.markAsDirty();
   // }
 
-  onInput(event: any, control: AbstractControl, validations: { type: string, value: any }[]): void {
+  public onInput(event: any, control: AbstractControl, validations: { type: string, value: any }[]): void {
     let value = event.target.value;
 
     validations.forEach(validation => {

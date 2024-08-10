@@ -73,7 +73,6 @@ public updateMode:boolean=false
         alert('Product Added Successfully')
       },
       error:(err:any)=>{
-        console.log(err);
         alert('Something went wrong')
       }
     })
