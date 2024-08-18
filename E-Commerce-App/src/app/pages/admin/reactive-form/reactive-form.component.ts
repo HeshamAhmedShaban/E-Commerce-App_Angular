@@ -14,7 +14,7 @@ export class ReactiveFormComponent {
 
   public reactiveForm!:FormGroup;
 
-  readonly staticValue:string='ABCD/'
+  readonly _staticValue:string='ABCD/'
 
   @ViewChild(AdminProductsComponent)AdminProductsComponent!:AdminProductsComponent
 
@@ -22,7 +22,7 @@ export class ReactiveFormComponent {
 
 constructor(private formbuilder:FormBuilder){
   this.reactiveForm=this.formbuilder.group({
-    SKU: [this.staticValue, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    SKU: [this._staticValue, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     name:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     shortname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     price:['',[Validators.required,Validators.min(1),Validators.max(1000)]],
@@ -36,8 +36,8 @@ constructor(private formbuilder:FormBuilder){
 
 public onSKUInput(event: Event): void {
   const inputElement = event.target as HTMLInputElement;
-  const userInput = inputElement.value.slice(this.staticValue.length);
-  this.reactiveForm.get('SKU')!.setValue(this.staticValue + userInput, { emitEvent: false });
+  const userInput = inputElement.value.slice(this._staticValue.length);
+  this.reactiveForm.get('SKU')!.setValue(this._staticValue + userInput, { emitEvent: false });
 }
 
 get SKU() {
