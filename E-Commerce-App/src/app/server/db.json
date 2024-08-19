@@ -187,8 +187,41 @@
       "id": "13db",
       "email": "hesham11@gmail.com",
       "password": "12345"
+    },
+    {
+      "id": "34c6",
+      "email": "hesham@gmail.com",
+      "password": "12345"
+    },
+    {
+      "id": "6c62",
+      "email": "hesham@gmail.com",
+      "password": "12345"
     }
   ],
   "cart": [],
-  "order": []
+  "order": [
+    {
+      "id": "5cca",
+      "city": "",
+      "email": "hesham@gmail.com",
+      "pinCode": "",
+      "firstAddress": "",
+      "secondAddress": "",
+      "landMark": "",
+      "paymentNaration": "",
+      "cart": [
+        {
+          "id": "5434",
+          "customerEmail": "hesham@gmail.com",
+          "productId": "167c",
+          "quantity": 1,
+          "addedDate": "2024-08-19T11:04:11.509Z"
+        }
+      ],
+      "totalPrice": 1000,
+      "totalItems": 1,
+      "message": "Thank you for purchasing our products ,We Will Communicate With You At Nearest Time"
+    }
+  ]
 }

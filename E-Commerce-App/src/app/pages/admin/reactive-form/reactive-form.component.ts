@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminProductsComponent } from '../admin-products/admin-products.component';
+import { CustomValidators } from '../../../shared/custom-validation-reactiveForm';
 
 @Component({
   selector: 'app-reactive-form',
@@ -29,7 +30,8 @@ constructor(private formbuilder:FormBuilder){
     category:[''],
     description:['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
     image:['',[Validators.required]],
-    deleverytime:['',[Validators.required]]
+    deleverytime:['',[Validators.required]],
+    mobileNumber:['',[CustomValidators.required(),CustomValidators.numberOnly(),CustomValidators.mobileNumberValidation()]]
   })
 
 }
@@ -38,6 +40,13 @@ public onSKUInput(event: Event): void {
   const inputElement = event.target as HTMLInputElement;
   const userInput = inputElement.value.slice(this._staticValue.length);
   this.reactiveForm.get('SKU')!.setValue(this._staticValue + userInput, { emitEvent: false });
+}
+
+preventNonNumericInput(event: KeyboardEvent): void {
+  const input = String.fromCharCode(event.keyCode);
+  if (!/^[0-9]$/.test(input)) {
+    event.preventDefault();
+  }
 }
 
 get SKU() {
@@ -71,6 +80,10 @@ get image() {
 
 get deleverytime() {
   return this.reactiveForm.get('deleverytime')
+}
+
+get mobileNumber(){
+  return this.reactiveForm.get('mobileNumber')
 }
 
 

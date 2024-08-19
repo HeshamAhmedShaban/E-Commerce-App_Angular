@@ -173,8 +173,24 @@
           <span class="text-danger fw-bold">Description cannot be more than 20 characters long.</span>
         </div>
       </div>
+    </div>
+    <div class="col-6">
+      <label for="mobile">Mobile</label>
+      <input
+        name="mobile"
+        id="mobile"
+        placeholder="Mobile"
+        class="form-control"
+        formControlName="mobileNumber"
+        (keypress)="preventNonNumericInput($event)"
+        [ngClass]="{ 'is-invalid': mobileNumber?.invalid && (mobileNumber?.touched || mobileNumber?.dirty) }"
+        >
 
-
+      <div *ngIf="mobileNumber?.invalid && mobileNumber?.touched" class="invalid-feedback">
+          <small *ngIf="mobileNumber?.errors?.['required']">Mobile Number is required</small>
+          <small *ngIf="mobileNumber?.errors?.['mobileNumberValidation']">Mobile Number is not valid</small>
+          <small *ngIf="mobileNumber?.errors?.['numberOnly']">Mobile Number must be Numbers only</small>
+      </div>
     </div>
 
     <div class="row pt-5">
