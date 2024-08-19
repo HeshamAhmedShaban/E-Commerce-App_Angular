@@ -3,6 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminProductsComponent } from '../admin-products/admin-products.component';
 import { CustomValidators } from '../../../shared/custom-validation-reactiveForm';
+import { CustomValidationType } from '../../../core/enums/custom-validation-type';
 
 @Component({
   selector: 'app-reactive-form',
@@ -15,6 +16,8 @@ export class ReactiveFormComponent {
 
   public reactiveForm!:FormGroup;
 
+  public CustomValidationType = CustomValidationType
+
   readonly _staticValue:string='ABCD/'
 
   @ViewChild(AdminProductsComponent)AdminProductsComponent!:AdminProductsComponent
@@ -24,12 +27,12 @@ export class ReactiveFormComponent {
 constructor(private formbuilder:FormBuilder){
   this.reactiveForm=this.formbuilder.group({
     SKU: [this._staticValue, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-    name:['', [CustomValidators.required(),CustomValidators.minLength(3),CustomValidators.maxLength(10)]],
+    name:['', [CustomValidators.required(),CustomValidators.minLength(3),CustomValidators.maxLength(10),CustomValidators.englishOnly()]],
     shortname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-    price:['',[Validators.required,Validators.min(1),Validators.max(1000)]],
+    price:['',[CustomValidators.required(),CustomValidators.minValue(1),CustomValidators.maxValue(1000)]],
     category:[''],
     description:['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
-    image:['',[Validators.required]],
+    image:['',[CustomValidators.required(),CustomValidators.englishOnly()]],
     deleverytime:['',[Validators.required]],
     mobileNumber:['',[CustomValidators.required(),CustomValidators.mobileNumberValidation()]]
   })

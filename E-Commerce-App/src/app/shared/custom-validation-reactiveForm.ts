@@ -13,17 +13,30 @@ export class CustomValidators  {
     static arabicOnly(): ValidatorFn {
         return (control:AbstractControl):ValidationErrors | null => {
             const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-            return arabicRegex.test(control.value) ? null : { arabicOnly: true }
+            if(control.value && !arabicRegex.test(control.value)){
+                return { arabicOnly: true };
+            }
+            return null
         }
     }
 
+    // static englishOnly(): ValidatorFn {
+    //     return (control: AbstractControl): ValidationErrors | null => {
+    //       const englishRegex = /^[A-Za-z0-9\s]*$/;
+    //       if (control.value && !englishRegex.test(control.value)) {
+    //         return { englishOnly: true };
+    //       }
+    //       return null;
+    //     };
+    //   }
     static englishOnly(): ValidatorFn {
-        return (control:AbstractControl):ValidationErrors | null => {
-            const englishRegex = /^[A-Za-z\s]+$/;
-            return englishRegex.test(control.value) ? null : { englishOnly: true }
-        }
-
-    }
+        return (control: AbstractControl): ValidationErrors | null => {
+          const value = control.value || '';
+          const englishPattern = /^[A-Za-z\s]*$/;
+      
+          return !englishPattern.test(value) ? { englishOnly: true } : null;
+        };
+      }
 
     static _numberMessage():string {
         return "Only numbers allowed"
@@ -51,17 +64,37 @@ export class CustomValidators  {
     //     };
     // }
 
-    static maxLength(max: number): ValidatorFn {
+    static minLength(min: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value || '';
+      return value.length < min ? { minLength: { requiredLength: min, actualLength: value.length } } : null;
+    };
+  }
+
+  // Validator for checking the maximum length
+  static maxLength(max: number): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const value = control.value || '';
+      return value.length > max ? { maxLength: { requiredLength: max, actualLength: value.length } } : null;
+    };
+  }
+
+
+      static minValue(min: number): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
-          const length = control.value ? control.value.length : 0;
-          return length > max ? { maxLength: { requiredLength: max, actualLength: length } } : null;
+          const value = control.value;
+          if (value === null || value === '') return null; // Don't validate if the field is empty
+          return value < min ? { minValue: true } : null;
+        //   return value !== null && value < min ? { minValue: true } : null;
         };
       }
     
-      static minLength(min: number): ValidatorFn {
+      static maxValue(max: number): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
-          const length = control.value ? control.value.length : 0;
-          return length < min ? { minLength: { requiredLength: min, actualLength: length } } : null;
+          const value = control.value;
+          if (value === null || value === '') return null; // Don't validate if the field is empty
+          return value > max ? { maxValue: true } : null;
+        //   return value !== null && value > max ? { maxValue: true } : null;
         };
       }
 

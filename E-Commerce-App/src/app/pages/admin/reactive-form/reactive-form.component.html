@@ -38,15 +38,18 @@
               [ngClass]="{ 'is-invalid': name?.invalid && (name?.touched || name?.dirty) }">
 
               <!-- (input)="handleInput($event, 'name')" -->
-              <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
-                <div *ngIf="name?.errors?.['required']" class="text-center mb-2">
+              <div  *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
+                <div *ngIf="name?.hasError('required')" class="text-center mb-2">
                   <span >Enter Name.</span>
                 </div>
-                <div *ngIf="name?.errors?.['minLength']" class="text-center mb-2">
+                <div *ngIf="!name?.hasError('required') && name?.hasError('minLength')" class="text-center mb-2">
                   <span >Name must be at least {{ name?.errors?.['minLength']?.requiredLength }} characters long. Current length: {{ name?.errors?.['minLength']?.actualLength }}.</span>
                 </div>
-                <div *ngIf="name?.errors?.['maxLength']" class="text-center mb-2">
+                <div *ngIf="!name?.hasError('required') && name?.hasError('maxLength')" class="text-center mb-2">
                   <span >Name cannot be more than {{ name?.errors?.['maxLength']?.requiredLength }} characters long. Current length: {{ name?.errors?.['maxLength']?.actualLength }}.</span>
+                </div>
+                <div *ngIf="!name?.hasError('required') && !name?.hasError('minLength') && !name?.hasError('maxLength') && name?.hasError('englishOnly')">
+                  <span >Name must contain only english characters.</span>
                 </div>
               </div>
 
@@ -83,19 +86,17 @@
              placeholder="price"
              class="form-control"
              formControlName="price"
-             (input)="handleInput($event, 'price')"
-             (input)="onInput($event, reactiveForm.controls['price'], [{ type: 'required', value: null }, { type: 'min', value: 1 }, { type: 'max', value: 1000 }])"
-             [ngClass]="{ 'is-invalid': reactiveForm.controls['price'].invalid && (reactiveForm.controls['price'].touched || reactiveForm.controls['price'].dirty) }">
+             [ngClass]="{ 'is-invalid': price?.invalid && (price?.touched || price?.dirty) }">
 
-      <div *ngIf="reactiveForm.controls['price'].invalid && (reactiveForm.controls['price'].touched || reactiveForm.controls['price'].dirty)" class="invalid-feedback">
-        <div *ngIf="reactiveForm.controls['price'].errors?.['required']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Enter Price.</span>
+      <div *ngIf="price?.invalid && price?.touched" class="invalid-feedback">
+        <div *ngIf="price?.errors?.['required']" class="text-center mb-2">
+          <span >Enter Price.</span>
         </div>
-        <div *ngIf="reactiveForm.controls['price'].errors?.['min']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Price must be at least 1.</span>
+        <div *ngIf="price?.errors?.['minValue']" class="text-center mb-2">
+          <span >Price must be greater than or equal 1.</span>
         </div>
-        <div *ngIf="reactiveForm.controls['price'].errors?.['max']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Price cannot be more than 1000.</span>
+        <div *ngIf="price?.errors?.['maxValue']" class="text-center mb-2">
+          <span >Price must be less than or equal 1000.</span>
         </div>
       </div>
     </div>
@@ -147,7 +148,18 @@
 
     <div class="col-6">
       <label for="image">Image URL</label>
-      <input type="text" name="image" id="image" placeholder="image" class="form-control" >
+      <input type="text" name="image" id="image" placeholder="image" class="form-control" formControlName="image"
+      [ngClass]="{ 'is-invalid': image?.invalid && (image?.touched || image?.dirty) }"
+      >
+
+      <div *ngIf="image?.invalid && (image?.touched || image?.dirty)" class="invalid-feedback">
+        <div *ngIf="image?.errors?.['required']" class="text-center mb-2">
+          <span >Enter Image URL.</span>
+        </div>
+        <div *ngIf="image?.errors?.['englishOnly']" class="text-center mb-2">
+          <span >Image must be in English.</span>
+        </div>
+      </div>
     </div>
     <div class="col-6">
       <label for="description">Product Description</label>
