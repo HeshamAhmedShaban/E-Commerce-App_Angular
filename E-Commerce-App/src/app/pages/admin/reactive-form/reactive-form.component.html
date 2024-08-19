@@ -42,7 +42,7 @@
                 <div *ngIf="name?.hasError('required')" class="text-center mb-2">
                   <span >Enter Name.</span>
                 </div>
-                <div *ngIf="!name?.hasError('required') && name?.hasError('minLength')" class="text-center mb-2">
+                <div *ngIf="!name?.hasError(CustomValidationType.required) && name?.hasError('minLength')" class="text-center mb-2">
                   <span >Name must be at least {{ name?.errors?.['minLength']?.requiredLength }} characters long. Current length: {{ name?.errors?.['minLength']?.actualLength }}.</span>
                 </div>
                 <div *ngIf="!name?.hasError('required') && name?.hasError('maxLength')" class="text-center mb-2">
