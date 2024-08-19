@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
 import { Icategory } from '../../../core/models/icategory';
 import { Iproduct } from '../../../core/models/iproduct';
 import { CategoryService } from '../../../core/services/category.service';
 import { ShareModule } from '../../../shared/modules/share/share.module';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-admin-products',
@@ -14,11 +15,13 @@ import { ShareModule } from '../../../shared/modules/share/share.module';
   templateUrl: './admin-products.component.html',
   styleUrl: './admin-products.component.css'
 })
-export class AdminProductsComponent implements OnInit {
+export class AdminProductsComponent implements OnInit,OnDestroy {
 
 public isSidePanelVisable: boolean = false
 
 public updateMode:boolean=false
+
+private _subject$:Subject<boolean>=new Subject<boolean>()
 
   public productObj:Iproduct={
     productSku:'',
@@ -49,7 +52,9 @@ public updateMode:boolean=false
 
 
   public getAllCategories(){
-    this._categoryService.getCategory().subscribe({
+    this._categoryService.getCategory().pipe(
+      takeUntil(this._subject$)
+    ).subscribe({
       next:(data:any)=>{
         this.categoryList=data
       }
@@ -57,7 +62,7 @@ public updateMode:boolean=false
   }
 
   public getAllProducts(){
-    this._productService.getAllProducts().subscribe({
+    this._productService.getAllProducts().pipe(takeUntil(this._subject$)).subscribe({
       next:(data:any)=>{
         this.productList=data
       }
@@ -65,7 +70,7 @@ public updateMode:boolean=false
   }
 
   public createProduct(){
-    this._productService.addProduct(this.productObj).subscribe({
+    this._productService.addProduct(this.productObj).pipe(takeUntil(this._subject$)).subscribe({
       next:(data:any)=>{
         console.log(data);
         this.getAllProducts();
@@ -79,7 +84,7 @@ public updateMode:boolean=false
   }
 
   public deleteProduct(id:string){
-    this._productService.deleteProductt(id).subscribe({
+    this._productService.deleteProductt(id).pipe(takeUntil(this._subject$)).subscribe({
       next:(data:any)=>{
         console.log(data);
         this.getAllProducts()
@@ -88,7 +93,7 @@ public updateMode:boolean=false
   }
 
   public updateProduct(){
-    this._productService.updateProductt(this.productObj).subscribe({
+    this._productService.updateProductt(this.productObj).pipe(takeUntil(this._subject$)).subscribe({
       next:()=>{
         this.updateMode=false;
         this.getAllProducts();
@@ -172,7 +177,10 @@ public updateMode:boolean=false
     control.control.setErrors(Object.keys(errors).length > 0 ? errors : null);
   }
 
-
+  ngOnDestroy(): void {
+    this._subject$.next(true);
+    this._subject$.complete();
+  }
 
   }
 

@@ -39,20 +39,33 @@ export class CustomValidators  {
     }
 }
 
+    // static maxLength(max: number): ValidatorFn {
+    //     return (control: AbstractControl): ValidationErrors | null => {
+    //       return control.value && control.value.length > max ? { maxLength: { requiredLength: max, actualLength: control.value.length } } : null;
+    //     };
+    // }
+
+    // static minLength(min: number): ValidatorFn {
+    //     return (control: AbstractControl): ValidationErrors | null => {
+    //       return control.value && control.value.length < min ? { minLength: { requiredLength: min, actualLength: control.value.length } } : null;
+    //     };
+    // }
+
     static maxLength(max: number): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
-          return control.value && control.value.length > max ? { maxLength: { requiredLength: max, actualLength: control.value.length } } : null;
+          const length = control.value ? control.value.length : 0;
+          return length > max ? { maxLength: { requiredLength: max, actualLength: length } } : null;
         };
-    }
-
-    static minLength(min: number): ValidatorFn {
+      }
+    
+      static minLength(min: number): ValidatorFn {
         return (control: AbstractControl): ValidationErrors | null => {
-          return control.value && control.value.length < min ? { minLength: { requiredLength: min, actualLength: control.value.length } } : null;
+          const length = control.value ? control.value.length : 0;
+          return length < min ? { minLength: { requiredLength: min, actualLength: length } } : null;
         };
-    }
+      }
 
     static mobileNumberValidation():ValidatorFn{
-
         return (control:AbstractControl):ValidationErrors | null => {
             const mobileRegex = /^(010|011|012|015)\d{8}$/;
             return control.value && mobileRegex.test(control.value) ? null : { mobileNumberValidation: true }

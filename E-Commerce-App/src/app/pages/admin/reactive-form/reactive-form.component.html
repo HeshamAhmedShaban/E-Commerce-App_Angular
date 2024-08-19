@@ -10,7 +10,7 @@
             formControlName="SKU"
             (input)="onSKUInput($event)"
             (input)="onInput($event, reactiveForm.controls['SKU'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 20 }])"
-            [ngClass]="{ 'is-invalid': reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
+            [ngClass]="{ 'is-invalid': name?.invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
 
       <div *ngIf="reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty)" class="invalid-feedback">
         <div *ngIf="reactiveForm.controls['SKU'].errors?.['required']" class="text-center mb-2">
@@ -35,21 +35,20 @@
               placeholder="name"
               class="form-control"
               formControlName="name"
-              (input)="onInput($event, reactiveForm.controls['name'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 10 }])"
-              [ngClass]="{ 'is-invalid': reactiveForm.controls['name'].invalid && (reactiveForm.controls['name'].touched || reactiveForm.controls['name'].dirty) }">
+              [ngClass]="{ 'is-invalid': name?.invalid && (name?.touched || name?.dirty) }">
 
               <!-- (input)="handleInput($event, 'name')" -->
-      <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
-        <div *ngIf="name?.errors?.['required']" class="text-center mb-2">
-          <span class="text-bg-danger fw-bold">Enter Name.</span>
-        </div>
-        <div *ngIf="name?.errors?.['minlength']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Name must be at least 3 characters long.</span>
-        </div>
-        <div *ngIf="name?.errors?.['maxlength']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Name cannot be more than 10 characters long.</span>
-        </div>
-      </div>
+              <div *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
+                <div *ngIf="name?.errors?.['required']" class="text-center mb-2">
+                  <span >Enter Name.</span>
+                </div>
+                <div *ngIf="name?.errors?.['minLength']" class="text-center mb-2">
+                  <span >Name must be at least {{ name?.errors?.['minLength']?.requiredLength }} characters long. Current length: {{ name?.errors?.['minLength']?.actualLength }}.</span>
+                </div>
+                <div *ngIf="name?.errors?.['maxLength']" class="text-center mb-2">
+                  <span >Name cannot be more than {{ name?.errors?.['maxLength']?.requiredLength }} characters long. Current length: {{ name?.errors?.['maxLength']?.actualLength }}.</span>
+                </div>
+              </div>
 
     </div>
 
@@ -186,11 +185,14 @@
         [ngClass]="{ 'is-invalid': mobileNumber?.invalid && (mobileNumber?.touched || mobileNumber?.dirty) }"
         >
 
-      <div *ngIf="mobileNumber?.invalid && mobileNumber?.touched" class="invalid-feedback">
+        <div *ngIf="mobileNumber?.invalid && mobileNumber?.touched" class="invalid-feedback">
+          <!-- Prioritize the required message if the field is empty -->
           <small *ngIf="mobileNumber?.errors?.['required']">Mobile Number is required</small>
-          <small *ngIf="mobileNumber?.errors?.['mobileNumberValidation']">Mobile Number is not valid</small>
-          <small *ngIf="mobileNumber?.errors?.['numberOnly']">Mobile Number must be Numbers only</small>
-      </div>
+          <!-- Show the mobile number validation error only if the field is not empty -->
+          <small *ngIf="mobileNumber?.errors?.['mobileNumberValidation'] && !mobileNumber?.errors?.['required']">
+            Mobile Number is not valid
+          </small>
+        </div>
     </div>
 
     <div class="row pt-5">

@@ -24,14 +24,14 @@ export class ReactiveFormComponent {
 constructor(private formbuilder:FormBuilder){
   this.reactiveForm=this.formbuilder.group({
     SKU: [this._staticValue, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-    name:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+    name:['', [CustomValidators.required(),CustomValidators.minLength(3),CustomValidators.maxLength(10)]],
     shortname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     price:['',[Validators.required,Validators.min(1),Validators.max(1000)]],
     category:[''],
     description:['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
     image:['',[Validators.required]],
     deleverytime:['',[Validators.required]],
-    mobileNumber:['',[CustomValidators.required(),CustomValidators.numberOnly(),CustomValidators.mobileNumberValidation()]]
+    mobileNumber:['',[CustomValidators.required(),CustomValidators.mobileNumberValidation()]]
   })
 
 }
@@ -44,9 +44,14 @@ public onSKUInput(event: Event): void {
 
 preventNonNumericInput(event: KeyboardEvent): void {
   const input = String.fromCharCode(event.keyCode);
-  if (!/^[0-9]$/.test(input)) {
-    event.preventDefault();
-  }
+  const inputt = event.target as HTMLInputElement;
+  const maxLength = 11;
+    if (!/^[0-9]$/.test(input)) {
+      event.preventDefault();
+    }
+    if (inputt.value.length >= maxLength && event.key !== 'Backspace' && event.key !== 'Delete') {
+      event.preventDefault();
+    }
 }
 
 get SKU() {
