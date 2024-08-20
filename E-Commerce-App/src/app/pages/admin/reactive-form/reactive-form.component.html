@@ -91,10 +91,10 @@
         <div *ngIf="price?.errors?.[CustomValidationType.required]" class="text-center mb-2">
           <span >Enter Price.</span>
         </div>
-        <div *ngIf="price?.errors?.['minValue']" class="text-center mb-2">
+        <div *ngIf="price?.errors?.[CustomValidationType.minValue]" class="text-center mb-2">
           <span >Price must be greater than or equal 1.</span>
         </div>
-        <div *ngIf="price?.errors?.['maxValue']" class="text-center mb-2">
+        <div *ngIf="price?.errors?.[CustomValidationType.maxValue]" class="text-center mb-2">
           <span >Price must be less than or equal 1000.</span>
         </div>
       </div>
@@ -155,7 +155,7 @@
         <div *ngIf="image?.errors?.[CustomValidationType.required]" class="text-center mb-2">
           <span >Enter Image URL.</span>
         </div>
-        <div *ngIf="image?.errors?.['englishOnly']" class="text-center mb-2">
+        <div *ngIf="image?.errors?.[CustomValidationType.englishOnly]" class="text-center mb-2">
           <span >Image must be in English.</span>
         </div>
       </div>
@@ -200,7 +200,7 @@
           <!-- Prioritize the required message if the field is empty -->
           <small *ngIf="mobileNumber?.errors?.[CustomValidationType.required]">Mobile Number is required</small>
           <!-- Show the mobile number validation error only if the field is not empty -->
-          <small *ngIf="mobileNumber?.errors?.['mobileNumberValidation'] && !mobileNumber?.errors?.[CustomValidationType.required]">
+          <small *ngIf="mobileNumber?.errors?.[CustomValidationType.mobileNumberValidation] && !mobileNumber?.errors?.[CustomValidationType.required]">
             Mobile Number is not valid
           </small>
         </div>
