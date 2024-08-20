@@ -19,6 +19,8 @@ export class ReactiveFormComponent {
   public CustomValidationType = CustomValidationType
 
   readonly _staticValue:string='ABCD/'
+  private _IBAN_PATTERN = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/;
+  private _SWIFT_PATTERN = /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/;
 
   @ViewChild(AdminProductsComponent)AdminProductsComponent!:AdminProductsComponent
 
@@ -34,7 +36,9 @@ constructor(private formbuilder:FormBuilder){
     description:['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
     image:['',[CustomValidators.required(),CustomValidators.englishOnly()]],
     deleverytime:['',[Validators.required]],
-    mobileNumber:['',[CustomValidators.required(),CustomValidators.mobileNumberValidation()]]
+    mobileNumber:['',[CustomValidators.required(),CustomValidators.mobileNumberValidation()]],
+    IBAN:['',[CustomValidators.required(),CustomValidators.patternValidator(this._IBAN_PATTERN,CustomValidationType.IBAN)]],
+    SOFT_Code:['',[CustomValidators.required(),CustomValidators.patternValidator(this._SWIFT_PATTERN,CustomValidationType.SOFT_Code)]]
   })
 
 }
@@ -92,6 +96,14 @@ get deleverytime() {
 
 get mobileNumber(){
   return this.reactiveForm.get('mobileNumber')
+}
+
+get IBAN(){
+  return this.reactiveForm.get('IBAN')
+}
+
+get softCode(){
+  return this.reactiveForm.get('SOFT_Code')
 }
 
 

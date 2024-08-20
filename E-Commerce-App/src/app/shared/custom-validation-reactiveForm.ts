@@ -105,8 +105,19 @@ export class CustomValidators  {
         }
     }
 
-
+    // Validator for checking any pattern
+    static patternValidator(pattern: RegExp, errorKey: string): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        if (!control.value) {
+          return null;
+        }
+        const isValid = pattern.test(control.value);
+        return isValid ? null : { [errorKey]: true };
+      };
     }
+
+
+  }
 
 
 

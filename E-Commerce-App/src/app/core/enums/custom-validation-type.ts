@@ -8,5 +8,7 @@ export enum CustomValidationType {
     mobileNumberValidation = 'mobileNumberValidation',
     englishOnly = 'englishOnly',
     arabicOnly = 'arabicOnly',
-    numberOnly = 'numberOnly'
+    numberOnly = 'numberOnly',
+    IBAN = 'IBAN',
+    SOFT_Code='SOFT_Code'
 }
