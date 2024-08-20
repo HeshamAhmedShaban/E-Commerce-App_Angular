@@ -36,19 +36,18 @@
               class="form-control"
               formControlName="name"
               [ngClass]="{ 'is-invalid': name?.invalid && (name?.touched || name?.dirty) }">
-
               <!-- (input)="handleInput($event, 'name')" -->
               <div  *ngIf="name?.invalid && (name?.touched || name?.dirty)" class="invalid-feedback">
                 <div *ngIf="name?.hasError('required')" class="text-center mb-2">
                   <span >Enter Name.</span>
                 </div>
-                <div *ngIf="!name?.hasError(CustomValidationType.required) && name?.hasError('minLength')" class="text-center mb-2">
-                  <span >Name must be at least {{ name?.errors?.['minLength']?.requiredLength }} characters long. Current length: {{ name?.errors?.['minLength']?.actualLength }}.</span>
+                <div *ngIf="!name?.hasError(CustomValidationType.required) && name?.hasError(CustomValidationType.minLength)" class="text-center mb-2">
+                  <span >Name must be at least {{ name?.errors?.[CustomValidationType.minLength]?.requiredLength }} characters long. Current length: {{ name?.errors?.[CustomValidationType.minLength]?.actualLength }}.</span>
                 </div>
-                <div *ngIf="!name?.hasError('required') && name?.hasError('maxLength')" class="text-center mb-2">
+                <div *ngIf="!name?.hasError(CustomValidationType.required) && name?.hasError(CustomValidationType.maxLength)" class="text-center mb-2">
                   <span >Name cannot be more than {{ name?.errors?.['maxLength']?.requiredLength }} characters long. Current length: {{ name?.errors?.['maxLength']?.actualLength }}.</span>
                 </div>
-                <div *ngIf="!name?.hasError('required') && !name?.hasError('minLength') && !name?.hasError('maxLength') && name?.hasError('englishOnly')">
+                <div *ngIf="!name?.hasError(CustomValidationType.required) && !name?.hasError(CustomValidationType.minLength) && !name?.hasError(CustomValidationType.maxLength) && name?.hasError(CustomValidationType.englishOnly)">
                   <span >Name must contain only english characters.</span>
                 </div>
               </div>
@@ -89,7 +88,7 @@
              [ngClass]="{ 'is-invalid': price?.invalid && (price?.touched || price?.dirty) }">
 
       <div *ngIf="price?.invalid && price?.touched" class="invalid-feedback">
-        <div *ngIf="price?.errors?.['required']" class="text-center mb-2">
+        <div *ngIf="price?.errors?.[CustomValidationType.required]" class="text-center mb-2">
           <span >Enter Price.</span>
         </div>
         <div *ngIf="price?.errors?.['minValue']" class="text-center mb-2">
@@ -153,7 +152,7 @@
       >
 
       <div *ngIf="image?.invalid && (image?.touched || image?.dirty)" class="invalid-feedback">
-        <div *ngIf="image?.errors?.['required']" class="text-center mb-2">
+        <div *ngIf="image?.errors?.[CustomValidationType.required]" class="text-center mb-2">
           <span >Enter Image URL.</span>
         </div>
         <div *ngIf="image?.errors?.['englishOnly']" class="text-center mb-2">
@@ -199,9 +198,9 @@
 
         <div *ngIf="mobileNumber?.invalid && mobileNumber?.touched" class="invalid-feedback">
           <!-- Prioritize the required message if the field is empty -->
-          <small *ngIf="mobileNumber?.errors?.['required']">Mobile Number is required</small>
+          <small *ngIf="mobileNumber?.errors?.[CustomValidationType.required]">Mobile Number is required</small>
           <!-- Show the mobile number validation error only if the field is not empty -->
-          <small *ngIf="mobileNumber?.errors?.['mobileNumberValidation'] && !mobileNumber?.errors?.['required']">
+          <small *ngIf="mobileNumber?.errors?.['mobileNumberValidation'] && !mobileNumber?.errors?.[CustomValidationType.required]">
             Mobile Number is not valid
           </small>
         </div>
