@@ -88,14 +88,17 @@
              [ngClass]="{ 'is-invalid': price?.invalid && (price?.touched || price?.dirty) }">
 
       <div *ngIf="price?.invalid && price?.touched" class="invalid-feedback">
-        <div *ngIf="price?.errors?.[CustomValidationType.required]" class="text-center mb-2">
+        <div *ngIf="price?.hasError(CustomValidationType.required)" class="text-center mb-2">
           <span >Enter Price.</span>
         </div>
-        <div *ngIf="price?.errors?.[CustomValidationType.minValue]" class="text-center mb-2">
+        <!-- <div *ngIf="price?.errors?.[CustomValidationType.minValue]" class="text-center mb-2">
           <span >Price must be greater than or equal 1.</span>
         </div>
         <div *ngIf="price?.errors?.[CustomValidationType.maxValue]" class="text-center mb-2">
           <span >Price must be less than or equal 1000.</span>
+        </div> -->
+        <div *ngIf="!price?.hasError(CustomValidationType.required) &&price?.hasError(CustomValidationType.patternValidator)" class="text-center mb-2">
+          price must be a less than or equal 50 and greater than or equal 210
         </div>
       </div>
     </div>
@@ -161,26 +164,25 @@
       </div>
     </div>
     <div class="col-6">
-      <label for="description">Product Description</label>
+      <label for="description">Description</label>
       <textarea
         name="description"
         id="description"
         placeholder="Description"
         class="form-control"
         formControlName="description"
-        (input)="onInput($event, reactiveForm.controls['description'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 20 }])"
         [ngClass]="{ 'is-invalid': description?.invalid && (description?.touched || description?.dirty) }"
         ></textarea>
 
       <div *ngIf="description?.invalid && (description?.touched || description?.dirty)" class="invalid-feedback">
-        <div *ngIf="description?.errors?.['required']" class="text-center mb-2">
+        <div *ngIf="description?.hasError(CustomValidationType.required)" class="text-center mb-2">
           <span class="text-danger fw-bold">Enter Description.</span>
         </div>
-        <div *ngIf="description?.errors?.['minlength']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Description must be at least 3 characters long.</span>
+        <div *ngIf="!description?.hasError(CustomValidationType.required) && description?.hasError(CustomValidationType.minLength)" class="text-center mb-2">
+          <span class="text-danger fw-bold">Description must be at least 3 characters long {{ description?.errors?.[CustomValidationType.minLength]?.actualLength }}.</span>
         </div>
-        <div *ngIf="description?.errors?.['maxlength']" class="text-center mb-2">
-          <span class="text-danger fw-bold">Description cannot be more than 20 characters long.</span>
+        <div *ngIf="!description?.hasError(CustomValidationType.required) && description?.hasError(CustomValidationType.maxLength)" class="text-center mb-2">
+          <span class="text-danger fw-bold">Description cannot be more than 500 characters long {{ description?.errors?.[CustomValidationType.maxLength]?.actualLength }}.</span>
         </div>
       </div>
     </div>
@@ -230,7 +232,7 @@
     </div> -->
 
 
-    
+
     <div class="col-6">
       <label for="iban">IBAN</label>
       <input
@@ -268,6 +270,26 @@
           <!-- Show the mobile number validation error only if the field is not empty -->
           <small *ngIf="mobileNumber?.errors?.[CustomValidationType.mobileNumberValidation] && !mobileNumber?.errors?.[CustomValidationType.required]">
             Mobile Number is not valid
+          </small>
+        </div>
+    </div>
+    <div class="col-6">
+      <label for="slug">SLUG</label>
+      <input
+        name="slug"
+        id="mobile"
+        placeholder="slug"
+        class="form-control"
+        formControlName="slug"
+        [ngClass]="{ 'is-invalid': slug?.invalid && (slug?.touched || slug?.dirty) }"
+        >
+
+        <div *ngIf="slug?.invalid && slug?.touched" class="invalid-feedback">
+          <!-- Prioritize the required message if the field is empty -->
+          <small *ngIf="slug?.errors?.[CustomValidationType.required]">slug is required</small>
+          <!-- Show the mobile number validation error only if the field is not empty -->
+          <small *ngIf="slug?.errors?.[CustomValidationType.patternValidator] && !slug?.errors?.[CustomValidationType.required]">
+            SLUG is not valid  Slug can only contain lowercase letters and numbers
           </small>
         </div>
     </div>

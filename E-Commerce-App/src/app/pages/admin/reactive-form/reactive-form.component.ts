@@ -31,14 +31,16 @@ constructor(private formbuilder:FormBuilder){
     SKU: [this._staticValue, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     name:['', [CustomValidators.required(),CustomValidators.minLength(3),CustomValidators.maxLength(10),CustomValidators.englishOnly()]],
     shortname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-    price:['',[CustomValidators.required(),CustomValidators.minValue(1),CustomValidators.maxValue(1000)]],
+    price:['',[CustomValidators.required(),CustomValidators.heightValidator()]],
     category:[''],
-    description:['',[Validators.required,Validators.minLength(3),Validators.maxLength(20)]],
+    description:['',[CustomValidators.required(),CustomValidators.descriptionValidator()]],
     image:['',[CustomValidators.required(),CustomValidators.englishOnly()]],
     deleverytime:['',[Validators.required]],
     mobileNumber:['',[CustomValidators.required(),CustomValidators.mobileNumberValidation()]],
     IBAN:['',[CustomValidators.required(),CustomValidators.patternValidator(this._IBAN_PATTERN,CustomValidationType.IBAN)]],
-    SOFT_Code:['',[CustomValidators.required(),CustomValidators.patternValidator(this._SWIFT_PATTERN,CustomValidationType.SOFT_Code)]]
+    SOFT_Code:['',[CustomValidators.required(),CustomValidators.patternValidator(this._SWIFT_PATTERN,CustomValidationType.SOFT_Code)]],
+    slug:['',[CustomValidators.required(),CustomValidators.slugValidator()]],
+    height:['',[CustomValidators.required(),CustomValidators.heightValidator()]],
   })
 
 }
@@ -104,6 +106,10 @@ get IBAN(){
 
 get softCode(){
   return this.reactiveForm.get('SOFT_Code')
+}
+
+get slug(){
+  return this.reactiveForm.get('slug')
 }
 
 

@@ -116,6 +116,71 @@ export class CustomValidators  {
       };
     }
 
+    static descriptionValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = control.value || '';
+        const minLength =3 ;
+        const maxLength = 500;
+
+        if(value.length < minLength){
+          return { minLength: { requiredLength: minLength, actualLength: value.length } };
+        } else if(value.length > maxLength){
+          return { maxLength: { requiredLength: maxLength, actualLength: value.length } };
+        }
+        return null;
+      }
+    }
+
+
+    static slugValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = control.value || '';
+        const slugPattern = /^[a-zA-Z0-9_.-]*$/;
+        return slugPattern.test(value) ? null : { patternValidator: true };
+      }
+    }
+
+    static nameValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = control.value || '';
+        const minLength =2 ;
+        const maxLength = 50; 
+
+        if(value.length < minLength){
+          return { minLength: { requiredLength: minLength, actualLength: value.length } };
+        } else if(value.length > maxLength){
+          return { maxLength: { requiredLength: maxLength, actualLength: value.length } };
+        }
+        return null;
+      }
+    }
+
+    static heightValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = control.value || '';
+        const min = 50;
+        const max = 210;
+        if (value > max) {
+          control.setValue(max);
+        }
+        const isValid = (value >= min && value <= max);
+        return isValid ? null : { patternValidator: true };
+      }
+    }
+
+    static weightValidator(): ValidatorFn {
+      return (control: AbstractControl): ValidationErrors | null => {
+        const value = control.value || '';
+        const min = 20;
+        const max = 250;
+        if (value > max) {
+          control.setValue(max);
+        };
+        const isValid = (value >= min && value <= max);
+        return isValid ? null : { patternValidator: true };
+      }
+    }
+
 
   }
 

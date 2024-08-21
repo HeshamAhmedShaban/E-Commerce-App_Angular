@@ -10,5 +10,9 @@ export enum CustomValidationType {
     arabicOnly = 'arabicOnly',
     numberOnly = 'numberOnly',
     IBAN = 'IBAN',
-    SOFT_Code='SOFT_Code'
+    SOFT_Code='SOFT_Code',
+    patternValidator = 'patternValidator',
+    slugValidator = 'slugValidator',
+    heightValidator = 'heightValidator',
+    descriptionValidator = 'descriptionValidator'
 }
