@@ -135,7 +135,8 @@ export class CustomValidators  {
     static slugValidator(): ValidatorFn {
       return (control: AbstractControl): ValidationErrors | null => {
         const value = control.value || '';
-        const slugPattern = /^[a-zA-Z0-9_.-]*$/;
+        // const slugPattern = /^[a-zA-Z0-9_.-]*$/;
+        const slugPattern = /^[a-z0-9]+$/;
         return slugPattern.test(value) ? null : { patternValidator: true };
       }
     }
@@ -163,6 +164,9 @@ export class CustomValidators  {
         if (value > max) {
           control.setValue(max);
         }
+        if(value < min){
+          return   {negativeValue: true}
+        }
         const isValid = (value >= min && value <= max);
         return isValid ? null : { patternValidator: true };
       }
@@ -176,6 +180,9 @@ export class CustomValidators  {
         if (value > max) {
           control.setValue(max);
         };
+        if(value < min){
+          return   {negativeValue: true}
+        }
         const isValid = (value >= min && value <= max);
         return isValid ? null : { patternValidator: true };
       }

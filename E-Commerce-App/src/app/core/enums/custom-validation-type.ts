@@ -14,5 +14,6 @@ export enum CustomValidationType {
     patternValidator = 'patternValidator',
     slugValidator = 'slugValidator',
     heightValidator = 'heightValidator',
-    descriptionValidator = 'descriptionValidator'
+    descriptionValidator = 'descriptionValidator',
+    negativeValue = 'negativeValue'
 }

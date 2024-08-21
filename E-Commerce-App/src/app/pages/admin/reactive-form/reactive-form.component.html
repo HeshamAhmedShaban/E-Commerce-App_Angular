@@ -87,7 +87,7 @@
              formControlName="price"
              [ngClass]="{ 'is-invalid': price?.invalid && (price?.touched || price?.dirty) }">
 
-      <div *ngIf="price?.invalid && price?.touched" class="invalid-feedback">
+      <div *ngIf="price?.invalid && (price?.touched || price?.dirty)" class="invalid-feedback">
         <div *ngIf="price?.hasError(CustomValidationType.required)" class="text-center mb-2">
           <span >Enter Price.</span>
         </div>
@@ -96,10 +96,14 @@
         </div>
         <div *ngIf="price?.errors?.[CustomValidationType.maxValue]" class="text-center mb-2">
           <span >Price must be less than or equal 1000.</span>
-        </div> -->
-        <div *ngIf="!price?.hasError(CustomValidationType.required) &&price?.hasError(CustomValidationType.patternValidator)" class="text-center mb-2">
-          price must be a less than or equal 50 and greater than or equal 210
+        </div> --> 
+        <div *ngIf="!price?.hasError(CustomValidationType.required) && price?.hasError(CustomValidationType.patternValidator)" class="text-center mb-2">
+          <span>price must be a less than or equal 50 and greater than or equal 210</span>
         </div>
+        <div *ngIf="!price?.hasError(CustomValidationType.required) && !price?.hasError(CustomValidationType.patternValidator) && price?.hasError(CustomValidationType.negativeValue)" class="text-center mb-2">
+          <span>Price must be greater than 1</span>
+          </div>
+
       </div>
     </div>
 
