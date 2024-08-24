@@ -175,6 +175,7 @@
         placeholder="Description"
         class="form-control"
         formControlName="description"
+        [appInputNumbersLanguages]="'english'"
         [ngClass]="{ 'is-invalid': description?.invalid && (description?.touched || description?.dirty) }"
         ></textarea>
 

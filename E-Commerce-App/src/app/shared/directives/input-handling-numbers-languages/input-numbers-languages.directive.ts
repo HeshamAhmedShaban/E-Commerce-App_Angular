@@ -52,9 +52,9 @@ export class InputNumbersLanguagesDirective {
   }
 
   private _showErrorMessage(message: string) {
-    let errorElement = this._el.nativeElement.nextSibling;
+    let errorElement = this._el.nativeElement.parentNode.querySelector('.error-message');
 
-    if (!errorElement || errorElement.className !== 'error-message') {
+    if (!errorElement) {
       errorElement = this._renderer.createElement('span');
       this._renderer.addClass(errorElement, 'error-message');
       this._renderer.setStyle(errorElement, 'color', 'red');
@@ -66,9 +66,9 @@ export class InputNumbersLanguagesDirective {
   }
 
   private _removeErrorMessage() {
-    const errorElement = this._el.nativeElement.nextSibling;
+    const errorElement = this._el.nativeElement.parentNode.querySelector('.error-message');
 
-    if (errorElement && errorElement.className === 'error-message') {
+    if (errorElement) {
       this._renderer.removeChild(this._el.nativeElement.parentNode, errorElement);
     }
   }
