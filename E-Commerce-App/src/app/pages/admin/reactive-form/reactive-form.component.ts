@@ -4,11 +4,16 @@ import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModu
 import { AdminProductsComponent } from '../admin-products/admin-products.component';
 import { CustomValidators } from '../../../shared/custom-validation-reactiveForm';
 import { CustomValidationType } from '../../../core/enums/custom-validation-type';
+import { NumberOnlyDirective } from '../../../shared/directives/numberOnly/number-only.directive';
+import { ArabicOnlyDirective } from '../../../shared/directives/arabicOnly/arabic-only.directive';
+import { EnglishOnlyDirective } from '../../../shared/directives/englishOnly/english-only.directive';
+import { InputNumbersLanguagesDirective } from '../../../shared/directives/input-handling-numbers-languages/input-numbers-languages.directive';
+import { ValidationMethods } from '../../../shared/directives/SharedValidation';
 
 @Component({
   selector: 'app-reactive-form',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule,FormsModule],
+  imports: [ReactiveFormsModule,CommonModule,FormsModule,InputNumbersLanguagesDirective],
   templateUrl: './reactive-form.component.html',
   styleUrl: './reactive-form.component.css'
 })
@@ -41,6 +46,8 @@ constructor(private formbuilder:FormBuilder){
     SOFT_Code:['',[CustomValidators.required(),CustomValidators.patternValidator(this._SWIFT_PATTERN,CustomValidationType.SOFT_Code)]],
     slug:['',[CustomValidators.required(),CustomValidators.slugValidator()]],
     height:['',[CustomValidators.required(),CustomValidators.heightValidator()]],
+    num:['',[CustomValidators.required()]],
+    desc:['',[ValidationMethods.required(),ValidationMethods.textNumberValidation(5, 15)]],
   })
 
 }
@@ -65,6 +72,14 @@ preventNonNumericInput(event: KeyboardEvent): void {
 
 get SKU() {
   return this.reactiveForm.get('SKU');
+}
+
+get num() {
+  return this.reactiveForm.get('num')
+}
+
+get desc(){
+  return this.reactiveForm.get('desc')
 }
 
 

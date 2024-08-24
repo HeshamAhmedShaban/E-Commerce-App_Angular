@@ -1,25 +1,24 @@
 import { Directive, ElementRef, HostListener, inject, Renderer2 } from '@angular/core';
 
 @Directive({
-  selector: '[appArabicOnly]',
+  selector: '[appNumberOnly]',
   standalone: true
 })
-export class ArabicOnlyDirective {
+export class NumberOnlyDirective {
 
   private _el = inject(ElementRef);
   private _renderer = inject(Renderer2);
 
-  // const arabicOnlyRegex = /^[\u0621-\u064A0-9\s]*$/;
 
   @HostListener('input', ['$event']) onInputChange(event: Event) {
     const inputElement = this._el.nativeElement as HTMLInputElement;
     const initialValue = inputElement.value;
 
-    // Regex to match Arabic letters
-    inputElement.value = initialValue.replace(/[^ء-ي\s]*/g, '');
+    // Replace any character that is not a digit
+    inputElement.value = initialValue.replace(/[^0-9]*/g, '');
 
     if (initialValue !== inputElement.value) {
-      this.showErrorMessage('Only Arabic letters are allowed.');
+      this.showErrorMessage('Only numbers are allowed.');
     } else {
       this.removeErrorMessage();
     }
@@ -46,4 +45,5 @@ export class ArabicOnlyDirective {
       this._renderer.removeChild(this._el.nativeElement.parentNode, errorElement);
     }
   }
+
 }

@@ -297,6 +297,50 @@
           </small>
         </div>
     </div>
+    <div class="col-6">
+      <label for="numb">Numb</label>
+      <input
+        id="numb"
+        class="form-control"
+        formControlName="num"
+        [appInputNumbersLanguages]="'numbers'"
+        >
+    </div>
+    <div class="col-6">
+      <label for="number">Numbber</label>
+      <input
+        id="number"
+        class="form-control"
+        [appInputNumbersLanguages]="'numbers'"
+        >
+    </div>
+    <div class="col-6">
+      <label for="arabicInput">Arabic Input:</label>
+      <input id="arabicInput" type="text" class="form-control" [appInputNumbersLanguages]="'arabic'">
+    </div>
+    <div class="col-6">
+      <label for="englishInput">English Input:</label>
+      <input id="englishInput" type="text" class="form-control" [appInputNumbersLanguages]="'english'">
+    </div>
+    <div class="col-6">
+      <label for="englishInput">ُEnglish With Numbers Input:</label>
+      <input id="englishInput" type="text" class="form-control" [appInputNumbersLanguages]="'englishWithNumbers'">
+    </div>
+    <div class="col-6">
+      <label for="numberWithCommas">Number With Commas:</label>
+      <input id="numberWithCommas" type="text" class="form-control" formControlName="desc"
+      [ngClass]="{ 'is-invalid': desc?.invalid && (desc?.touched || desc?.dirty) }"
+      >
+      <div *ngIf="desc?.invalid && (desc?.touched || desc?.dirty)" class="invalid-feedback">
+        <div *ngIf="desc?.hasError(CustomValidationType.required)">
+          <small>desc is required</small>
+        </div>
+        <!-- {{ description?.errors?.[CustomValidationType.maxLength]?.actualLength }}. -->
+        <div *ngIf="!desc?.hasError(CustomValidationType.required) && desc?.hasError(CustomValidationType.patternValidator)">
+          <small>desc must be between 5 and 15 characters. Current length: {{ desc?.errors?.[CustomValidationType.patternValidator]?.actualLength }}.</small>
+        </div>
+      </div>
+    </div>
 
     <div class="row pt-5">
       <div class="col-6">
