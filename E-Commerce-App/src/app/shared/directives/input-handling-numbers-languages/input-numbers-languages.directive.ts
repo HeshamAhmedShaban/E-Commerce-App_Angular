@@ -20,7 +20,7 @@ export class InputNumbersLanguagesDirective {
   };
   
 
-  @HostListener('input', ['$event']) onInputChange(event: Event) {
+  @HostListener('input', ['$event']) onInputChange() {
     const inputElement = this._el.nativeElement as HTMLInputElement;
     const initialValue = inputElement.value;
 
