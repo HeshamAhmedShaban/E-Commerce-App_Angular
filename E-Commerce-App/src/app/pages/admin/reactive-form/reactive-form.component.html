@@ -9,17 +9,17 @@
             class="form-control"
             formControlName="SKU"
             (input)="onSKUInput($event)"
-            (input)="onInput($event, reactiveForm.controls['SKU'], [{ type: 'required', value: null }, { type: 'minlength', value: 3 }, { type: 'maxlength', value: 20 }])"
-            [ngClass]="{ 'is-invalid': name?.invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
+            (input)="onInput($event, reactiveForm.controls['SKU'], [{ type: 'required', value: null }, { type: 'minlength', value: 10 }, { type: 'maxlength', value: 20 }])"
+            [ngClass]="{ 'is-invalid': reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty) }">
 
-      <div *ngIf="reactiveForm.controls['SKU'].invalid && (reactiveForm.controls['SKU'].touched || reactiveForm.controls['SKU'].dirty)" class="invalid-feedback">
-        <div *ngIf="reactiveForm.controls['SKU'].errors?.['required']" class="text-center mb-2">
+      <div *ngIf="SKU?.invalid && (SKU?.touched || SKU?.dirty)" class="invalid-feedback">
+        <div *ngIf="SKU?.errors?.['required']" class="text-center mb-2">
           <span class="text-danger fw-bold">Enter SKU.</span>
         </div>
-        <div *ngIf="reactiveForm.controls['SKU'].errors?.['minlength']" class="text-center mb-2">
-          <span class="text-danger fw-bold">SKU must be at least 3 characters long.</span>
+        <div *ngIf="SKU?.errors?.['minlength']" class="text-center mb-2">
+          <span class="text-danger fw-bold">SKU must be at least 10 characters long.</span>
         </div>
-        <div *ngIf="reactiveForm.controls['SKU'].errors?.['maxlength']" class="text-center mb-2">
+        <div *ngIf="SKU?.errors?.['maxlength']" class="text-center mb-2">
           <span class="text-danger fw-bold">SKU cannot be more than 20 characters long.</span>
         </div>
       </div>
@@ -287,15 +287,16 @@
         class="form-control"
         formControlName="slug"
         [ngClass]="{ 'is-invalid': slug?.invalid && (slug?.touched || slug?.dirty) }"
-        >
+        [appInputNumbersLanguages]="'englishWithNumbers'"
+        > 
 
         <div *ngIf="slug?.invalid && slug?.touched" class="invalid-feedback">
           <!-- Prioritize the required message if the field is empty -->
           <small *ngIf="slug?.errors?.[CustomValidationType.required]">slug is required</small>
           <!-- Show the mobile number validation error only if the field is not empty -->
-          <small *ngIf="slug?.errors?.[CustomValidationType.patternValidator] && !slug?.errors?.[CustomValidationType.required]">
+          <!-- <small *ngIf="slug?.errors?.[CustomValidationType.patternValidator] && !slug?.errors?.[CustomValidationType.required]">
             SLUG is not valid  Slug can only contain lowercase letters and numbers
-          </small>
+          </small> -->
         </div>
     </div>
     <div class="col-6">
@@ -305,15 +306,16 @@
         class="form-control"
         formControlName="num"
         [appInputNumbersLanguages]="'numbers'"
+        [ngClass]="{ 'is-invalid': num?.invalid && (num?.touched || num?.dirty) }"
         >
-    </div>
-    <div class="col-6">
-      <label for="number">Numbber</label>
-      <input
-        id="number"
-        class="form-control"
-        [appInputNumbersLanguages]="'numbers'"
-        >
+        <div *ngIf="num?.invalid && (num?.touched || num?.dirty)" class="invalid-feedback">
+          <div *ngIf="num?.hasError(CustomValidationType.required)">
+            <small>Numb is required</small>
+          </div>
+          <div *ngIf="num?.hasError(CustomValidationType.patternValidator) && !num?.errors?.[CustomValidationType.required]">
+            <small>num must less than 1000 and greater than 110 </small>
+          </div>
+        </div>
     </div>
     <div class="col-6">
       <label for="arabicInput">Arabic Input:</label>
@@ -328,9 +330,10 @@
       <input id="englishInput" type="text" class="form-control" [appInputNumbersLanguages]="'englishWithNumbers'">
     </div>
     <div class="col-6">
-      <label for="numberWithCommas">Number With Commas:</label>
+      <label for="numberWithCommas">Desc</label>
       <input id="numberWithCommas" type="text" class="form-control" formControlName="desc"
       [ngClass]="{ 'is-invalid': desc?.invalid && (desc?.touched || desc?.dirty) }"
+      [appInputNumbersLanguages]="'englishWithNumbers'"
       >
       <div *ngIf="desc?.invalid && (desc?.touched || desc?.dirty)" class="invalid-feedback">
         <div *ngIf="desc?.hasError(CustomValidationType.required)">

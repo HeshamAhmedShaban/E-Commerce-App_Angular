@@ -3,7 +3,7 @@ import { Component, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AdminProductsComponent } from '../admin-products/admin-products.component';
 import { CustomValidators } from '../../../shared/custom-validation-reactiveForm';
-import { CustomValidationType } from '../../../core/enums/custom-validation-type';
+import { CustomValidationType, PatternValidation, VariablesValidation } from '../../../core/enums/custom-validation-type';
 import { NumberOnlyDirective } from '../../../shared/directives/numberOnly/number-only.directive';
 import { ArabicOnlyDirective } from '../../../shared/directives/arabicOnly/arabic-only.directive';
 import { EnglishOnlyDirective } from '../../../shared/directives/englishOnly/english-only.directive';
@@ -26,14 +26,14 @@ export class ReactiveFormComponent {
   readonly _staticValue:string='ABCD/'
   private _IBAN_PATTERN = /^[A-Z]{2}[0-9]{2}[A-Z0-9]{11,30}$/;
   private _SWIFT_PATTERN = /^[A-Z]{4}[A-Z]{2}[A-Z0-9]{2}([A-Z0-9]{3})?$/;
-
+  // private  _slugPattern = /^[a-z0-9]+$/;
   @ViewChild(AdminProductsComponent)AdminProductsComponent!:AdminProductsComponent
 
 
 
 constructor(private formbuilder:FormBuilder){
   this.reactiveForm=this.formbuilder.group({
-    SKU: [this._staticValue, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+    SKU: [this._staticValue, [Validators.required, Validators.minLength(10), Validators.maxLength(20)]],
     name:['', [CustomValidators.required(),CustomValidators.minLength(3),CustomValidators.maxLength(10),CustomValidators.englishOnly()]],
     shortname:['', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
     price:['',[CustomValidators.required(),CustomValidators.heightValidator()]],
@@ -44,10 +44,10 @@ constructor(private formbuilder:FormBuilder){
     mobileNumber:['',[CustomValidators.required(),CustomValidators.mobileNumberValidation()]],
     IBAN:['',[CustomValidators.required(),CustomValidators.patternValidator(this._IBAN_PATTERN,CustomValidationType.IBAN)]],
     SOFT_Code:['',[CustomValidators.required(),CustomValidators.patternValidator(this._SWIFT_PATTERN,CustomValidationType.SOFT_Code)]],
-    slug:['',[CustomValidators.required(),CustomValidators.slugValidator()]],
+    slug:['',[ValidationMethods.required(),ValidationMethods.patternValidation(PatternValidation.SlugPattern)]],
     height:['',[CustomValidators.required(),CustomValidators.heightValidator()]],
-    num:['',[CustomValidators.required()]],
-    desc:['',[ValidationMethods.required(),ValidationMethods.textNumberValidation(5, 15)]],
+    num:['',[ValidationMethods.required(),ValidationMethods.minMaxValueValidation(VariablesValidation.minValueNum, VariablesValidation.maxValueNum)]],
+    desc:['',[ValidationMethods.required(),ValidationMethods.minMaxLengthValidation(5, 15)]],
   })
 
 }
