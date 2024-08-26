@@ -21,15 +21,25 @@ export class ValidationMethods {
         };
     }
     
-    static minMaxValueValidation(min:number,max:number): (control: AbstractControl) => ValidationErrors | null {
+    static minMaxValueValidation(min: number, max: number): (control: AbstractControl) => ValidationErrors | null {
         return (control: AbstractControl): ValidationErrors | null => {
-            const value = control.value || 0;
-            if(value > max){
+            const value = control.value;
+            
+            // If the control is empty or null, we return null (no error) because required validation should handle this case
+            if (value === null || value === undefined || value === '') {
+                return null;
+            }
+    
+            const numericValue = Number(value);
+    
+            // Ensure that we don't replace valid "0" with "0" due to falsy check
+            if (numericValue > max) {
                 control.setValue(max);
             }
-
-            const isValid = value >= min && value <= max;
-            return isValid ? null : { patternValidator: { actualLength: value } };
+    
+            const isValid = numericValue >= min && numericValue <= max;
+    
+            return isValid ? null : { patternValidator: { actualLength: numericValue } };
         };
     }
 
