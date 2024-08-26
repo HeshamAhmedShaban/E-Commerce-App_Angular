@@ -98,7 +98,7 @@ export class CustomValidators  {
         };
       }
 
-    static mobileNumberValidation():ValidatorFn{
+    static egyptianMobileNumberValidation():ValidatorFn{
         return (control:AbstractControl):ValidationErrors | null => {
             const mobileRegex = /^(010|011|012|015)\d{8}$/;
             return control.value && mobileRegex.test(control.value) ? null : { mobileNumberValidation: true }

@@ -41,7 +41,7 @@ constructor(private formbuilder:FormBuilder){
     description:['',[CustomValidators.required(),CustomValidators.descriptionValidator()]],
     image:['',[CustomValidators.required(),CustomValidators.englishOnly()]],
     deleverytime:['',[Validators.required]],
-    mobileNumber:['',[CustomValidators.required(),CustomValidators.mobileNumberValidation()]],
+    mobileNumber:['',[CustomValidators.required(),CustomValidators.egyptianMobileNumberValidation()]],
     IBAN:['',[CustomValidators.required(),CustomValidators.patternValidator(this._IBAN_PATTERN,CustomValidationType.IBAN)]],
     SOFT_Code:['',[CustomValidators.required(),CustomValidators.patternValidator(this._SWIFT_PATTERN,CustomValidationType.SOFT_Code)]],
     slug:['',[ValidationMethods.required(),ValidationMethods.patternValidation(PatternValidation.SlugPattern)]],
