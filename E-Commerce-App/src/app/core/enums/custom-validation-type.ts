@@ -53,4 +53,6 @@ export enum VariablesValidation {
 export const PatternValidation = {
 
     SlugPattern: /^[a-z0-9]+$/,
+    googleMapsLink: /https?:\/\/(www\.)?(google\.(com|[a-z]{2,3})\/maps|goo\.gl\/maps|maps\.app\.goo\.gl)\/?.*?/,
+    containsMaps: /maps/
 } as const;

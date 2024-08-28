@@ -48,6 +48,7 @@ constructor(private formbuilder:FormBuilder){
     height:['',[CustomValidators.required(),CustomValidators.heightValidator()]],
     num:['',[ValidationMethods.required(),ValidationMethods.minMaxValueValidation(VariablesValidation.minValueNum, VariablesValidation.maxValueNum)]],
     desc:['',[ValidationMethods.required(),ValidationMethods.minMaxLengthValidation(5, 15)]],
+    googleLink: ['',[CustomValidators.required(),ValidationMethods.patternValidation(PatternValidation.googleMapsLink || PatternValidation.containsMaps)]],
   })
 
 }
@@ -125,6 +126,10 @@ get softCode(){
 
 get slug(){
   return this.reactiveForm.get('slug')
+}
+
+get googleLink(){
+  return this.reactiveForm.get('googleLink')
 }
 
 

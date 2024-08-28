@@ -345,6 +345,24 @@
         </div>
       </div>
     </div>
+    <div class="col-6">
+      <label for="googleLink">google Link</label>
+      <input
+      type="text"
+      id ="googleLink"
+      class="form-control"
+      formControlName="googleLink"
+      [ngClass]="{ 'is-invalid': googleLink?.invalid && (googleLink?.touched || googleLink?.dirty) }"
+      >
+      <div *ngIf="googleLink?.invalid && (googleLink?.touched || googleLink?.dirty)" class="invalid-feedback">
+        <div *ngIf="googleLink?.hasError(CustomValidationType.required)">
+          <small>googleLink is required</small>
+        </div>
+        <div *ngIf="googleLink?.hasError(CustomValidationType.patternValidator) && !googleLink?.hasError(CustomValidationType.required)">
+          <small>googleLink must contain maps</small>
+        </div>
+      </div>
+    </div>
 
     <div class="row pt-5">
       <div class="col-6">
