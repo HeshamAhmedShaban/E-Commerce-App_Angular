@@ -17,15 +17,15 @@ export class LoginComponent {
     password:'admin'
   }
 
-  router=inject(Router)
+  private _router=inject(Router)
 
 
 
   public login(){
     if(this.loginObj.userName == 'admin' && this.loginObj.password == 'admin'){
-this.router.navigateByUrl('/products')
+      this._router.navigateByUrl('/products')
     }else{
-    alert('invalid user name or password')
+      alert('invalid user name or password')
     }
   }
 }
