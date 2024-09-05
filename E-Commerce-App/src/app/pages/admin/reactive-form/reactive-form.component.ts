@@ -49,6 +49,7 @@ constructor(private formbuilder:FormBuilder){
     num:['',[ValidationMethods.required(),ValidationMethods.minMaxValueValidation(VariablesValidation.minValueNum, VariablesValidation.maxValueNum)]],
     desc:['',[ValidationMethods.required(),ValidationMethods.minMaxLengthValidation(5, 15)]],
     googleLink: ['',[CustomValidators.required(),ValidationMethods.patternValidation(PatternValidation.googleMapsLink || PatternValidation.containsMaps)]],
+    englishOrArabic:['',[CustomValidators.required(),ValidationMethods.minMaxLengthValidation(5, 15),ValidationMethods.englishOrArabicOnly()]]
   })
 
 }
@@ -73,6 +74,10 @@ preventNonNumericInput(event: KeyboardEvent): void {
 
 get SKU() {
   return this.reactiveForm.get('SKU');
+}
+
+get englishOrArabic (){
+  return this.reactiveForm.get('englishOrArabic');
 }
 
 get num() {

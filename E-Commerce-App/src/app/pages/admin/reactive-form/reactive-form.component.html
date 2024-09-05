@@ -287,7 +287,7 @@
         class="form-control"
         formControlName="slug"
         [ngClass]="{ 'is-invalid': slug?.invalid && (slug?.touched || slug?.dirty) }"
-        [appInputNumbersLanguages]="'englishWithNumbers'"
+        [appInputNumbersLanguages]="'arabicOrEnglish'"
         > 
 
         <div *ngIf="slug?.invalid && slug?.touched" class="invalid-feedback">
@@ -363,7 +363,30 @@
         </div>
       </div>
     </div>
-
+    <div class="col-6">
+      <label for="englishOrArabic">englishOrArabic</label>
+      <input
+      type="text"
+      id ="englishOrArabic"
+      class="form-control"
+      formControlName="englishOrArabic"
+      [ngClass]="{ 'is-invalid': englishOrArabic?.invalid && (englishOrArabic?.touched || englishOrArabic?.dirty) }"
+      >
+      <div *ngIf="englishOrArabic?.invalid && (englishOrArabic?.touched || englishOrArabic?.dirty)" class="invalid-feedback">
+        <div *ngIf="englishOrArabic?.hasError(CustomValidationType.required)">
+          <small>englishOrArabic is required</small>
+        </div>
+        <div *ngIf="englishOrArabic?.hasError(CustomValidationType.patternValidator) && !englishOrArabic?.hasError(CustomValidationType.required)">
+          <small>englishOrArabic must be between 5 and 15 characters. Current length:</small>
+        </div>
+        <div *ngIf="englishOrArabic?.hasError(CustomValidationType.languageMismatch) && !englishOrArabic?.hasError(CustomValidationType.patternValidator) && !englishOrArabic?.hasError(CustomValidationType.required)">
+          <small>englishOrArabic must arabic or english only</small>
+        </div>
+        <div *ngIf="englishOrArabic?.hasError(CustomValidationType.containsNumbers)">
+          <small>Numbers are not allowed</small>
+        </div>
+      </div>
+    </div>
     <div class="row pt-5">
       <div class="col-6">
         <button  class="btn btn-sm btn-outline-secondary" (click)="clearForm()">Clear</button>

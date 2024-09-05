@@ -15,7 +15,9 @@ export enum CustomValidationType {
     slugValidator = 'slugValidator',
     heightValidator = 'heightValidator',
     descriptionValidator = 'descriptionValidator',
-    negativeValue = 'negativeValue'
+    negativeValue = 'negativeValue',
+    languageMismatch ='languageMismatch',
+    containsNumbers = 'containsNumbers'
 }
     // last code in sportyanoWEbAPp
 // export enum CustomValidationType {
