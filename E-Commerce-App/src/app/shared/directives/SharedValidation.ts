@@ -57,27 +57,21 @@ export class ValidationMethods {
         return (control: AbstractControl): ValidationErrors | null => {
             const value = control.value || '';
             
-            // Regular expressions for validation
             const arabicRegex = /^[\u0621-\u064A\u0660-\u0669]+$/;
             const englishRegex = /^[a-zA-Z]+$/;
             const hasNumbers = /\d/.test(value);
-
-            // Check if the value contains numbers
             if (hasNumbers) {
                 return { containsNumbers: true };
             }
 
-            // Check if the value starts with Arabic letters and contains only Arabic letters
             if (arabicRegex.test(value)) {
                 return arabicRegex.test(value) ? null : { languageMismatch: true };
             }
 
-            // Check if the value starts with English letters and contains only English letters
             if (englishRegex.test(value)) {
                 return englishRegex.test(value) ? null : { languageMismatch: true };
             }
 
-            // If the value does not meet any of the above conditions, return an error
             return { languageMismatch: true };
         };
     
