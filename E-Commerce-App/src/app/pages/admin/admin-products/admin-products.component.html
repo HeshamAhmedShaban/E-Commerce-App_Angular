@@ -322,6 +322,35 @@
             </div>
 
             <div class="col-6">
+              <label for="image">password</label>
+              <input type="text"
+                     name="password"
+                     id="password"
+                     placeholder="password"
+                     class="form-control"
+                     #password="ngModel"
+                     [(ngModel)]="productObj.password"
+                     (input)="onPasswordInput()"
+                     >
+                     <div *ngIf="productObj.password">
+                      <p>Password strength: {{ passwordScore }}/4</p>
+                      <div class="strength-meter">
+                        <div
+                          [style.width]="(passwordScore + 1) * 25 + '%'"
+                          [class.weak]="passwordScore === 0"
+                          [class.fair]="passwordScore === 1"
+                          [class.good]="passwordScore === 2"
+                          [class.strong]="passwordScore === 3 || passwordScore === 4"
+                        ></div>
+                      </div>
+                  
+                      <ul *ngIf="feedback.length > 0">
+                        <li *ngFor="let suggestion of feedback">{{ suggestion }}</li>
+                      </ul>
+                    </div>
+            </div>
+
+            <div class="col-6">
               <label for="description">Product Description</label>
               <textarea name="description"
                         id="description"

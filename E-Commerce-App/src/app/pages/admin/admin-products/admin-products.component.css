@@ -1,0 +1,32 @@
+.password-container {
+    width: 150px;
+    margin: 20px;
+  }
+  
+  .strength-meter {
+    width: 150px;
+    height: 10px;
+    background-color: #ddd;
+    margin: 10px 0;
+  }
+  
+  .strength-meter div {
+    height: 100%;
+  }
+  
+  .weak {
+    background-color: red;
+  }
+  
+  .fair {
+    background-color: orange;
+  }
+  
+  .good {
+    background-color: yellow;
+  }
+  
+  .strong {
+    background-color: green;
+  }
+  

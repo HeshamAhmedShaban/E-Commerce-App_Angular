@@ -7,7 +7,7 @@ import { Iproduct } from '../../../core/models/iproduct';
 import { CategoryService } from '../../../core/services/category.service';
 import { ShareModule } from '../../../shared/modules/share/share.module';
 import { Subject, takeUntil } from 'rxjs';
-
+import zxcvbn from 'zxcvbn';
 @Component({
   selector: 'app-admin-products',
   standalone: true,
@@ -33,7 +33,15 @@ private _subject$:Subject<boolean>=new Subject<boolean>()
     deliveryTimeSpan:'',
     categoryId:0,
     productImageUrl:'',
+    password:''
   }
+
+
+  // 
+  passwordStrength: any = {};
+  passwordScore: number = 0;
+  feedback: string[] = [];
+  // 
   public categoryList!:Icategory[]
   public productList!:Iproduct[]
   private _productService=inject(ProductService)
@@ -42,6 +50,23 @@ private _subject$:Subject<boolean>=new Subject<boolean>()
   ngOnInit(): void {
       this.getAllProducts();
       this.getAllCategories();
+  }
+
+
+  onPasswordInput() {
+    if (this.productObj.password) {
+      const result = zxcvbn(this.productObj.password);
+      console.log(result);
+      
+      this.passwordStrength = result;
+      this.passwordScore = result.score;
+      this.feedback = result.feedback.suggestions;
+      result
+    } else {
+      this.passwordStrength = {};
+      this.passwordScore = 0;
+      this.feedback = [];
+    }
   }
 
 
@@ -132,6 +157,7 @@ private _subject$:Subject<boolean>=new Subject<boolean>()
       deliveryTimeSpan:'',
       categoryId:0,
       productImageUrl:'',
+      password:''
     }
   }
 

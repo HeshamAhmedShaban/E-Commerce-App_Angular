@@ -9,4 +9,5 @@ export interface Iproduct {
   deliveryTimeSpan: string;
   categoryId: number;
   productImageUrl: string;
+  password:any
 }
