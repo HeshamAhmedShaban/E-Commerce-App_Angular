@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, effect, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
 import { Icategory } from '../../../core/models/icategory';
@@ -22,6 +22,10 @@ public isSidePanelVisable: boolean = false
 public updateMode:boolean=false
 
 private _subject$:Subject<boolean>=new Subject<boolean>()
+
+
+public $signal = signal<boolean>(false);
+
 
   public productObj:Iproduct={
     productSku:'',
@@ -50,6 +54,19 @@ private _subject$:Subject<boolean>=new Subject<boolean>()
   ngOnInit(): void {
       this.getAllProducts();
       this.getAllCategories();
+      this.$signal.set(true);
+      this.$signal.update((value) => !value);
+
+      effect(() => {
+        console.log(this.$signal());
+      });
+
+      const $newSignal = computed(() => {
+        return this.$signal();
+      });
+
+      console.log($newSignal());
+      
   }
 
 
