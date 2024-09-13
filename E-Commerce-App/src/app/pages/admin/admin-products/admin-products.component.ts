@@ -56,8 +56,6 @@ private _subject$:Subject<boolean>=new Subject<boolean>()
   onPasswordInput() {
     if (this.productObj.password) {
       const result = zxcvbn(this.productObj.password);
-      console.log(result);
-      
       this.passwordStrength = result;
       this.passwordScore = result.score;
       this.feedback = result.feedback.suggestions;
