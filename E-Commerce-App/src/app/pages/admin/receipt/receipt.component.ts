@@ -58,8 +58,7 @@ export class ReceiptComponent implements OnInit {
     // arr.subscribe(x=>{
     //   console.log('x',x);
     // })
-
-  
   }
+
 
 }
