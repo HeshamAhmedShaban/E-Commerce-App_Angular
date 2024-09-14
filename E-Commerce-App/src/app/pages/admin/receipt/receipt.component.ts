@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { combineLatest, concatMap, delay, forkJoin, from, mergeMap, of, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, concatMap, delay, forkJoin, from, map, mergeMap, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-receipt',
@@ -33,6 +33,32 @@ export class ReceiptComponent implements OnInit {
     // this.forkJoin$.subscribe(data => {
     //   console.log('Received forkJoin data', data);
     // });
+
+
+    const arrayy = new BehaviorSubject<number[]>([1,2,3,4,5]);
+    // arrayy.pipe(
+      
+    //   map(x=>{
+    //       console.log('x',x);
+    //       x.map((y)=>console.log('y',y));
+    //   })
+
+    // ).subscribe();
+
+    
+
+    const arr = from([1,2,3,4,5]).pipe(
+      concatMap(x=>of(x).pipe(delay(1000))),
+      tap(x=>console.log('tap',x))
+
+    )
+
+    arr.subscribe()
+
+    // arr.subscribe(x=>{
+    //   console.log('x',x);
+    // })
+
   
   }
 
