@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { Icategory } from '../../../core/models/icategory';
 import { ProductService } from '../../../core/services/product.service';
 import { CategoryService } from '../../../core/services/category.service';
@@ -9,7 +9,7 @@ import { Iproduct } from '../../../core/models/iproduct';
 import { Icart } from '../../../core/models/icart';
 import { CartService } from '../../../core/services/cart.service';
 import { Login_Auth } from '../../../core/models/auth';
-import { debounceTime, fromEvent, map } from 'rxjs';
+import { debounceTime, fromEvent, map, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-products',
@@ -18,7 +18,7 @@ import { debounceTime, fromEvent, map } from 'rxjs';
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent implements OnInit , OnDestroy {
   public categoriesNameList: string[] = [];
   public productList!:Iproduct[] ;
   public categoryList!:Icategory[];
@@ -36,6 +36,9 @@ export class ProductsComponent implements OnInit {
   private _categoryService=inject(CategoryService);
   private _cartService=inject(CartService)
   private router=inject(Router);
+
+
+  private subject$ = new Subject<boolean>();
 
   ngOnInit(): void {
     this.getAllCategories();
@@ -58,7 +61,7 @@ export class ProductsComponent implements OnInit {
   }
 
   private getAllProduct(){
-    this._productService.getAllProducts().subscribe({
+    this._productService.getAllProducts().pipe(takeUntil(this.subject$)).subscribe({
       next:(data:any)=>{
         // console.log(data);
         this.productList=data;
@@ -75,7 +78,7 @@ export class ProductsComponent implements OnInit {
     this.cartObj.customerEmail=this.userData.email;
     this.cartObj.productId=id;
     this.cartObj.quantity=1;
-    this._cartService.addToCartt(this.cartObj).subscribe({
+    this._cartService.addToCartt(this.cartObj).pipe(takeUntil(this.subject$)).subscribe({
       next: (data: Icart) => {
         alert('Product added');
         this._cartService.cartUpdated$.next(true);
@@ -109,4 +112,10 @@ export class ProductsComponent implements OnInit {
 //       }
 //     });
 // }
+
+  ngOnDestroy(): void {
+    this.subject$.next(true);
+    this.subject$.complete();
+  }
+
 }
