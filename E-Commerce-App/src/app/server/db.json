@@ -77,12 +77,6 @@
       "categoryName": "Edible Oil & Ghee",
       "parentCategoryId": "56",
       "id": "6b6b"
-    },
-    {
-      "categoryId": "68",
-      "categoryName": "Bakery Snacks",
-      "parentCategoryId": "56",
-      "id": "49a6"
     }
   ],
   "getAllProducts": [
@@ -99,16 +93,17 @@
       "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     },
     {
-      "id": "35c4",
       "productSku": "headphone",
       "productName": "headphone",
-      "productPrice": 111,
+      "productPrice": 11,
       "productShortName": "headphone",
       "productDescription": "ABC",
       "createdDate": "2024-05-20T05:16:28.108Z",
       "deliveryTimeSpan": "1 day",
       "categoryId": "55",
-      "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      "productImageUrl": "https://images.unsplash.com/photo-1583394838336-acd977736f90?q=80&w=1884&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "password": "",
+      "id": "35c4"
     },
     {
       "id": "07d3",
@@ -150,21 +145,20 @@
       "email": "hesham11@gmail.com",
       "mobileNumber": "01147431061",
       "password": "12345"
+    },
+    {
+      "id": "2df6",
+      "custID": 0,
+      "firstName": "Hesham",
+      "lastName": "Shaban",
+      "email": "hesham@gmail.com",
+      "mobileNumber": "01147431061",
+      "password": "11111111"
     }
   ],
   "login": [
     {
-      "id": "9727",
-      "email": "hesham@gmail.com",
-      "password": "12345"
-    },
-    {
       "id": "ed27",
-      "email": "hesham@gmail.com",
-      "password": "12345"
-    },
-    {
-      "id": "d3ed",
       "email": "hesham@gmail.com",
       "password": "12345"
     },
@@ -174,29 +168,19 @@
       "password": "12345"
     },
     {
-      "id": "d1e7",
+      "id": "4ac8",
       "email": "hesham@gmail.com",
       "password": "12345"
     },
     {
-      "id": "fada",
+      "id": "869e",
       "email": "hesham@gmail.com",
       "password": "12345"
     },
     {
-      "id": "13db",
-      "email": "hesham11@gmail.com",
-      "password": "12345"
-    },
-    {
-      "id": "34c6",
+      "id": "37aa",
       "email": "hesham@gmail.com",
-      "password": "12345"
-    },
-    {
-      "id": "6c62",
-      "email": "hesham@gmail.com",
-      "password": "12345"
+      "password": "U2FsdGVkX19SUZ3hciI9z6/4c7y2IpLLZRYPTQ2t6gA="
     }
   ],
   "cart": [],
@@ -217,6 +201,28 @@
           "productId": "167c",
           "quantity": 1,
           "addedDate": "2024-08-19T11:04:11.509Z"
+        }
+      ],
+      "totalPrice": 1000,
+      "totalItems": 1,
+      "message": "Thank you for purchasing our products ,We Will Communicate With You At Nearest Time"
+    },
+    {
+      "id": "32eb",
+      "city": "Bani suef",
+      "email": "hesham@gmail.com",
+      "pinCode": "62511",
+      "firstAddress": "egypt",
+      "secondAddress": "egypt",
+      "landMark": "asasxax",
+      "paymentNaration": "axsasxasxasx",
+      "cart": [
+        {
+          "id": "a8bc",
+          "customerEmail": "hesham@gmail.com",
+          "productId": "07d3",
+          "quantity": 1,
+          "addedDate": "2024-11-17T18:37:30.585Z"
         }
       ],
       "totalPrice": 1000,

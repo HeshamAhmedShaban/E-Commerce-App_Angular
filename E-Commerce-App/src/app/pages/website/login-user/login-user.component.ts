@@ -32,10 +32,12 @@ export class LoginUserComponent {
           this.usersList=data;
           let isExistingUser= this.usersList.find(user=>user.email==this.loginUser.email);
           if(isExistingUser){
+            console.log(this._authService.encryptPassword(isExistingUser.password)," ");
+            const encryptPassword = this._authService.encryptPassword(isExistingUser.password);
             if(isExistingUser.email === this.loginUser.email && isExistingUser.password === this.loginUser.password){
               let loginUser= {
                 email:isExistingUser.email,
-                password:isExistingUser.password
+                password:encryptPassword
               };
               this._authService.loginUser(loginUser).subscribe({
                 next:()=>{
