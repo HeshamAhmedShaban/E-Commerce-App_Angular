@@ -14,5 +14,5 @@ export const appConfig: ApplicationConfig = {
       disableImageLazyLoadWarning: true
     }},
   //    provideHttpClient(),to speed fetch data From API
-      provideHttpClient(withFetch())]
+      provideHttpClient(withFetch()), provideAnimationsAsync()]
 };

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject, combineLatest, concatMap, delay, forkJoin, from, map, mergeMap, of, switchMap, tap } from 'rxjs';
-
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatButtonModule} from '@angular/material/button';
 @Component({
   selector: 'app-receipt',
   standalone: true,
-  imports: [],
+  imports: [MatButtonModule, MatDividerModule, MatIconModule],
   templateUrl: './receipt.component.html',
   styleUrl: './receipt.component.css'
 })
