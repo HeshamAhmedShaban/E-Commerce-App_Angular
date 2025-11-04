@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Login_Auth, Register_Auth } from '../../../core/models/auth';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -12,12 +12,29 @@ import { AuthUserService } from '../../../core/services/auth-user.service';
   templateUrl: './login-user.component.html',
   styleUrl: './login-user.component.css'
 })
-export class LoginUserComponent {
+export class LoginUserComponent implements OnInit  {
 
   public loginUser:Login_Auth = {
     email:'',
     password: '',
   }
+  public lastSegment!:string;
+
+    ngOnInit() {
+    const url = this.router.url; // مثال: /products/122341 أو /register_user
+    const segments = url.split('/').filter(Boolean); // ['products', '122341']
+
+    if (segments.length > 1) {
+      // لو فيه أكتر من جزء زي products/122341
+      this.lastSegment = segments[segments.length - 2]; // 'products'
+    } else {
+      // لو الرابط بسيط زي /register_user
+      this.lastSegment = segments[segments.length - 1]; // 'register_user'
+    }
+
+    console.log(this.lastSegment);
+  }
+
 
   public usersList!:Register_Auth[]
 

@@ -1,36 +1,133 @@
-<div class="example-button-container">
-    <button mat-fab extended>
-      <mat-icon>favorite</mat-icon>
-      Basic
-    </button>
-  </div>
-  <div class="example-button-container">
-    <button mat-fab extended disabled>
-      <mat-icon>favorite</mat-icon>
-      Disabled
-    </button>
-  </div>
-  <div class="example-button-container">
-    <a mat-fab extended routerLink=".">
-      <mat-icon>favorite</mat-icon>
-      Link
-    </a>
+<div
+  class="sidenav bg-blackDark d-flex flex-column justify-content-between"
+  [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''"
+>
+  <!-- Logo / header -->
+  <div class="logo-container d-flex align-items-center px-3 py-2 w-100">
+    <!-- Expanded logo -->
+    <ng-container *ngIf="!isLeftSidebarCollapsed(); else collapsedLogo">
+      <div class="mx-3 d-flex align-items-center">
+        <!-- inline SVG logo -->
+        <svg width="118" height="40" viewBox="0 0 118 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <!-- Example logo shapes -->
+          <rect width="118" height="40" rx="6" fill="#0b3b66"></rect>
+          <text x="14" y="26" fill="#fff" font-size="16" font-weight="700">MyApp</text>
+        </svg>
+      </div>
+    </ng-container>
+
+    <ng-template #collapsedLogo>
+      <div class="mx-2 d-flex align-items-center">
+        <!-- smaller logo -->
+        <svg width="31" height="40" viewBox="0 0 31 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <rect width="31" height="40" rx="4" fill="#0b3b66"></rect>
+          <text x="6" y="26" fill="#fff" font-size="12" font-weight="700">M</text>
+        </svg>
+      </div>
+    </ng-template>
   </div>
 
-  <section>
-    <div class="example-label">Mini FAB</div>
-    <div class="example-button-row">
-      <div class="example-flex-container">
-        <div class="example-button-container">
-          <button mat-mini-fab aria-label="Example icon button with a menu icon">
-            <mat-icon>menu</mat-icon>
-          </button>
-        </div>
-        <div class="example-button-container">
-          <button mat-mini-fab aria-label="Example icon button with a home icon">
-            <mat-icon>home</mat-icon>
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Navigation -->
+  <ul class="sidenav-nav list-unstyled d-flex flex-column align-items-start px-0 py-2">
+    <!-- Fixed routes (no loop) -->
+    <li class="sidenav-nav-item w-100">
+      <a
+        class="sidenav-nav-link d-flex align-items-center text-decoration-none w-100"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <!-- SVG icon -->
+        <span class="sidenav-link-icon d-inline-flex align-items-center justify-content-center">
+          <!-- home icon -->
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 3l8 7h-3v8h-4v-5H11v5H7v-8H4z"></path>
+          </svg>
+        </span>
+
+        <span class="sidenav-link-text" *ngIf="!isLeftSidebarCollapsed()">Dashboard</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item w-100">
+      <a
+        class="sidenav-nav-link d-flex align-items-center text-decoration-none w-100"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <!-- products icon -->
+        <span class="sidenav-link-icon d-inline-flex align-items-center justify-content-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M3 7l9-4 9 4v10l-9 4-9-4z"></path>
+          </svg>
+        </span>
+
+        <span class="sidenav-link-text" *ngIf="!isLeftSidebarCollapsed()">Products</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item w-100">
+      <a
+        class="sidenav-nav-link d-flex align-items-center text-decoration-none w-100"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <!-- orders icon -->
+        <span class="sidenav-link-icon d-inline-flex align-items-center justify-content-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M3 13h2v-2H3v2zm4 0h14v-2H7v2zM3 17h2v-2H3v2zm4 0h14v-2H7v2zM3 9h2V7H3v2zm4 0h14V7H7v2z"></path>
+          </svg>
+        </span>
+
+        <span class="sidenav-link-text" *ngIf="!isLeftSidebarCollapsed()">Orders</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item w-100">
+      <a
+        class="sidenav-nav-link d-flex align-items-center text-decoration-none w-100"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <!-- settings icon -->
+        <span class="sidenav-link-icon d-inline-flex align-items-center justify-content-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 8.6A3.4 3.4 0 1 0 12 15.4 3.4 3.4 0 0 0 12 8.6zm8.4 2.1l1.6-1L19 6.6l-1.6 1.6a8.3 8.3 0 0 0-1.5-.9L15 3H9l-.9 4.3c-.5.2-1 .5-1.5.9L5.6 6.6 2 9.7l1.6 1a8.3 8.3 0 0 0 0 2.6L2 15.9 5.6 19l1.6-1.6c.5.4 1 .7 1.5.9L9 21h6l.9-4.3c.5-.2 1-.5 1.5-.9L19 19l3.6-3.1-1.6-1a8.3 8.3 0 0 0 0-2.6z"></path>
+          </svg>
+        </span>
+
+        <span class="sidenav-link-text" *ngIf="!isLeftSidebarCollapsed()">Settings</span>
+      </a>
+    </li>
+
+    <li class="sidenav-nav-item w-100 mt-auto">
+      <a
+        class="sidenav-nav-link d-flex align-items-center text-decoration-none w-100"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+      >
+        <!-- profile icon -->
+        <span class="sidenav-link-icon d-inline-flex align-items-center justify-content-center">
+          <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm0 2c-4 0-7 2-7 4v2h14v-2c0-2-3-4-7-4z"></path>
+          </svg>
+        </span>
+
+        <span class="sidenav-link-text" *ngIf="!isLeftSidebarCollapsed()">Profile</span>
+      </a>
+    </li>
+  </ul>
+
+  <!-- Footer: collapse toggle -->
+  <div class="sidenav-footer px-3 py-3 w-100">
+    <button class="btn btn-link toggle-button d-flex align-items-center w-100 justify-content-center" (click)="toggleCollapse()">
+      <!-- toggle icon: changes based on collapsed state -->
+      <span class="me-2 d-inline-flex align-items-center">
+        <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" *ngIf="isLeftSidebarCollapsed()" d="M9 6l6 6-6 6V6z"></path>
+          <path fill="currentColor" *ngIf="!isLeftSidebarCollapsed()" d="M15 6l-6 6 6 6V6z"></path>
+        </svg>
+      </span>
+      <span *ngIf="!isLeftSidebarCollapsed()" class="fw-bold">Collapse</span>
+    </button>
+  </div>
+</div>
